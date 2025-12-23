@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norbin</title>
 <style>
-/* Black and White Theme */
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;
@@ -15,8 +14,6 @@
     --table-header: #111111;
     --table-row: #0a0a0a;
     --table-alt: #111111;
-    
-    /* Role Colors */
     --owner-color: #ff0000;
     --manager-color: #ff9900;
     --vip-color: #ffd700;
@@ -39,7 +36,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -59,7 +55,6 @@ body {
     background: #cccccc;
 }
 
-/* Navbar */
 .navbar {
     background-color: #000000;
     padding: 1rem 2rem;
@@ -88,7 +83,6 @@ body {
     gap: 1rem;
 }
 
-/* Role Badges */
 .role-badge {
     padding: 0.1rem 0.5rem;
     border-radius: 3px;
@@ -132,7 +126,6 @@ body {
     50% { box-shadow: 0 0 15px var(--vip-color); }
 }
 
-/* Slide Down Menu - Clean Layout */
 .slide-down-menu {
     position: fixed;
     top: -100%;
@@ -185,7 +178,6 @@ body {
     display: none !important;
 }
 
-/* Main Content */
 .main-content {
     padding-top: 80px;
     max-width: 1400px;
@@ -194,7 +186,6 @@ body {
     min-height: calc(100vh - 80px);
 }
 
-/* Logo and Search */
 .logo-container {
     text-align: center;
     margin-bottom: 2rem;
@@ -235,11 +226,8 @@ body {
     border: 1px solid var(--accent-color);
     border-radius: 3px;
     padding: 1rem;
-    max-height: 400px;
-    overflow-y: auto;
 }
 
-/* Table Layout for Pastes */
 .pastes-section {
     margin-top: 2rem;
 }
@@ -254,7 +242,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Paste Tables */
 .paste-table-container {
     overflow-x: auto;
     margin-bottom: 2rem;
@@ -299,7 +286,6 @@ body {
     color: var(--accent-color);
 }
 
-/* Table Cell Styles */
 .paste-title {
     color: var(--accent-color);
     font-weight: bold;
@@ -339,7 +325,6 @@ body {
     background-color: #1a1a1a;
 }
 
-/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -383,7 +368,6 @@ body {
     margin: 0 1rem;
 }
 
-/* FULLSCREEN PASTE DETAIL */
 .paste-detail-container {
     position: fixed;
     top: 0;
@@ -454,7 +438,6 @@ body {
     font-size: 1rem;
 }
 
-/* Forms */
 .paste-form, .auth-form, .profile-form, .timeout-form, .tag-form {
     max-width: 800px;
     margin: 0 auto;
@@ -517,7 +500,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Buttons */
 .btn {
     padding: 0.6rem 1rem;
     border: none;
@@ -591,7 +573,6 @@ body {
     margin-top: 0.5rem;
 }
 
-/* Chat Page */
 .chat-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -682,7 +663,6 @@ body {
     color: #000000;
 }
 
-/* Hall of Autism */
 .hall-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -744,7 +724,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* Profile Page */
 .profile-banner {
     height: 200px;
     background: #000000;
@@ -779,7 +758,6 @@ body {
     object-fit: cover;
 }
 
-/* Admin Panel */
 .admin-controls {
     background: #111111;
     border: 1px solid #ff0000;
@@ -833,7 +811,6 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Timeout Notification */
 .timeout-overlay {
     position: fixed;
     top: 0;
@@ -886,7 +863,6 @@ body {
     margin-top: 1rem;
 }
 
-/* Tag Management Page */
 .tags-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -929,7 +905,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* Color Picker */
 .color-picker {
     display: flex;
     gap: 0.3rem;
@@ -953,7 +928,6 @@ body {
     border: 1px solid white;
 }
 
-/* Alerts */
 .alert-container {
     position: fixed;
     top: 20px;
@@ -988,7 +962,6 @@ body {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* Utility */
 .text-center { text-align: center; }
 .mt-2 { margin-top: 0.5rem; }
 .mt-3 { margin-top: 0.8rem; }
@@ -1004,7 +977,6 @@ body {
 .gap-2 { gap: 0.5rem; }
 .gap-3 { gap: 0.8rem; }
 
-/* Responsive */
 @media (max-width: 768px) {
     .main-content { padding: 70px 0.5rem 1rem; }
     .paste-form, .auth-form, .timeout-form, .tag-form { padding: 1rem; }
@@ -1019,7 +991,6 @@ body {
 </style>
 </head>
 <body>
-<!-- Fullscreen Paste Detail -->
 <div id="paste-detail-container" class="paste-detail-container">
     <div class="paste-detail-header">
         <button class="back-btn" onclick="closePasteDetail()">Back</button>
@@ -1028,7 +999,6 @@ body {
     <div id="paste-detail-content" class="paste-detail-content"></div>
 </div>
 
-<!-- Timeout Notification -->
 <div id="timeout-overlay" class="timeout-overlay">
     <div class="timeout-message">
         <h1 class="timeout-title">TIMED OUT</h1>
@@ -1040,7 +1010,6 @@ body {
     </div>
 </div>
 
-<!-- Navigation -->
 <nav class="navbar">
     <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
     <div class="user-info">
@@ -1049,7 +1018,6 @@ body {
     </div>
 </nav>
 
-<!-- Slide Down Menu -->
 <div class="slide-down-menu" id="slideDownMenu">
     <div class="menu-items">
         <button class="menu-btn" onclick="showPage('home')">Home</button>
@@ -1064,9 +1032,7 @@ body {
     </div>
 </div>
 
-<!-- Main Content -->
 <div class="main-content">
-    <!-- Home Page -->
     <div id="home-page">
         <div class="logo-container">
             <img src="https://i.postimg.cc/x8ML5hVd/logo.jpg" alt="Norbin Logo" class="logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';">
@@ -1079,12 +1045,23 @@ body {
                    placeholder="Search pastes by title, username, or content..."
                    oninput="handleSearch()">
             <div class="search-results hidden" id="searchResults">
-                <div class="section-title">Search Results</div>
-                <div id="searchResultsContent"></div>
+                <div class="paste-table-container">
+                    <table class="paste-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th style="width: 100px;">Views</th>
+                                <th style="width: 150px;">Created by</th>
+                                <th style="width: 120px;">Added</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchResultsContent">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Pinned Pastes Section -->
         <div id="pinned-pastes-section" class="pastes-section">
             <h2 class="section-title">Pinned Pastes</h2>
             <div class="paste-table-container">
@@ -1099,13 +1076,11 @@ body {
                         </tr>
                     </thead>
                     <tbody id="pinned-pastes-body">
-                        <!-- Pinned pastes will be loaded here -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- All Pastes Section -->
         <div id="all-pastes-section" class="pastes-section">
             <h2 class="section-title">All Pastes</h2>
             <div class="paste-table-container">
@@ -1120,13 +1095,11 @@ body {
                         </tr>
                     </thead>
                     <tbody id="all-pastes-body">
-                        <!-- All pastes will be loaded here -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Pagination -->
         <div class="pagination" id="pagination">
             <button class="page-btn" onclick="changePage(-1)" id="prev-btn">Previous</button>
             <span class="page-info" id="page-info">Page 1 of 1</span>
@@ -1134,7 +1107,6 @@ body {
         </div>
     </div>
 
-    <!-- Create Paste -->
     <div id="paste-page" class="hidden">
         <h2 class="section-title">Create New Paste</h2>
         <div class="paste-form">
@@ -1153,7 +1125,6 @@ body {
         </div>
     </div>
 
-    <!-- Global Chat -->
     <div id="chat-page" class="hidden">
         <h2 class="section-title">Global Chat</h2>
         <div class="chat-container">
@@ -1174,7 +1145,6 @@ body {
         </div>
     </div>
 
-    <!-- Most Mentioned -->
     <div id="most-mentioned-page" class="hidden">
         <h2 class="section-title">Most Mentioned Titles</h2>
         <div id="most-mentioned-container" class="paste-table-container">
@@ -1187,19 +1157,16 @@ body {
                     </tr>
                 </thead>
                 <tbody id="most-mentioned-body">
-                    <!-- Most mentioned will be loaded here -->
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Hall of Autism -->
     <div id="hall-page" class="hidden">
         <h2 class="section-title">Hall of Autism</h2>
         <div class="hall-grid" id="hall-container"></div>
     </div>
 
-    <!-- My Account -->
     <div id="myaccount-page" class="hidden">
         <h2 class="section-title">My Account</h2>
         <div class="profile-form">
@@ -1218,7 +1185,7 @@ body {
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Username Color (VIP Only)</label>
+                    <label class="form-label">Username Color</label>
                     <div class="color-picker" id="color-picker">
                         <div class="color-option" style="background: #ffffff;" onclick="selectColor('#ffffff')"></div>
                         <div class="color-option" style="background: #ff0000;" onclick="selectColor('#ff0000')"></div>
@@ -1251,7 +1218,6 @@ body {
         </div>
     </div>
 
-    <!-- Admin Panel -->
     <div id="admin-page" class="hidden">
         <h2 class="section-title">Admin Panel</h2>
         <div class="admin-controls">
@@ -1293,7 +1259,6 @@ body {
         </div>
     </div>
 
-    <!-- Manager Panel -->
     <div id="manager-page" class="hidden">
         <h2 class="section-title">Manager Panel</h2>
         <div class="admin-controls" style="border-color: var(--manager-color);">
@@ -1310,7 +1275,6 @@ body {
         </div>
     </div>
 
-    <!-- Timeout Page -->
     <div id="timeout-page" class="hidden">
         <h2 class="section-title">Timeout Users</h2>
         <div class="timeout-form">
@@ -1332,7 +1296,7 @@ body {
             </div>
 
             <div class="form-group">
-                <label class="form-label">Reason (Optional)</label>
+                <label class="form-label">Reason</label>
                 <input type="text" class="form-input" id="timeout-reason" placeholder="Reason for timeout">
             </div>
 
@@ -1355,7 +1319,6 @@ body {
                             </tr>
                         </thead>
                         <tbody id="timed-out-table-body">
-                            <!-- Timed out users will be loaded here -->
                         </tbody>
                     </table>
                 </div>
@@ -1363,7 +1326,6 @@ body {
         </div>
     </div>
 
-    <!-- Tag Management Page -->
     <div id="tagmaker-page" class="hidden">
         <h2 class="section-title">Tag Management</h2>
         <div class="tag-form">
@@ -1380,13 +1342,11 @@ body {
         </div>
     </div>
 
-    <!-- User Profile -->
     <div id="user-profile-page" class="hidden">
         <button class="back-btn" onclick="showPage('home')">Back</button>
         <div id="user-profile-content" class="paste-detail"></div>
     </div>
 
-    <!-- Auth Page -->
     <div id="auth-page" class="hidden">
         <h2 class="section-title">Authentication</h2>
         <div class="auth-form">
@@ -1407,21 +1367,17 @@ body {
     </div>
 </div>
 
-<!-- Alert Container -->
 <div id="alert-container" class="alert-container"></div>
 
-<!-- Audio for Hall of Autism -->
 <audio id="hallMusic" autoplay loop style="display: none;">
     <source src="https://jumpshare.com/share/TQW46hI41f8SrHjqZkva" type="audio/mpeg">
 </audio>
 
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
 <script>
-// Firebase Configuration
 const pasteDbConfig = {
     apiKey: "AIzaSyA1qaJnsRvWDvxNn9Nd1tmMVjvkF-WpUQY",
     authDomain: "norbin-c2fdb.firebaseapp.com",
@@ -1442,16 +1398,13 @@ const chatDbConfig = {
     measurementId: "G-3TQ13WL0NV"
 };
 
-// Initialize Firebase Apps
 const pasteApp = firebase.initializeApp(pasteDbConfig, "pasteApp");
 const chatApp = firebase.initializeApp(chatDbConfig, "chatApp");
 
-// Get Firebase Services
 const pasteAuth = pasteApp.auth();
 const pasteDb = pasteApp.firestore();
 const chatDb = chatApp.firestore();
 
-// Global State
 let currentUser = null;
 let isAdmin = false;
 let isManager = false;
@@ -1460,13 +1413,13 @@ let isTagMaker = false;
 let selectedColor = '#ffffff';
 let searchTimeout = null;
 
-// Pagination variables
 let currentPage = 1;
 const pastesPerPage = 20;
 let totalPastes = 0;
 let totalPages = 1;
+let lastVisibleDoc = null;
+let firstVisibleDoc = null;
 
-// Alert System
 function showAlert(message, type = 'info') {
     const container = document.getElementById('alert-container');
     const alert = document.createElement('div');
@@ -1479,7 +1432,6 @@ function showAlert(message, type = 'info') {
     }, 5000);
 }
 
-// Initialize Hall of Autism
 function initializeHallOfAutism() {
     const hallContainer = document.getElementById('hall-container');
     hallContainer.innerHTML = '';
@@ -1508,7 +1460,6 @@ function initializeHallOfAutism() {
         hallContainer.appendChild(box);
     });
 
-    // Auto-play music on Hall of Autism page
     if (!document.getElementById('hall-page').classList.contains('hidden')) {
         try {
             const hallMusic = document.getElementById('hallMusic');
@@ -1521,27 +1472,21 @@ function initializeHallOfAutism() {
     }
 }
 
-// Menu Functions
 function toggleMenu() {
     const menu = document.getElementById('slideDownMenu');
     menu.classList.toggle('active');
 }
 
 function showPage(pageId) {
-    // Close menu
     document.getElementById('slideDownMenu').classList.remove('active');
-
-    // Hide all pages
     document.querySelectorAll('[id$="-page"]').forEach(page => {
         page.classList.add('hidden');
     });
 
-    // Show requested page
     const page = document.getElementById(pageId + '-page');
     if (page) {
         page.classList.remove('hidden');
 
-        // Load data for specific pages
         switch(pageId) {
             case 'home':
                 loadPinnedPastes();
@@ -1575,7 +1520,6 @@ function showPage(pageId) {
     }
 }
 
-// FULLSCREEN PASTE FUNCTIONS
 function showPasteDetail(pasteId) {
     const container = document.getElementById('paste-detail-container');
     container.classList.add('active');
@@ -1592,7 +1536,6 @@ function closePasteDetail() {
 
 async function loadPasteDetailContent(pasteId) {
     try {
-        // Increment view count
         await pasteDb.collection('pastes').doc(pasteId).update({
             views: firebase.firestore.FieldValue.increment(1)
         });
@@ -1640,7 +1583,6 @@ async function loadPasteDetailContent(pasteId) {
     }
 }
 
-// Load Pinned Pastes
 async function loadPinnedPastes() {
     try {
         const snapshot = await pasteDb.collection('pastes')
@@ -1658,27 +1600,22 @@ async function loadPinnedPastes() {
     }
 }
 
-// Load All Pastes with Pagination
 async function loadAllPastes() {
     try {
-        // First get total count for pagination
-        const countSnapshot = await pasteDb.collection('pastes')
-            .where('isRemoved', '==', false)
-            .get();
-        
-        totalPastes = countSnapshot.size;
-        totalPages = Math.ceil(totalPastes / pastesPerPage);
-        
-        // Calculate start index for pagination
-        const startIndex = (currentPage - 1) * pastesPerPage;
-        
-        // Get paginated data
-        const snapshot = await pasteDb.collection('pastes')
+        let query = pasteDb.collection('pastes')
             .where('isRemoved', '==', false)
             .orderBy('timestamp', 'desc')
-            .limit(pastesPerPage)
-            .startAfter(startIndex > 0 ? await getLastDoc(startIndex) : null)
-            .get();
+            .limit(pastesPerPage);
+
+        const snapshot = await query.get();
+        
+        totalPastes = snapshot.size;
+        totalPages = Math.max(1, Math.ceil(totalPastes / pastesPerPage));
+        
+        if (snapshot.docs.length > 0) {
+            lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
+            firstVisibleDoc = snapshot.docs[0];
+        }
 
         displayPastesTable(snapshot, 'all-pastes-body', false);
         updatePagination();
@@ -1689,18 +1626,37 @@ async function loadAllPastes() {
     }
 }
 
-// Helper function to get last document for pagination
-async function getLastDoc(startIndex) {
-    const snapshot = await pasteDb.collection('pastes')
-        .where('isRemoved', '==', false)
-        .orderBy('timestamp', 'desc')
-        .limit(startIndex)
-        .get();
-    
-    return snapshot.docs[snapshot.docs.length - 1];
+async function changePage(delta) {
+    if (delta === 1 && !lastVisibleDoc) return;
+    if (delta === -1 && !firstVisibleDoc) return;
+
+    try {
+        let query = pasteDb.collection('pastes')
+            .where('isRemoved', '==', false)
+            .orderBy('timestamp', 'desc')
+            .limit(pastesPerPage);
+
+        if (delta === 1) {
+            query = query.startAfter(lastVisibleDoc);
+        } else if (delta === -1) {
+            query = query.endBefore(firstVisibleDoc).limitToLast(pastesPerPage);
+        }
+
+        const snapshot = await query.get();
+        
+        if (snapshot.docs.length > 0) {
+            lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
+            firstVisibleDoc = snapshot.docs[0];
+            currentPage += delta;
+        }
+
+        displayPastesTable(snapshot, 'all-pastes-body', false);
+        updatePagination();
+    } catch (error) {
+        console.error('Error changing page:', error);
+    }
 }
 
-// Display Pastes in Table Format
 function displayPastesTable(snapshot, containerId, isPinned = false) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
@@ -1719,12 +1675,10 @@ function displayPastesTable(snapshot, containerId, isPinned = false) {
         row.className = rowClass;
         row.onclick = () => showPasteDetail(pasteId);
 
-        // Format date
         const date = paste.timestamp?.toDate();
         const dateStr = date ? formatDate(date) : 'Unknown';
         
-        // Get comment count (placeholder - you'll need to implement this)
-        const commentCount = 0; // Replace with actual comment count from your database
+        const commentCount = paste.commentCount || 0;
         
         row.innerHTML = `
             <td class="paste-title">${escapeHtml(paste.title)}</td>
@@ -1740,30 +1694,16 @@ function displayPastesTable(snapshot, containerId, isPinned = false) {
     });
 }
 
-// Update Pagination Controls
 function updatePagination() {
     const pageInfo = document.getElementById('page-info');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     
     pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-    prevBtn.disabled = currentPage === 1;
-    nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
 }
 
-// Change Page
-async function changePage(delta) {
-    const newPage = currentPage + delta;
-    
-    if (newPage < 1 || newPage > totalPages) {
-        return;
-    }
-    
-    currentPage = newPage;
-    await loadAllPastes();
-}
-
-// Format date as "Dec 23, 2025"
 function formatDate(date) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const month = months[date.getMonth()];
@@ -1773,10 +1713,6 @@ function formatDate(date) {
     return `${month} ${day}, ${year}`;
 }
 
-// Authentication and other existing functions remain mostly the same
-// ... [Rest of your existing JavaScript code] ...
-
-// Authentication
 async function signIn() {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
@@ -1792,7 +1728,6 @@ async function signIn() {
         await checkUserStatus();
         updateUIForAuth();
         
-        // Check if user is timed out
         await checkTimeoutStatus();
         
         showAlert('Successfully signed in!', 'success');
@@ -1820,7 +1755,6 @@ async function signUp() {
         const userCredential = await pasteAuth.createUserWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
 
-        // Create user profile
         const userData = {
             email: email,
             username: email.split('@')[0],
@@ -1880,14 +1814,12 @@ async function checkUserStatus() {
             isVip = userData.isVip || false;
             isTagMaker = userData.isTagMaker || false;
 
-            // Update admin status if needed
             if (currentUser.email === 'exoticslash3r@gmail.com' && !userData.isAdmin) {
                 await pasteDb.collection('users').doc(currentUser.uid).update({
                     isAdmin: true
                 });
             }
         } else {
-            // Create user document if it doesn't exist
             const userData = {
                 email: currentUser.email,
                 username: currentUser.email.split('@')[0],
@@ -1924,10 +1856,8 @@ async function checkTimeoutStatus() {
                 const now = new Date();
                 
                 if (timeoutUntil > now) {
-                    // User is still timed out
                     showTimeoutNotification(timeoutUntil, userData.timeoutReason || 'No reason provided');
                 } else {
-                    // Timeout has expired, remove it
                     await pasteDb.collection('users').doc(currentUser.uid).update({
                         timeoutUntil: null,
                         timeoutReason: null
@@ -1946,7 +1876,6 @@ function showTimeoutNotification(timeoutUntil, reason) {
     const reasonEl = document.getElementById('timeout-reason');
     const timerEl = document.getElementById('timeout-timer');
     
-    // Calculate time remaining
     const now = new Date();
     const diff = timeoutUntil - now;
     
@@ -1973,7 +1902,6 @@ function showTimeoutNotification(timeoutUntil, reason) {
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     
-    // Update timer every second
     const timerInterval = setInterval(() => {
         const now = new Date();
         const diff = timeoutUntil - now;
@@ -2015,14 +1943,12 @@ function updateUIForAuth() {
         authBtn.onclick = signOut;
         myAccountBtn.classList.remove('hidden');
 
-        // Load username with color
         pasteDb.collection('users').doc(currentUser.uid).get().then(doc => {
             if (doc.exists) {
                 const userData = doc.data();
                 let username = userData.displayName || userData.username || currentUser.email.split('@')[0];
                 let color = userData.usernameColor || '#ffffff';
                 
-                // Apply role badges
                 let badges = '';
                 if (userData.isAdmin) badges += '<span class="role-badge owner-badge">OWNER</span>';
                 if (userData.isManager) badges += '<span class="role-badge manager-badge">MANAGER</span>';
@@ -2031,7 +1957,6 @@ function updateUIForAuth() {
                 
                 usernameDisplay.innerHTML = `<span style="color: ${color};">${escapeHtml(username)}</span>${badges}`;
                 
-                // Show/hide role-specific buttons
                 if (isAdmin) {
                     adminBtn.classList.remove('hidden');
                     showAlert('Owner privileges activated!', 'success');
@@ -2052,7 +1977,6 @@ function updateUIForAuth() {
                     tagMakerBtn.classList.add('hidden');
                 }
                 
-                // Show color picker for VIPs
                 if (isVip) {
                     document.getElementById('color-picker').classList.remove('hidden');
                     updateColorBtn.classList.remove('hidden');
@@ -2078,19 +2002,16 @@ function updateUIForAuth() {
     }
 }
 
-// Color Picker Functions
 function selectColor(color) {
     selectedColor = color;
-    // Remove selected class from all
     document.querySelectorAll('.color-option').forEach(option => {
         option.classList.remove('selected');
     });
-    // Add selected class to clicked one
     event.target.classList.add('selected');
 }
 
 async function updateUsernameColor() {
-    if (!currentUser || !isVip) return;
+    if (!currentUser) return;
 
     try {
         await pasteDb.collection('users').doc(currentUser.uid).update({
@@ -2098,13 +2019,12 @@ async function updateUsernameColor() {
         });
 
         showAlert('Username color updated successfully!', 'success');
-        updateUIForAuth(); // Refresh UI to show new color
+        updateUIForAuth();
     } catch (error) {
         showAlert(`Error updating color: ${error.message}`, 'error');
     }
 }
 
-// Paste Management
 async function publishPaste() {
     if (!currentUser) {
         showAlert('Please sign in to publish pastes', 'error');
@@ -2112,7 +2032,6 @@ async function publishPaste() {
         return;
     }
 
-    // Check if user is timed out
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         if (userDoc.exists) {
@@ -2135,12 +2054,10 @@ async function publishPaste() {
     }
 
     try {
-        // Get user data
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         let userData = userDoc.data();
         
         if (!userData) {
-            // Create user document if it doesn't exist
             userData = {
                 email: currentUser.email,
                 username: currentUser.email.split('@')[0],
@@ -2162,6 +2079,7 @@ async function publishPaste() {
             username: userData.displayName || userData.username || currentUser.email.split('@')[0],
             userId: currentUser.uid,
             views: 0,
+            commentCount: 0,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             isPinned: false,
             isRemoved: false,
@@ -2172,6 +2090,7 @@ async function publishPaste() {
 
         showAlert('Paste published successfully!', 'success');
         clearPasteForm();
+        loadAllPastes();
         showPage('home');
     } catch (error) {
         showAlert(`Error publishing paste: ${error.message}`, 'error');
@@ -2183,7 +2102,6 @@ function clearPasteForm() {
     document.getElementById('paste-content').value = '';
 }
 
-// Chat Functions
 async function sendChatMessage() {
     if (!currentUser) {
         showAlert('Please sign in to chat', 'error');
@@ -2191,7 +2109,6 @@ async function sendChatMessage() {
         return;
     }
 
-    // Check if user is timed out
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         if (userDoc.exists) {
@@ -2211,7 +2128,6 @@ async function sendChatMessage() {
     if (!message) return;
 
     try {
-        // Get user data with color
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         let username;
         let color = '#ffffff';
@@ -2251,7 +2167,6 @@ function loadChatMessages() {
                 messages.push({ id: doc.id, ...doc.data() });
             });
 
-            // Sort by timestamp (newest first)
             messages.sort((a, b) => b.timestamp - a.timestamp);
 
             if (messages.length === 0) {
@@ -2276,14 +2191,12 @@ function loadChatMessages() {
                 container.appendChild(messageDiv);
             });
 
-            // Scroll to bottom
             container.scrollTop = container.scrollHeight;
         }, error => {
             console.error('Error loading chat:', error);
         });
 }
 
-// Most Mentioned - Updated for table layout
 async function loadMostMentioned() {
     try {
         const snapshot = await pasteDb.collection('pastes')
@@ -2332,7 +2245,6 @@ async function loadMostMentioned() {
     }
 }
 
-// Profile Functions
 async function loadUserProfileData() {
     if (!currentUser) return;
 
@@ -2424,7 +2336,6 @@ async function updateProfilePicture() {
     }
 }
 
-// Search Functionality
 function handleSearch() {
     const searchTerm = document.getElementById('searchBar').value.trim();
     const resultsDiv = document.getElementById('searchResults');
@@ -2444,7 +2355,7 @@ function handleSearch() {
 
 async function performSearch(searchTerm) {
     const resultsContent = document.getElementById('searchResultsContent');
-    resultsContent.innerHTML = '<div style="text-align: center; padding: 2rem;">Searching...</div>';
+    resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem;">Searching...</td></tr>';
 
     try {
         const snapshot = await pasteDb.collection('pastes')
@@ -2471,36 +2382,25 @@ async function performSearch(searchTerm) {
 
         displaySearchResults(results, resultsContent);
     } catch (error) {
-        resultsContent.innerHTML = `<div style="text-align: center; padding: 2rem; color: #ff0000;">Error: ${error.message}</div>`;
+        resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem; color: #ff0000;">Error loading search results</td></tr>';
     }
 }
 
 function displaySearchResults(results, container) {
+    container.innerHTML = '';
+
     if (results.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 2rem;">No results found</div>';
+        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No results found</td></tr>';
         return;
     }
 
-    container.innerHTML = `
-        <div class="paste-table-container">
-            <table class="paste-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th style="width: 100px;">Views</th>
-                        <th style="width: 150px;">Created by</th>
-                        <th style="width: 120px;">Added</th>
-                    </tr>
-                </thead>
-                <tbody id="search-results-body"></tbody>
-            </table>
-        </div>
-    `;
-
-    const tbody = container.querySelector('#search-results-body');
     results.slice(0, 10).forEach(paste => {
         const row = document.createElement('tr');
-        row.onclick = () => showPasteDetail(paste.id);
+        row.onclick = () => {
+            showPasteDetail(paste.id);
+            document.getElementById('searchResults').classList.add('hidden');
+            document.getElementById('searchBar').value = '';
+        };
 
         row.innerHTML = `
             <td class="paste-title">${escapeHtml(paste.title)}</td>
@@ -2508,61 +2408,10 @@ function displaySearchResults(results, container) {
             <td class="paste-author">${escapeHtml(paste.username || 'Anonymous')}</td>
             <td class="paste-date">${formatDate(paste.timestamp?.toDate())}</td>
         `;
-        tbody.appendChild(row);
+        container.appendChild(row);
     });
 }
 
-// Initialize App
-document.addEventListener('DOMContentLoaded', () => {
-    // Set logo
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.src = "https://i.postimg.cc/x8ML5hVd/logo.jpg";
-        logo.onerror = function() {
-            this.src = 'https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';
-        };
-    }
-
-    // Set up auth listener
-    pasteAuth.onAuthStateChanged(async (user) => {
-        currentUser = user;
-        if (user) {
-            await checkUserStatus();
-            await checkTimeoutStatus();
-        } else {
-            isAdmin = false;
-            isManager = false;
-            isVip = false;
-            isTagMaker = false;
-        }
-        updateUIForAuth();
-        loadPinnedPastes();
-        loadAllPastes();
-    });
-
-    // Show home page
-    showPage('home');
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        const menu = document.getElementById('slideDownMenu');
-        const hamburger = document.querySelector('.hamburger-btn');
-
-        if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
-            menu.classList.remove('active');
-        }
-    });
-
-    // Enable music autoplay on user interaction
-    document.body.addEventListener('click', function() {
-        const hallMusic = document.getElementById('hallMusic');
-        if (hallMusic && hallMusic.paused) {
-            hallMusic.play().catch(e => console.log("Music play prevented"));
-        }
-    });
-});
-
-// Utility Functions
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -2584,8 +2433,98 @@ function formatTime(date) {
     return date.toLocaleDateString();
 }
 
-// Note: You'll need to keep your existing admin functions, timeout functions, tag functions, etc.
-// They should work with the new table layout with minor adjustments
+async function adminPinPaste(pasteId, pinState) {
+    if (!isAdmin && !isManager) return;
+
+    try {
+        await pasteDb.collection('pastes').doc(pasteId).update({
+            isPinned: pinState
+        });
+        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
+        loadPasteDetailContent(pasteId);
+        loadPinnedPastes();
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function adminRemovePaste(pasteId) {
+    if (!isAdmin && !isManager) return;
+
+    if (confirm('Are you sure you want to remove this paste?')) {
+        try {
+            await pasteDb.collection('pastes').doc(pasteId).update({
+                isRemoved: true
+            });
+            showAlert('Paste removed', 'success');
+            closePasteDetail();
+            showPage('home');
+            loadAllPastes();
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminBanUser(userId, banState = true) {
+    if (!isAdmin && !isManager) return;
+
+    const action = banState ? 'ban' : 'unban';
+    if (confirm(`Are you sure you want to ${action} this user?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isBanned: banState
+            });
+            showAlert(`User ${banState ? 'banned' : 'unbanned'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.src = "https://i.postimg.cc/x8ML5hVd/logo.jpg";
+        logo.onerror = function() {
+            this.src = 'https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';
+        };
+    }
+
+    pasteAuth.onAuthStateChanged(async (user) => {
+        currentUser = user;
+        if (user) {
+            await checkUserStatus();
+            await checkTimeoutStatus();
+        } else {
+            isAdmin = false;
+            isManager = false;
+            isVip = false;
+            isTagMaker = false;
+        }
+        updateUIForAuth();
+        loadPinnedPastes();
+        loadAllPastes();
+    });
+
+    showPage('home');
+
+    document.addEventListener('click', (event) => {
+        const menu = document.getElementById('slideDownMenu');
+        const hamburger = document.querySelector('.hamburger-btn');
+
+        if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    });
+
+    document.body.addEventListener('click', function() {
+        const hallMusic = document.getElementById('hallMusic');
+        if (hallMusic && hallMusic.paused) {
+            hallMusic.play().catch(e => console.log("Music play prevented"));
+        }
+    });
+});
 </script>
 </body>
 </html>
