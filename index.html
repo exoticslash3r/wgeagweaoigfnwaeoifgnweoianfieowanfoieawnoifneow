@@ -5,19 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norbin</title>
 <style>
+/* Black and White Theme */
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;
     --accent-color: #ffffff;
+    --card-bg: #111111;
     --border-color: #333333;
     --hover-color: #222222;
-    --table-header: #111111;
-    --table-row: #0a0a0a;
-    --table-alt: #111111;
-    --owner-color: #ff0000;
-    --manager-color: #ff9900;
-    --vip-color: #ffd700;
-    --tagmaker-color: #00ff00;
 }
 
 * {
@@ -36,9 +31,10 @@ body {
     overflow-x: hidden;
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,13 +44,78 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: var(--accent-color);
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #cccccc;
 }
 
+/* Role Glow Effects */
+.owner-glow {
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff0000,
+        0 0 40px #ff0000;
+    animation: bloodPulse 2s infinite;
+}
+
+.vip-glow {
+    text-shadow: 
+        0 0 10px #ffd700,
+        0 0 20px #ffd700,
+        0 0 30px #ffd700;
+}
+
+@keyframes bloodPulse {
+    0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+    50% { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 60px #ff0000; }
+    100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+}
+
+/* Timeout Fullscreen */
+.timeout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+}
+
+.timeout-overlay.active {
+    display: flex;
+}
+
+.timeout-message {
+    font-size: 3rem;
+    color: #ff0000;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px #ff0000;
+    animation: pulse 1.5s infinite;
+}
+
+.timeout-details {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 3rem;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Navbar */
 .navbar {
     background-color: #000000;
     padding: 1rem 2rem;
@@ -62,7 +123,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    border-bottom: 1px solid var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,7 +133,7 @@ body {
     background: none;
     border: none;
     color: var(--accent-color);
-    font-size: 1.5rem;
+    font-size: 2rem;
     cursor: pointer;
     padding: 0.5rem;
 }
@@ -83,49 +144,11 @@ body {
     gap: 1rem;
 }
 
-.role-badge {
-    padding: 0.1rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.7rem;
+.username-display {
     font-weight: bold;
-    margin-left: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.owner-badge {
-    background: linear-gradient(45deg, var(--owner-color), #ff4444);
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-    animation: bloodPulse 2s infinite;
-}
-
-.manager-badge {
-    background: linear-gradient(45deg, var(--manager-color), #ffbb33);
-    color: black;
-}
-
-.vip-badge {
-    background: linear-gradient(45deg, var(--vip-color), #ffff44);
-    color: black;
-    animation: goldGlow 2s infinite;
-}
-
-.tagmaker-badge {
-    background: linear-gradient(45deg, var(--tagmaker-color), #44ff44);
-    color: black;
-}
-
-@keyframes bloodPulse {
-    0%, 100% { box-shadow: 0 0 5px var(--owner-color), 0 0 10px var(--owner-color); }
-    50% { box-shadow: 0 0 15px var(--owner-color), 0 0 30px var(--owner-color); }
-}
-
-@keyframes goldGlow {
-    0%, 100% { box-shadow: 0 0 5px var(--vip-color); }
-    50% { box-shadow: 0 0 15px var(--vip-color); }
-}
-
+/* Slide Down Menu */
 .slide-down-menu {
     position: fixed;
     top: -100%;
@@ -133,59 +156,55 @@ body {
     width: 100%;
     background-color: #000000;
     z-index: 999;
-    padding: 0;
-    border-bottom: 1px solid var(--accent-color);
-    transition: top 0.3s ease;
+    padding: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    transition: top 0.5s ease;
 }
 
 .slide-down-menu.active {
-    top: 60px;
+    top: 70px;
 }
 
 .menu-items {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .menu-btn {
-    background: transparent;
+    background: #111111;
     color: var(--accent-color);
-    border: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 2rem;
-    text-align: left;
-    font-size: 1rem;
+    border: 2px solid var(--accent-color);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-}
-
-.menu-btn:last-child {
-    border-bottom: none;
+    border-radius: 5px;
+    transition: all 0.3s;
 }
 
 .menu-btn:hover {
-    background: var(--hover-color);
-    color: var(--accent-color);
-}
-
-.menu-btn:active {
-    background: #333333;
+    background: var(--accent-color);
+    color: #000000;
+    transform: translateY(-2px);
 }
 
 .hidden {
     display: none !important;
 }
 
+/* Main Content */
 .main-content {
-    padding-top: 80px;
+    padding-top: 120px;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 1rem 2rem;
-    min-height: calc(100vh - 80px);
+    padding: 120px 2rem 2rem;
+    min-height: calc(100vh - 120px);
 }
 
+/* Logo and Search */
 .logo-container {
     text-align: center;
     margin-bottom: 2rem;
@@ -195,24 +214,89 @@ body {
     max-width: 300px;
     height: auto;
     margin: 1rem auto;
-    border: 1px solid var(--accent-color);
+    border: 3px solid var(--accent-color);
     padding: 1rem;
     background: #000000;
 }
 
+/* Pinned Pastes Section */
+.pinned-pastes {
+    margin-bottom: 3rem;
+}
+
+.pastes-table-container {
+    background: #111111;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.pastes-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pastes-table th {
+    background: #000000;
+    color: var(--accent-color);
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.pastes-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #333333;
+    cursor: pointer;
+}
+
+.pastes-table tr:hover {
+    background: #222222;
+}
+
+.pastes-table tr:last-child td {
+    border-bottom: none;
+}
+
+.username-cell {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.pinned-badge-cell {
+    background: #00aa00;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.admin-badge-cell {
+    background: #ff0000;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+/* Search */
 .search-container {
     max-width: 800px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 3rem;
 }
 
 .search-bar {
     width: 100%;
-    padding: 0.8rem 1.2rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
     background: #000000;
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: 1.2rem;
     outline: none;
 }
 
@@ -220,154 +304,17 @@ body {
     color: #666;
 }
 
-.search-results {
-    margin-top: 1rem;
-    background: #111111;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
-    padding: 1rem;
-}
-
-.pastes-section {
-    margin-top: 2rem;
-}
-
+/* Recent Pastes */
 .section-title {
     color: var(--accent-color);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.paste-table-container {
-    overflow-x: auto;
+    font-size: 2rem;
     margin-bottom: 2rem;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-}
-
-.paste-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 800px;
-}
-
-.paste-table th {
-    background-color: var(--table-header);
-    color: var(--accent-color);
-    font-weight: bold;
-    text-align: left;
-    padding: 0.8rem 1rem;
-    border-bottom: 2px solid var(--accent-color);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-}
-
-.paste-table td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--table-row);
-}
-
-.paste-table tr:nth-child(even) td {
-    background-color: var(--table-alt);
-}
-
-.paste-table tr:hover td {
-    background-color: var(--hover-color);
-    cursor: pointer;
-}
-
-.paste-table tr:hover .paste-title {
-    color: var(--accent-color);
-}
-
-.paste-title {
-    color: var(--accent-color);
-    font-weight: bold;
-    max-width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.paste-comments,
-.paste-views {
     text-align: center;
-    font-family: monospace;
-    color: #888;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 1rem;
 }
 
-.paste-author {
-    color: #ccc;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.paste-date {
-    color: #666;
-    font-size: 0.9rem;
-    text-align: right;
-}
-
-.paste-table tr.pinned-row td {
-    background-color: #111111;
-    border-left: 3px solid var(--accent-color);
-}
-
-.paste-table tr.pinned-row:hover td {
-    background-color: #1a1a1a;
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-    padding: 1rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.page-btn {
-    background: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 0.9rem;
-    min-width: 40px;
-}
-
-.page-btn:hover:not(:disabled) {
-    background: var(--hover-color);
-    border-color: var(--accent-color);
-}
-
-.page-btn.active {
-    background: var(--accent-color);
-    color: #000000;
-    border-color: var(--accent-color);
-}
-
-.page-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.page-info {
-    color: #888;
-    font-size: 0.9rem;
-    margin: 0 1rem;
-}
-
+/* FULLSCREEN PASTE DETAIL */
 .paste-detail-container {
     position: fixed;
     top: 0;
@@ -392,7 +339,7 @@ body {
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
     padding: 1rem 2rem;
-    border-bottom: 1px solid var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
     z-index: 10000;
     display: flex;
     justify-content: space-between;
@@ -400,7 +347,7 @@ body {
 }
 
 .paste-detail-content {
-    margin-top: 60px;
+    margin-top: 80px;
     padding: 2rem;
     max-width: 1200px;
     margin-left: auto;
@@ -408,13 +355,13 @@ body {
 }
 
 .back-btn {
-    background: transparent;
+    background: #111111;
     color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 0.5rem 1rem;
+    border: 2px solid var(--accent-color);
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 0.9rem;
+    border-radius: 5px;
+    font-size: 1rem;
     transition: all 0.3s;
 }
 
@@ -428,47 +375,45 @@ body {
     font-family: 'Courier New', monospace;
     background: #000000;
     padding: 2rem;
-    border-radius: 3px;
-    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    border: 2px solid var(--accent-color);
     margin-top: 2rem;
     min-height: 200px;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
-.paste-form, .auth-form, .profile-form, .timeout-form, .tag-form {
+/* Forms */
+.paste-form, .auth-form, .profile-form, .timeout-form, .tag-form, .username-color-form {
     max-width: 800px;
     margin: 0 auto;
     background: #111111;
     padding: 2rem;
-    border-radius: 3px;
-    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
     color: var(--accent-color);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .form-input, .form-textarea, .form-select {
     width: 100%;
-    padding: 0.6rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
     background: #000000;
     color: var(--accent-color);
-    font-size: 0.9rem;
+    font-size: 1rem;
     outline: none;
 }
 
@@ -480,42 +425,43 @@ body {
 
 .url-input-group {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .url-input {
     flex: 1;
-    padding: 0.6rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
     background: #000000;
     color: var(--accent-color);
 }
 
-.timeout-inputs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+.time-input-group {
+    display: flex;
+    gap: 1rem;
 }
 
+.time-input {
+    flex: 1;
+}
+
+/* Buttons */
 .btn {
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1.5rem;
     border: none;
-    border-radius: 3px;
-    font-size: 0.9rem;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .btn-primary {
-    background: transparent;
+    background: #000000;
     color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    border: 2px solid var(--accent-color);
 }
 
 .btn-primary:hover {
@@ -524,61 +470,58 @@ body {
 }
 
 .btn-secondary {
-    background: transparent;
+    background: #222222;
     color: var(--accent-color);
-    border: 1px solid #666666;
+    border: 2px solid #666666;
 }
 
 .btn-secondary:hover {
     background: #333333;
-    border-color: var(--accent-color);
 }
 
 .btn-danger {
-    background: transparent;
-    color: #ff0000;
-    border: 1px solid #ff0000;
+    background: #ff0000;
+    color: white;
+    border: 2px solid #ff0000;
 }
 
 .btn-danger:hover {
-    background: #ff0000;
-    color: white;
+    background: #cc0000;
 }
 
 .btn-success {
-    background: transparent;
-    color: #00aa00;
-    border: 1px solid #00aa00;
+    background: #00aa00;
+    color: white;
+    border: 2px solid #00aa00;
 }
 
 .btn-success:hover {
-    background: #00aa00;
-    color: white;
+    background: #008800;
 }
 
-.btn-warning {
-    background: transparent;
-    color: var(--manager-color);
-    border: 1px solid var(--manager-color);
+.btn-gold {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #000000;
+    border: 2px solid #ffd700;
 }
 
-.btn-warning:hover {
-    background: var(--manager-color);
-    color: black;
+.btn-gold:hover {
+    background: linear-gradient(45deg, #ffed4e, #ffd700);
 }
 
 .btn-group {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
+/* Chat Page */
 .chat-container {
     max-width: 1000px;
     margin: 0 auto;
     background: #111111;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
     height: 600px;
     display: flex;
     flex-direction: column;
@@ -587,10 +530,10 @@ body {
 
 .chat-header {
     background: #000000;
-    padding: 0.8rem;
-    border-bottom: 1px solid var(--accent-color);
+    padding: 1rem;
+    border-bottom: 2px solid var(--accent-color);
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: var(--accent-color);
 }
 
@@ -602,58 +545,57 @@ body {
 }
 
 .message {
-    margin-bottom: 0.8rem;
-    padding: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
     background: #111111;
-    border-radius: 3px;
-    border-left: 2px solid var(--accent-color);
+    border-radius: 5px;
+    border-left: 3px solid var(--accent-color);
 }
 
 .message-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
 }
 
 .message-sender {
     font-weight: bold;
     color: var(--accent-color);
-    font-size: 0.9rem;
 }
 
 .message-time {
     color: #888888;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .chat-input-container {
-    padding: 0.8rem;
+    padding: 1rem;
     background: #000000;
-    border-top: 1px solid var(--accent-color);
+    border-top: 2px solid var(--accent-color);
 }
 
 .chat-input-wrapper {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .chat-input {
     flex: 1;
-    padding: 0.6rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
     background: #000000;
     color: var(--accent-color);
-    font-size: 0.9rem;
+    font-size: 1rem;
     outline: none;
 }
 
 .send-btn {
-    padding: 0.6rem 1rem;
-    background: transparent;
+    padding: 0.8rem 1.5rem;
+    background: #000000;
     color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
 }
@@ -663,11 +605,12 @@ body {
     color: #000000;
 }
 
+/* Hall of Autism */
 .hall-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 @media (max-width: 1200px) {
@@ -684,25 +627,25 @@ body {
 
 .hall-box {
     background: #111111;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
-    padding: 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 1.5rem;
     text-align: center;
     transition: all 0.3s;
 }
 
 .hall-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
 }
 
 .hall-image {
     width: 100%;
-    height: 150px;
+    height: 200px;
     background: #000000;
-    border: 1px solid var(--accent-color);
-    margin-bottom: 0.8rem;
-    border-radius: 3px;
+    border: 2px solid var(--accent-color);
+    margin-bottom: 1rem;
+    border-radius: 5px;
     overflow: hidden;
 }
 
@@ -713,25 +656,26 @@ body {
 }
 
 .hall-name {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     color: var(--accent-color);
 }
 
 .hall-description {
     color: #888888;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
+/* Profile Page */
 .profile-banner {
-    height: 200px;
+    height: 300px;
     background: #000000;
-    border-radius: 3px;
-    margin-bottom: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--accent-color);
+    border: 2px solid var(--accent-color);
 }
 
 .profile-banner-img {
@@ -741,14 +685,14 @@ body {
 }
 
 .profile-picture {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background: #000000;
     position: absolute;
-    bottom: -50px;
+    bottom: -75px;
     left: 2rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
+    border: 3px solid var(--accent-color);
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -758,176 +702,84 @@ body {
     object-fit: cover;
 }
 
+/* Admin Panel */
 .admin-controls {
     background: #111111;
-    border: 1px solid #ff0000;
-    border-radius: 3px;
-    padding: 1.5rem;
-    margin-top: 1rem;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-top: 2rem;
 }
 
 .admin-title {
     color: #ff0000;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid #ff0000;
-    padding-bottom: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    padding-bottom: 0.5rem;
 }
 
 .admin-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .stat-box {
     background: #000000;
-    border: 1px solid var(--accent-color);
-    border-radius: 3px;
-    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 1rem;
     text-align: center;
 }
 
 .stat-number {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--accent-color);
 }
 
 .stat-label {
     color: #888;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.9rem;
 }
 
 .admin-actions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.timeout-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 99999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.timeout-overlay.active {
-    display: flex;
-}
-
-.timeout-message {
+/* Tag Management */
+.tag-container {
     background: #111111;
-    border: 2px solid #ff0000;
-    border-radius: 3px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
     padding: 2rem;
-    text-align: center;
-    max-width: 500px;
-    animation: pulse 2s infinite;
+    margin-top: 2rem;
 }
 
-@keyframes pulse {
-    0%, 100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-    50% { border-color: #ff4444; box-shadow: 0 0 20px #ff0000; }
-}
-
-.timeout-title {
-    color: #ff0000;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.timeout-details {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-}
-
-.timeout-reason {
-    font-size: 1rem;
-    color: #cccccc;
-    margin-top: 1rem;
-}
-
-.tags-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.8rem;
-    margin-top: 0.8rem;
-}
-
-.tag-card {
-    background: #111111;
-    border: 1px solid var(--tagmaker-color);
-    border-radius: 3px;
-    padding: 0.8rem;
-}
-
-.tag-header {
+.tag-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.8rem;
+    padding: 1rem;
+    background: #000000;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    margin-bottom: 1rem;
 }
 
 .tag-name {
-    color: var(--tagmaker-color);
-    font-size: 1rem;
     font-weight: bold;
-}
-
-.tag-users {
-    margin-top: 0.3rem;
-}
-
-.tag-user {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3rem;
-    background: #000000;
+    color: var(--accent-color);
+    padding: 0.3rem 0.8rem;
     border-radius: 3px;
-    margin-bottom: 0.3rem;
-    font-size: 0.8rem;
 }
 
-.color-picker {
-    display: flex;
-    gap: 0.3rem;
-    margin-top: 0.3rem;
-    flex-wrap: wrap;
-}
-
-.color-option {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 1px solid transparent;
-}
-
-.color-option:hover {
-    transform: scale(1.1);
-}
-
-.color-option.selected {
-    border: 1px solid white;
-}
-
+/* Alerts */
 .alert-container {
     position: fixed;
     top: 20px;
@@ -936,15 +788,14 @@ body {
 }
 
 .alert {
-    padding: 0.8rem 1.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 3px;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
     background: #111111;
     color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     animation: slideIn 0.3s ease-out;
-    font-size: 0.9rem;
 }
 
 .alert.error {
@@ -962,144 +813,137 @@ body {
     to { transform: translateX(0); opacity: 1; }
 }
 
+/* Utility */
 .text-center { text-align: center; }
 .mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 0.8rem; }
-.mt-4 { margin-top: 1rem; }
-.mt-5 { margin-top: 1.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2rem; }
 .mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 0.8rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-5 { margin-bottom: 1.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2rem; }
 .d-flex { display: flex; }
 .justify-between { justify-content: space-between; }
 .align-center { align-items: center; }
 .gap-2 { gap: 0.5rem; }
-.gap-3 { gap: 0.8rem; }
+.gap-3 { gap: 1rem; }
 
+/* Responsive */
 @media (max-width: 768px) {
-    .main-content { padding: 70px 0.5rem 1rem; }
-    .paste-form, .auth-form, .timeout-form, .tag-form { padding: 1rem; }
+    .main-content { padding: 120px 1rem 2rem; }
+    .menu-items { grid-template-columns: 1fr; }
+    .paste-form, .auth-form { padding: 1.5rem; }
     .btn-group { flex-direction: column; }
     .paste-detail-content { padding: 1rem; }
     .paste-content { padding: 1rem; }
-    .timeout-inputs { grid-template-columns: 1fr; }
-    .paste-table th, .paste-table td { padding: 0.6rem 0.8rem; }
-    .pagination { flex-wrap: wrap; }
-    .logo { max-width: 200px; }
+    .pastes-table th, .pastes-table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
 }
 </style>
 </head>
 <body>
+<!-- Timeout Overlay -->
+<div id="timeout-overlay" class="timeout-overlay">
+    <div class="timeout-message">⏰ YOU HAVE BEEN TIMED OUT</div>
+    <div class="timeout-details" id="timeout-details"></div>
+    <div style="color: #888; font-size: 1rem;">
+        You will be redirected when the timeout expires
+    </div>
+</div>
+
+<!-- Fullscreen Paste Detail -->
 <div id="paste-detail-container" class="paste-detail-container">
     <div class="paste-detail-header">
-        <button class="back-btn" onclick="closePasteDetail()">Back</button>
+        <button class="back-btn" onclick="closePasteDetail()">← Back to Pastes</button>
         <div id="paste-detail-actions"></div>
     </div>
     <div id="paste-detail-content" class="paste-detail-content"></div>
 </div>
 
-<div id="timeout-overlay" class="timeout-overlay">
-    <div class="timeout-message">
-        <h1 class="timeout-title">TIMED OUT</h1>
-        <div class="timeout-details" id="timeout-details">You have been timed out</div>
-        <div class="timeout-reason" id="timeout-reason"></div>
-        <div class="timeout-timer" id="timeout-timer" style="font-size: 1.5rem; margin-top: 1rem;"></div>
-    </div>
-</div>
-
+<!-- Navigation -->
 <nav class="navbar">
     <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
     <div class="user-info">
-        <span id="usernameDisplay"></span>
+        <span id="usernameDisplay" class="username-display"></span>
         <button class="btn btn-primary" onclick="showPage('auth')" id="authBtn">Sign In</button>
     </div>
 </nav>
 
+<!-- Slide Down Menu -->
 <div class="slide-down-menu" id="slideDownMenu">
     <div class="menu-items">
-        <button class="menu-btn" onclick="showPage('home')">Home</button>
-        <button class="menu-btn" onclick="showPage('paste')">Create Paste</button>
-        <button class="menu-btn" onclick="showPage('chat')">Global Chat</button>
-        <button class="menu-btn" onclick="showPage('most-mentioned')">Most Mentioned</button>
-        <button class="menu-btn" onclick="showPage('hall')">Hall of Autism</button>
-        <button class="menu-btn hidden" id="myAccountBtn" onclick="showPage('myaccount')">My Account</button>
-        <button class="menu-btn hidden" id="tagMakerBtn" onclick="showPage('tagmaker')">Tag Management</button>
-        <button class="menu-btn hidden" id="adminBtn" onclick="showPage('admin')">Admin Panel</button>
-        <button class="menu-btn hidden" id="managerBtn" onclick="showPage('manager')">Manager Panel</button>
+        <button class="menu-btn" onclick="showPage('home')">🏠 Home</button>
+        <button class="menu-btn" onclick="showPage('paste')">📝 Create Paste</button>
+        <button class="menu-btn" onclick="showPage('chat')">💬 Global Chat</button>
+        <button class="menu-btn" onclick="showPage('most-mentioned')">🔥 Most Mentioned</button>
+        <button class="menu-btn" onclick="showPage('hall')">🎭 Hall of Autism</button>
+        <button class="menu-btn hidden" id="myAccountBtn" onclick="showPage('myaccount')">👤 My Account</button>
+        <button class="menu-btn hidden" id="adminBtn" onclick="showPage('admin')">⚙️ Admin Panel</button>
+        <button class="menu-btn hidden" id="tagMakerBtn" onclick="showPage('tagMaker')">🏷️ Tag Manager</button>
+        <button class="menu-btn hidden" id="vipBtn" onclick="showPage('vip')">⭐ VIP Features</button>
     </div>
 </div>
 
+<!-- Main Content -->
 <div class="main-content">
+    <!-- Home Page -->
     <div id="home-page">
         <div class="logo-container">
             <img src="https://i.postimg.cc/x8ML5hVd/logo.jpg" alt="Norbin Logo" class="logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';">
         </div>
 
         <div class="search-container">
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search pastes by title, username, or content..." oninput="handleSearch()">
-            <div class="search-results hidden" id="searchResults">
-                <div class="paste-table-container">
-                    <table class="paste-table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th style="width: 100px;">Views</th>
-                                <th style="width: 150px;">Created by</th>
-                                <th style="width: 120px;">Added</th>
-                            </tr>
-                        </thead>
-                        <tbody id="searchResultsContent"></tbody>
-                    </table>
-                </div>
-            </div>
+            <input type="text"
+                   class="search-bar"
+                   id="searchBar"
+                   placeholder="🔍 Search pastes by title, username, or content..."
+                   oninput="handleSearch()">
         </div>
 
-        <div id="pinned-pastes-section" class="pastes-section">
-            <h2 class="section-title">Pinned Pastes</h2>
-            <div class="paste-table-container">
-                <table class="paste-table" id="pinned-pastes-table">
+        <!-- Pinned Pastes -->
+        <div id="pinned-pastes" class="pinned-pastes">
+            <h2 class="section-title">📌 Pinned Pastes</h2>
+            <div id="pinned-pastes-container" class="pastes-table-container">
+                <table class="pastes-table" id="pinned-pastes-table">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th style="width: 100px;">Comments</th>
-                            <th style="width: 100px;">Views</th>
-                            <th style="width: 150px;">Created by</th>
-                            <th style="width: 120px;">Added</th>
+                            <th width="40%">Title</th>
+                            <th width="20%">Created by</th>
+                            <th width="15%">Views</th>
+                            <th width="25%">Added</th>
                         </tr>
                     </thead>
-                    <tbody id="pinned-pastes-body"></tbody>
+                    <tbody id="pinned-pastes-body">
+                        <!-- Pinned pastes will be loaded here -->
+                    </tbody>
                 </table>
             </div>
         </div>
 
-        <div id="all-pastes-section" class="pastes-section">
-            <h2 class="section-title">All Pastes</h2>
-            <div class="paste-table-container">
-                <table class="paste-table" id="all-pastes-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th style="width: 100px;">Comments</th>
-                            <th style="width: 100px;">Views</th>
-                            <th style="width: 150px;">Created by</th>
-                            <th style="width: 120px;">Added</th>
-                        </tr>
-                    </thead>
-                    <tbody id="all-pastes-body"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="pagination" id="pagination">
-            <button class="page-btn" onclick="changePage(-1)" id="prev-btn">Previous</button>
-            <span class="page-info" id="page-info">Page 1 of 1</span>
-            <button class="page-btn" onclick="changePage(1)" id="next-btn">Next</button>
+        <h2 class="section-title">📜 All Pastes</h2>
+        <div id="pastes-container" class="pastes-table-container">
+            <table class="pastes-table" id="all-pastes-table">
+                <thead>
+                    <tr>
+                        <th width="40%">Title</th>
+                        <th width="20%">Created by</th>
+                        <th width="15%">Views</th>
+                        <th width="25%">Added</th>
+                    </tr>
+                </thead>
+                <tbody id="all-pastes-body">
+                    <!-- All pastes will be loaded here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
+    <!-- Create Paste -->
     <div id="paste-page" class="hidden">
-        <h2 class="section-title">Create New Paste</h2>
+        <h2 class="section-title">📝 Create New Paste</h2>
         <div class="paste-form">
             <div class="form-group">
                 <label class="form-label">Title</label>
@@ -1110,49 +954,48 @@ body {
                 <textarea class="form-textarea" id="paste-content" placeholder="Enter your paste content here..."></textarea>
             </div>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="publishPaste()">Publish</button>
-                <button class="btn btn-secondary" onclick="clearPasteForm()">Clear</button>
+                <button class="btn btn-primary" onclick="publishPaste()">🚀 Publish</button>
+                <button class="btn btn-secondary" onclick="clearPasteForm()">🗑️ Clear</button>
             </div>
         </div>
     </div>
 
+    <!-- Global Chat -->
     <div id="chat-page" class="hidden">
-        <h2 class="section-title">Global Chat</h2>
+        <h2 class="section-title">💬 Global Chat</h2>
         <div class="chat-container">
-            <div class="chat-header">Live Global Chat • <span id="onlineCount">0</span> users online</div>
+            <div class="chat-header">
+                🌍 Live Global Chat • <span id="onlineCount">0</span> users online
+            </div>
             <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input-container">
                 <div class="chat-input-wrapper">
-                    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message... (Press Enter to send)" onkeypress="if(event.key === 'Enter') sendChatMessage()">
-                    <button class="send-btn" onclick="sendChatMessage()">Send</button>
+                    <input type="text"
+                           class="chat-input"
+                           id="chat-input"
+                           placeholder="Type your message... (Press Enter to send)"
+                           onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <button class="send-btn" onclick="sendChatMessage()">📤 Send</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Most Mentioned -->
     <div id="most-mentioned-page" class="hidden">
-        <h2 class="section-title">Most Mentioned Titles</h2>
-        <div id="most-mentioned-container" class="paste-table-container">
-            <table class="paste-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th style="width: 150px;">Mentions</th>
-                        <th style="width: 120px;">Last Mentioned</th>
-                    </tr>
-                </thead>
-                <tbody id="most-mentioned-body"></tbody>
-            </table>
-        </div>
+        <h2 class="section-title">🔥 Most Mentioned Titles</h2>
+        <div id="most-mentioned-container" class="pastes-grid"></div>
     </div>
 
+    <!-- Hall of Autism -->
     <div id="hall-page" class="hidden">
-        <h2 class="section-title">Hall of Autism</h2>
+        <h2 class="section-title">🎭 Hall of Autism</h2>
         <div class="hall-grid" id="hall-container"></div>
     </div>
 
+    <!-- My Account -->
     <div id="myaccount-page" class="hidden">
-        <h2 class="section-title">My Account</h2>
+        <h2 class="section-title">👤 My Account</h2>
         <div class="profile-form">
             <div class="form-group">
                 <div class="profile-banner">
@@ -1161,25 +1004,13 @@ body {
                         <div id="profile-picture-img" class="profile-picture-img"></div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">Display Name</label>
                     <input type="text" class="form-input" id="display-name" placeholder="Enter display name">
                     <button class="btn btn-primary mt-3" onclick="updateDisplayName()">Update Display Name</button>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Username Color</label>
-                    <div class="color-picker" id="color-picker">
-                        <div class="color-option" style="background: #ffffff;" onclick="selectColor('#ffffff')"></div>
-                        <div class="color-option" style="background: #ff0000;" onclick="selectColor('#ff0000')"></div>
-                        <div class="color-option" style="background: #00ff00;" onclick="selectColor('#00ff00')"></div>
-                        <div class="color-option" style="background: #0000ff;" onclick="selectColor('#0000ff')"></div>
-                        <div class="color-option" style="background: #ffff00;" onclick="selectColor('#ffff00')"></div>
-                        <div class="color-option" style="background: #ff00ff;" onclick="selectColor('#ff00ff')"></div>
-                        <div class="color-option" style="background: #00ffff;" onclick="selectColor('#00ffff')"></div>
-                        <div class="color-option" style="background: #ff9900;" onclick="selectColor('#ff9900')"></div>
-                    </div>
-                    <button class="btn btn-primary mt-3" onclick="updateUsernameColor()" id="updateColorBtn">Update Color</button>
-                </div>
+
                 <div class="form-group">
                     <label class="form-label">Banner Image URL</label>
                     <div class="url-input-group">
@@ -1187,6 +1018,7 @@ body {
                         <button class="btn btn-primary" onclick="updateBanner()">Update</button>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">Profile Picture URL</label>
                     <div class="url-input-group">
@@ -1198,10 +1030,47 @@ body {
         </div>
     </div>
 
+    <!-- VIP Features -->
+    <div id="vip-page" class="hidden">
+        <h2 class="section-title">⭐ VIP Features</h2>
+        <div class="profile-form">
+            <div class="form-group">
+                <label class="form-label">Custom Username Color</label>
+                <input type="color" class="form-input" id="username-color" value="#ffffff" style="height: 50px; padding: 0;">
+                <button class="btn btn-gold mt-3" onclick="updateUsernameColor()">Update Color</button>
+                <p class="mt-2" style="color: #888; font-size: 0.9rem;">
+                    Note: VIP users can customize their username color. Glow effects are only for Owner and VIP roles.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tag Manager -->
+    <div id="tagMaker-page" class="hidden">
+        <h2 class="section-title">🏷️ Tag Manager</h2>
+        <div class="tag-form">
+            <div class="form-group">
+                <label class="form-label">Create New Tag</label>
+                <input type="text" class="form-input" id="tag-name" placeholder="Enter tag name">
+                <input type="color" class="form-input mt-2" id="tag-color" value="#ffffff" style="height: 50px; padding: 0;">
+                <button class="btn btn-primary mt-3" onclick="createTag()">Create Tag</button>
+            </div>
+        </div>
+        
+        <div class="tag-container">
+            <h3 class="section-title" style="font-size: 1.5rem;">Existing Tags</h3>
+            <div id="tags-container">
+                <!-- Tags will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
     <div id="admin-page" class="hidden">
-        <h2 class="section-title">Admin Panel</h2>
+        <h2 class="section-title">⚙️ Admin Panel</h2>
         <div class="admin-controls">
             <div class="admin-title">Administrator Controls</div>
+
             <div class="admin-stats">
                 <div class="stat-box">
                     <div class="stat-number" id="totalUsers">0</div>
@@ -1219,136 +1088,85 @@ body {
                     <div class="stat-number" id="pinnedPastes">0</div>
                     <div class="stat-label">Pinned Pastes</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="timedOutUsers">0</div>
-                    <div class="stat-label">Timed Out Users</div>
-                </div>
             </div>
+
             <div class="admin-actions">
-                <button class="btn btn-danger" onclick="adminViewAllUsers()">View All Users</button>
-                <button class="btn btn-danger" onclick="adminViewAllPastes()">View All Pastes</button>
-                <button class="btn btn-danger" onclick="adminClearChat()">Clear Chat</button>
-                <button class="btn btn-danger" onclick="adminBackupData()">Backup Data</button>
-                <button class="btn btn-warning" onclick="adminManageRoles()">Manage Roles</button>
-                <button class="btn btn-warning" onclick="showPage('timeout')">Timeout Users</button>
-                <button class="btn btn-warning" onclick="showPage('tagmaker')">Manage Tags</button>
+                <button class="btn btn-danger" onclick="adminViewAllUsers()">👥 View All Users</button>
+                <button class="btn btn-danger" onclick="adminViewAllPastes()">📄 View All Pastes</button>
+                <button class="btn btn-danger" onclick="adminClearChat()">🗑️ Clear Chat</button>
+                <button class="btn btn-danger" onclick="adminBackupData()">💾 Backup Data</button>
+                <button class="btn btn-danger" onclick="showTimeoutForm()">⏰ Timeout User</button>
+                <button class="btn btn-danger" onclick="adminManageRoles()">👑 Manage Roles</button>
             </div>
+
             <div id="admin-content" class="mt-4"></div>
-        </div>
-    </div>
-
-    <div id="manager-page" class="hidden">
-        <h2 class="section-title">Manager Panel</h2>
-        <div class="admin-controls" style="border-color: var(--manager-color);">
-            <div class="admin-title" style="color: var(--manager-color);">Manager Controls</div>
-            <div class="admin-actions">
-                <button class="btn btn-warning" onclick="managerViewUsers()">View Users</button>
-                <button class="btn btn-warning" onclick="managerViewPastes()">View Pastes</button>
-                <button class="btn btn-warning" onclick="showPage('timeout')">Timeout Users</button>
-                <button class="btn btn-danger" onclick="managerClearChat()">Clear Chat</button>
-                <button class="btn btn-danger" onclick="managerViewAllPastes()">Remove Pastes</button>
-            </div>
-            <div id="manager-content" class="mt-4"></div>
-        </div>
-    </div>
-
-    <div id="timeout-page" class="hidden">
-        <h2 class="section-title">Timeout Users</h2>
-        <div class="timeout-form">
-            <div class="form-group">
-                <label class="form-label">Select User</label>
-                <select class="form-select" id="timeout-user-select">
-                    <option value="">-- Select a user --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Timeout Duration</label>
-                <div class="timeout-inputs">
-                    <input type="number" class="form-input" id="timeout-days" placeholder="Days" min="0">
-                    <input type="number" class="form-input" id="timeout-hours" placeholder="Hours" min="0" max="23">
-                    <input type="number" class="form-input" id="timeout-minutes" placeholder="Minutes" min="0" max="59">
-                    <input type="number" class="form-input" id="timeout-seconds" placeholder="Seconds" min="0" max="59">
+            
+            <!-- Timeout Form -->
+            <div id="timeout-form" class="timeout-form hidden mt-4">
+                <div class="admin-title">Timeout User</div>
+                <div class="form-group">
+                    <label class="form-label">User Email</label>
+                    <input type="email" class="form-input" id="timeout-email" placeholder="user@example.com">
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Reason</label>
-                <input type="text" class="form-input" id="timeout-reason-input" placeholder="Reason for timeout">
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-danger" onclick="timeoutUser()">Timeout User</button>
-                <button class="btn btn-success" onclick="untimeoutUser()">Remove Timeout</button>
-                <button class="btn btn-secondary" onclick="showPage('admin')">Back</button>
-            </div>
-            <div id="timeout-content" class="mt-4">
-                <h3>Currently Timed Out Users</h3>
-                <div id="timed-out-list" class="paste-table-container">
-                    <table class="paste-table">
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Time Remaining</th>
-                                <th>Reason</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="timed-out-table-body"></tbody>
-                    </table>
+                <div class="form-group">
+                    <label class="form-label">Timeout Duration</label>
+                    <div class="time-input-group">
+                        <input type="number" class="form-input time-input" id="timeout-days" placeholder="Days" min="0">
+                        <input type="number" class="form-input time-input" id="timeout-hours" placeholder="Hours" min="0" max="23">
+                        <input type="number" class="form-input time-input" id="timeout-minutes" placeholder="Minutes" min="0" max="59">
+                        <input type="number" class="form-input time-input" id="timeout-seconds" placeholder="Seconds" min="0" max="59">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-danger" onclick="adminTimeoutUser()">⏰ Timeout User</button>
+                    <button class="btn btn-secondary" onclick="hideTimeoutForm()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="tagmaker-page" class="hidden">
-        <h2 class="section-title">Tag Management</h2>
-        <div class="tag-form">
-            <div class="form-group">
-                <label class="form-label">Create New Tag</label>
-                <input type="text" class="form-input" id="new-tag-name" placeholder="Enter tag name">
-                <button class="btn btn-primary mt-3" onclick="createTag()">Create Tag</button>
-            </div>
-            <div id="tags-container" class="mt-4">
-                <h3>Existing Tags</h3>
-                <div id="tags-list" class="tags-grid"></div>
-            </div>
-        </div>
-    </div>
-
+    <!-- User Profile -->
     <div id="user-profile-page" class="hidden">
-        <button class="back-btn" onclick="showPage('home')">Back</button>
+        <button class="back-btn" onclick="showPage('home')">← Back</button>
         <div id="user-profile-content" class="paste-detail"></div>
     </div>
 
+    <!-- Auth Page -->
     <div id="auth-page" class="hidden">
-        <h2 class="section-title">Authentication</h2>
+        <h2 class="section-title">🔐 Authentication</h2>
         <div class="auth-form">
             <div class="form-group">
-                <label class="form-label">Email</label>
+                <label class="form-label">📧 Email</label>
                 <input type="email" class="form-input" id="auth-email" placeholder="your@email.com">
             </div>
             <div class="form-group">
-                <label class="form-label">Password</label>
+                <label class="form-label">🔑 Password</label>
                 <input type="password" class="form-input" id="auth-password" placeholder="••••••••">
             </div>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="signIn()">Sign In</button>
-                <button class="btn btn-secondary" onclick="signUp()">Create Account</button>
+                <button class="btn btn-primary" onclick="signIn()">🚀 Sign In</button>
+                <button class="btn btn-secondary" onclick="signUp()">✨ Create Account</button>
             </div>
             <div id="auth-message" class="mt-3 text-center"></div>
         </div>
     </div>
 </div>
 
+<!-- Alert Container -->
 <div id="alert-container" class="alert-container"></div>
 
+<!-- Audio for Hall of Autism -->
 <audio id="hallMusic" autoplay loop style="display: none;">
     <source src="https://jumpshare.com/share/TQW46hI41f8SrHjqZkva" type="audio/mpeg">
 </audio>
 
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
 <script>
+// Firebase Configuration
 const pasteDbConfig = {
     apiKey: "AIzaSyA1qaJnsRvWDvxNn9Nd1tmMVjvkF-WpUQY",
     authDomain: "norbin-c2fdb.firebaseapp.com",
@@ -1369,52 +1187,106 @@ const chatDbConfig = {
     measurementId: "G-3TQ13WL0NV"
 };
 
+// Initialize Firebase Apps
 const pasteApp = firebase.initializeApp(pasteDbConfig, "pasteApp");
 const chatApp = firebase.initializeApp(chatDbConfig, "chatApp");
 
+// Get Firebase Services
 const pasteAuth = pasteApp.auth();
 const pasteDb = pasteApp.firestore();
 const chatDb = chatApp.firestore();
 
+// Global State
 let currentUser = null;
+let userData = null;
 let isAdmin = false;
 let isManager = false;
-let isVip = false;
+let isVIP = false;
 let isTagMaker = false;
-let selectedColor = '#ffffff';
+let isOwner = false;
 let searchTimeout = null;
+let timeoutInterval = null;
 
-let currentPage = 1;
-const pastesPerPage = 20;
-let totalPastes = 0;
-let totalPages = 1;
-let lastVisibleDoc = null;
-let firstVisibleDoc = null;
-
+// Alert System
 function showAlert(message, type = 'info') {
     const container = document.getElementById('alert-container');
     const alert = document.createElement('div');
     alert.className = `alert ${type}`;
     alert.textContent = message;
     container.appendChild(alert);
-    setTimeout(() => alert.remove(), 5000);
+
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
 }
 
+// Initialize Hall of Autism
+function initializeHallOfAutism() {
+    const hallContainer = document.getElementById('hall-container');
+    hallContainer.innerHTML = '';
+
+    const hallItems = [
+        { name: "Mihai Caradan", description: "reasons:toxic, manipulationer, fakes that hes an kid with many non responsibilities that he said it for attention, mocks girls for the gayness that he is", image: "https://i.postimg.cc/ydG19g3W/image.png" },
+        { name: "Azcox (david)", description: "reason:an wanna be discord drowner who thinks his opsec is good but he actually got full drowned by exotic slasher and void", image: "https://i.postimg.cc/3rp3jy1q/expoze1.jpg" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+3" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+4" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+5" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+6" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+7" },
+        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+8" }
+    ];
+
+    hallItems.forEach(item => {
+        const box = document.createElement('div');
+        box.className = 'hall-box';
+        box.innerHTML = `
+            <div class="hall-image">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/400x300/000000/ffffff?text=Image+Error'">
+            </div>
+            <div class="hall-name">${item.name}</div>
+            <div class="hall-description">${item.description}</div>
+        `;
+        hallContainer.appendChild(box);
+    });
+
+    // Auto-play music on Hall of Autism page
+    if (!document.getElementById('hall-page').classList.contains('hidden')) {
+        try {
+            const hallMusic = document.getElementById('hallMusic');
+            hallMusic.play().catch(e => {
+                console.log("Music autoplay prevented");
+            });
+        } catch (e) {
+            console.log("Music error:", e);
+        }
+    }
+}
+
+// Menu Functions
 function toggleMenu() {
     const menu = document.getElementById('slideDownMenu');
     menu.classList.toggle('active');
 }
 
 function showPage(pageId) {
+    // Close menu
     document.getElementById('slideDownMenu').classList.remove('active');
-    document.querySelectorAll('[id$="-page"]').forEach(page => page.classList.add('hidden'));
+
+    // Hide all pages
+    document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.classList.add('hidden');
+    });
+
+    // Show requested page
     const page = document.getElementById(pageId + '-page');
     if (page) {
         page.classList.remove('hidden');
+
+        // Load data for specific pages
         switch(pageId) {
             case 'home':
+                loadRecentPastes();
                 loadPinnedPastes();
-                loadAllPastes();
                 break;
             case 'chat':
                 loadChatMessages();
@@ -1428,63 +1300,78 @@ function showPage(pageId) {
             case 'myaccount':
                 loadUserProfileData();
                 break;
+            case 'vip':
+                loadVIPFeatures();
+                break;
+            case 'tagMaker':
+                loadTags();
+                break;
             case 'admin':
                 loadAdminStats();
-                break;
-            case 'manager':
-                loadManagerStats();
-                break;
-            case 'timeout':
-                loadTimeoutUsers();
-                break;
-            case 'tagmaker':
-                loadTags();
                 break;
         }
     }
 }
 
+// FULLSCREEN PASTE FUNCTIONS
 function showPasteDetail(pasteId) {
-    document.getElementById('paste-detail-container').classList.add('active');
+    const container = document.getElementById('paste-detail-container');
+    container.classList.add('active');
     document.body.style.overflow = 'hidden';
+
     loadPasteDetailContent(pasteId);
 }
 
 function closePasteDetail() {
-    document.getElementById('paste-detail-container').classList.remove('active');
+    const container = document.getElementById('paste-detail-container');
+    container.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
 async function loadPasteDetailContent(pasteId) {
     try {
+        // Increment view count
         await pasteDb.collection('pastes').doc(pasteId).update({
             views: firebase.firestore.FieldValue.increment(1)
         });
+
         const doc = await pasteDb.collection('pastes').doc(pasteId).get();
         const paste = doc.data();
         const container = document.getElementById('paste-detail-content');
         const actionsContainer = document.getElementById('paste-detail-actions');
+
         let adminControls = '';
         if (isAdmin || isManager) {
-            adminControls = `<div class="btn-group">
-                <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
-                    ${paste.isPinned ? 'Unpin Paste' : 'Pin Paste'}
-                </button>
-                <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">Remove Paste</button>
-                <button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">Ban User</button>
-            </div>`;
+            adminControls = `
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
+                        ${paste.isPinned ? '📌 Unpin Paste' : '📌 Pin Paste'}
+                    </button>
+                    <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">
+                        🗑️ Remove Paste
+                    </button>
+                    ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">
+                        ⚠️ Ban User
+                    </button>` : ''}
+                    ${isAdmin ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${paste.userId}')">
+                        ⏰ Timeout User
+                    </button>` : ''}
+                </div>
+            `;
         }
+
         actionsContainer.innerHTML = adminControls;
+
         container.innerHTML = `
             <div class="paste-username" onclick="showUserProfile('${paste.userId}')">
                 ${escapeHtml(paste.username || 'Unknown User')}
-                ${paste.isPinned ? '<span class="pinned-badge">PINNED BY ADMIN</span>' : ''}
+                ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
             </div>
-            <h2 style="color: var(--accent-color); margin-bottom: 1rem; font-size: 2rem;">
+            <h2 style="color: var(--accent-color); margin-bottom: 1rem; font-size: 2.5rem;">
                 ${escapeHtml(paste.title)}
             </h2>
             <div class="paste-views" style="margin-bottom: 2rem;">
-                ${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}
+                👁️ ${paste.views || 0} views • ⏰ ${formatTime(paste.timestamp?.toDate())}
             </div>
             <div class="paste-content">${escapeHtml(paste.content)}</div>
         `;
@@ -1494,147 +1381,21 @@ async function loadPasteDetailContent(pasteId) {
     }
 }
 
-async function adminPinPaste(pasteId, pinState) {
-    if (!isAdmin && !isManager) return;
-    try {
-        await pasteDb.collection('pastes').doc(pasteId).update({ isPinned: pinState });
-        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
-        loadPinnedPastes();
-        loadAllPastes();
-        loadPasteDetailContent(pasteId);
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function adminRemovePaste(pasteId) {
-    if (!isAdmin && !isManager) return;
-    if (confirm('Are you sure you want to remove this paste?')) {
-        try {
-            await pasteDb.collection('pastes').doc(pasteId).update({ isRemoved: true });
-            showAlert('Paste removed', 'success');
-            closePasteDetail();
-            loadAllPastes();
-        } catch (error) {
-            showAlert(`Error: ${error.message}`, 'error');
-        }
-    }
-}
-
-async function loadPinnedPastes() {
-    try {
-        const snapshot = await pasteDb.collection('pastes')
-            .where('isPinned', '==', true)
-            .where('isRemoved', '==', false)
-            .orderBy('timestamp', 'desc')
-            .limit(10)
-            .get();
-        displayPastesTable(snapshot, 'pinned-pastes-body', true);
-    } catch (error) {
-        document.getElementById('pinned-pastes-body').innerHTML = 
-            '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pinned pastes</td></tr>';
-    }
-}
-
-async function loadAllPastes() {
-    try {
-        let query = pasteDb.collection('pastes')
-            .where('isRemoved', '==', false)
-            .orderBy('timestamp', 'desc')
-            .limit(pastesPerPage);
-        const snapshot = await query.get();
-        totalPastes = snapshot.size;
-        totalPages = Math.max(1, Math.ceil(totalPastes / pastesPerPage));
-        if (snapshot.docs.length > 0) {
-            lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
-            firstVisibleDoc = snapshot.docs[0];
-        }
-        displayPastesTable(snapshot, 'all-pastes-body', false);
-        updatePagination();
-    } catch (error) {
-        document.getElementById('all-pastes-body').innerHTML = 
-            '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pastes yet. Be the first to create one!</td></tr>';
-    }
-}
-
-async function changePage(delta) {
-    if (delta === 1 && !lastVisibleDoc) return;
-    if (delta === -1 && !firstVisibleDoc) return;
-    try {
-        let query = pasteDb.collection('pastes')
-            .where('isRemoved', '==', false)
-            .orderBy('timestamp', 'desc')
-            .limit(pastesPerPage);
-        if (delta === 1) query = query.startAfter(lastVisibleDoc);
-        else if (delta === -1) query = query.endBefore(firstVisibleDoc).limitToLast(pastesPerPage);
-        const snapshot = await query.get();
-        if (snapshot.docs.length > 0) {
-            lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
-            firstVisibleDoc = snapshot.docs[0];
-            currentPage += delta;
-        }
-        displayPastesTable(snapshot, 'all-pastes-body', false);
-        updatePagination();
-    } catch (error) {
-        console.error('Error changing page:', error);
-    }
-}
-
-function displayPastesTable(snapshot, containerId, isPinned = false) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = '';
-    if (snapshot.empty) {
-        container.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pastes found</td></tr>';
-        return;
-    }
-    snapshot.forEach(doc => {
-        const paste = doc.data();
-        const pasteId = doc.id;
-        const row = document.createElement('tr');
-        row.className = isPinned ? 'pinned-row' : '';
-        row.onclick = () => showPasteDetail(pasteId);
-        const date = paste.timestamp?.toDate();
-        const dateStr = date ? formatDate(date) : 'Unknown';
-        row.innerHTML = `
-            <td class="paste-title">${escapeHtml(paste.title)}</td>
-            <td class="paste-comments">0</td>
-            <td class="paste-views">${paste.views || 0}</td>
-            <td class="paste-author" onclick="event.stopPropagation(); showUserProfile('${paste.userId}')">
-                ${escapeHtml(paste.username || 'Anonymous')}
-            </td>
-            <td class="paste-date">${dateStr}</td>
-        `;
-        container.appendChild(row);
-    });
-}
-
-function updatePagination() {
-    const pageInfo = document.getElementById('page-info');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-    prevBtn.disabled = currentPage <= 1;
-    nextBtn.disabled = currentPage >= totalPages;
-}
-
-function formatDate(date) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-}
-
+// Authentication
 async function signIn() {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
+
     if (!email || !password) {
         showAlert('Please enter both email and password', 'error');
         return;
     }
+
     try {
         const userCredential = await pasteAuth.signInWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
         await checkUserStatus();
         updateUIForAuth();
-        await checkTimeoutStatus();
         showAlert('Successfully signed in!', 'success');
         showPage('home');
     } catch (error) {
@@ -1645,33 +1406,46 @@ async function signIn() {
 async function signUp() {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
+
     if (!email || !password) {
         showAlert('Please enter both email and password', 'error');
         return;
     }
+
     if (password.length < 6) {
         showAlert('Password must be at least 6 characters', 'error');
         return;
     }
+
     try {
         const userCredential = await pasteAuth.createUserWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
+
+        // Check if user should be owner (based on email)
+        const ownerEmail = 'exoticslash3r@gmail.com';
+        const isOwnerEmail = email === ownerEmail;
+
+        // Create user profile
         const userData = {
             email: email,
             username: email.split('@')[0],
             displayName: email.split('@')[0],
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             isBanned: false,
-            isAdmin: email === 'exoticslash3r@gmail.com',
+            isAdmin: isOwnerEmail,
             isManager: false,
-            isVip: false,
+            isVIP: false,
             isTagMaker: false,
+            isOwner: isOwnerEmail,
             usernameColor: '#ffffff',
             bannerUrl: '',
             profileUrl: '',
-            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+            timeoutUntil: null
         };
+
         await pasteDb.collection('users').doc(currentUser.uid).set(userData);
+
         await checkUserStatus();
         updateUIForAuth();
         showAlert('Account created successfully!', 'success');
@@ -1684,10 +1458,12 @@ async function signUp() {
 function signOut() {
     pasteAuth.signOut().then(() => {
         currentUser = null;
+        userData = null;
         isAdmin = false;
         isManager = false;
-        isVip = false;
+        isVIP = false;
         isTagMaker = false;
+        isOwner = false;
         updateUIForAuth();
         showAlert('Signed out successfully', 'success');
         showPage('home');
@@ -1696,136 +1472,203 @@ function signOut() {
 
 async function checkUserStatus() {
     if (!currentUser) {
-        isAdmin = false;
-        isManager = false;
-        isVip = false;
-        isTagMaker = false;
+        resetUserStatus();
         return;
     }
+
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         if (userDoc.exists) {
-            const userData = userDoc.data();
-            isAdmin = userData.isAdmin || currentUser.email === 'exoticslash3r@gmail.com';
+            userData = userDoc.data();
+            
+            // Check for timeout
+            if (userData.timeoutUntil) {
+                const timeoutUntil = userData.timeoutUntil.toDate();
+                if (timeoutUntil > new Date()) {
+                    showTimeoutNotification(timeoutUntil);
+                    return;
+                } else {
+                    // Clear timeout if expired
+                    await pasteDb.collection('users').doc(currentUser.uid).update({
+                        timeoutUntil: null
+                    });
+                }
+            }
+            
+            // Set role flags
+            isAdmin = userData.isAdmin || false;
             isManager = userData.isManager || false;
-            isVip = userData.isVip || false;
+            isVIP = userData.isVIP || false;
             isTagMaker = userData.isTagMaker || false;
-            if (currentUser.email === 'exoticslash3r@gmail.com' && !userData.isAdmin) {
-                await pasteDb.collection('users').doc(currentUser.uid).update({ isAdmin: true });
+            isOwner = userData.isOwner || false;
+
+            // Owner has all permissions
+            if (isOwner) {
+                isAdmin = true;
+                isManager = true;
+                isVIP = true;
+                isTagMaker = true;
+            }
+
+            // Update admin status if owner email
+            if (currentUser.email === 'exoticslash3r@gmail.com' && !userData.isOwner) {
+                await pasteDb.collection('users').doc(currentUser.uid).update({
+                    isOwner: true,
+                    isAdmin: true,
+                    isManager: true,
+                    isVIP: true,
+                    isTagMaker: true
+                });
+                isOwner = true;
+                isAdmin = true;
+                isManager = true;
+                isVIP = true;
+                isTagMaker = true;
             }
         } else {
-            const userData = {
+            // Create user document if it doesn't exist
+            const isOwnerEmail = currentUser.email === 'exoticslash3r@gmail.com';
+            userData = {
                 email: currentUser.email,
                 username: currentUser.email.split('@')[0],
                 displayName: currentUser.email.split('@')[0],
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 isBanned: false,
-                isAdmin: currentUser.email === 'exoticslash3r@gmail.com',
+                isAdmin: isOwnerEmail,
                 isManager: false,
-                isVip: false,
+                isVIP: false,
                 isTagMaker: false,
+                isOwner: isOwnerEmail,
                 usernameColor: '#ffffff',
                 bannerUrl: '',
                 profileUrl: '',
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+                timeoutUntil: null
             };
             await pasteDb.collection('users').doc(currentUser.uid).set(userData);
-            isAdmin = currentUser.email === 'exoticslash3r@gmail.com';
+            
+            isOwner = isOwnerEmail;
+            isAdmin = isOwnerEmail;
+            isManager = isOwnerEmail;
+            isVIP = isOwnerEmail;
+            isTagMaker = isOwnerEmail;
         }
     } catch (error) {
         console.error('Error checking user status:', error);
+        resetUserStatus();
     }
+}
+
+function resetUserStatus() {
+    isAdmin = false;
+    isManager = false;
+    isVIP = false;
+    isTagMaker = false;
+    isOwner = false;
+    userData = null;
 }
 
 function updateUIForAuth() {
     const authBtn = document.getElementById('authBtn');
     const myAccountBtn = document.getElementById('myAccountBtn');
     const adminBtn = document.getElementById('adminBtn');
-    const managerBtn = document.getElementById('managerBtn');
+    const vipBtn = document.getElementById('vipBtn');
     const tagMakerBtn = document.getElementById('tagMakerBtn');
     const usernameDisplay = document.getElementById('usernameDisplay');
-    if (currentUser) {
+
+    if (currentUser && userData) {
         authBtn.textContent = 'Sign Out';
         authBtn.onclick = signOut;
         myAccountBtn.classList.remove('hidden');
-        pasteDb.collection('users').doc(currentUser.uid).get().then(doc => {
-            if (doc.exists) {
-                const userData = doc.data();
-                let username = userData.displayName || userData.username || currentUser.email.split('@')[0];
-                let color = userData.usernameColor || '#ffffff';
-                let badges = '';
-                if (userData.isAdmin) badges += '<span class="role-badge owner-badge">OWNER</span>';
-                if (userData.isManager) badges += '<span class="role-badge manager-badge">MANAGER</span>';
-                if (userData.isVip) badges += '<span class="role-badge vip-badge">VIP</span>';
-                if (userData.isTagMaker) badges += '<span class="role-badge tagmaker-badge">TAG MAKER</span>';
-                usernameDisplay.innerHTML = `<span style="color: ${color};">${escapeHtml(username)}</span>${badges}`;
-                if (isAdmin) {
-                    adminBtn.classList.remove('hidden');
-                    showAlert('Owner privileges activated!', 'success');
-                } else adminBtn.classList.add('hidden');
-                if (isManager) {
-                    managerBtn.classList.remove('hidden');
-                    showAlert('Manager privileges activated!', 'success');
-                } else managerBtn.classList.add('hidden');
-                if (isTagMaker) tagMakerBtn.classList.remove('hidden');
-                else tagMakerBtn.classList.add('hidden');
-                if (isVip) {
-                    document.getElementById('color-picker').classList.remove('hidden');
-                    document.getElementById('updateColorBtn').classList.remove('hidden');
-                } else {
-                    document.getElementById('color-picker').classList.add('hidden');
-                    document.getElementById('updateColorBtn').classList.add('hidden');
-                }
-            } else {
-                usernameDisplay.textContent = currentUser.email.split('@')[0];
-            }
-        });
+
+        // Set username with appropriate styling
+        const displayName = userData.displayName || userData.username || currentUser.email.split('@')[0];
+        usernameDisplay.textContent = displayName;
+        usernameDisplay.style.color = userData.usernameColor || '#ffffff';
+        
+        if (isOwner) {
+            usernameDisplay.className = 'username-display owner-glow';
+        } else if (isVIP) {
+            usernameDisplay.className = 'username-display vip-glow';
+        } else {
+            usernameDisplay.className = 'username-display';
+        }
+
+        // Show/hide admin button
+        if (isAdmin || isManager) {
+            adminBtn.classList.remove('hidden');
+        } else {
+            adminBtn.classList.add('hidden');
+        }
+
+        // Show/hide VIP button
+        if (isVIP || isOwner) {
+            vipBtn.classList.remove('hidden');
+        } else {
+            vipBtn.classList.add('hidden');
+        }
+
+        // Show/hide tag maker button
+        if (isTagMaker || isOwner || isManager || isAdmin) {
+            tagMakerBtn.classList.remove('hidden');
+        } else {
+            tagMakerBtn.classList.add('hidden');
+        }
+
+        if (isOwner) {
+            showAlert('🔴 OWNER privileges activated!', 'success');
+        } else if (isAdmin) {
+            showAlert('🔴 Admin privileges activated!', 'success');
+        } else if (isManager) {
+            showAlert('👑 Manager privileges activated!', 'success');
+        } else if (isVIP) {
+            showAlert('⭐ VIP privileges activated!', 'success');
+        }
     } else {
         authBtn.textContent = 'Sign In';
         authBtn.onclick = () => showPage('auth');
         myAccountBtn.classList.add('hidden');
         adminBtn.classList.add('hidden');
-        managerBtn.classList.add('hidden');
+        vipBtn.classList.add('hidden');
         tagMakerBtn.classList.add('hidden');
         usernameDisplay.textContent = '';
+        usernameDisplay.className = 'username-display';
     }
 }
 
+// Paste Management
 async function publishPaste() {
     if (!currentUser) {
         showAlert('Please sign in to publish pastes', 'error');
         showPage('auth');
         return;
     }
+
     const title = document.getElementById('paste-title').value.trim();
     const content = document.getElementById('paste-content').value.trim();
+
     if (!title || !content) {
         showAlert('Please fill in both title and content', 'error');
         return;
     }
+
     try {
-        const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        let userData = userDoc.exists ? userDoc.data() : {
-            email: currentUser.email,
-            username: currentUser.email.split('@')[0],
-            displayName: currentUser.email.split('@')[0]
-        };
         const pasteData = {
             title: title,
             content: content,
             username: userData.displayName || userData.username || currentUser.email.split('@')[0],
             userId: currentUser.uid,
             views: 0,
-            commentCount: 0,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             isPinned: false,
             isRemoved: false,
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         };
+
         await pasteDb.collection('pastes').add(pasteData);
+
         showAlert('Paste published successfully!', 'success');
         clearPasteForm();
-        loadAllPastes();
         showPage('home');
     } catch (error) {
         showAlert(`Error publishing paste: ${error.message}`, 'error');
@@ -1837,37 +1680,69 @@ function clearPasteForm() {
     document.getElementById('paste-content').value = '';
 }
 
-async function sendChatMessage() {
-    if (!currentUser) {
-        showAlert('Please sign in to chat', 'error');
-        showPage('auth');
-        return;
-    }
-    const input = document.getElementById('chat-input');
-    const message = input.value.trim();
-    if (!message) return;
+async function loadRecentPastes() {
     try {
-        const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        let username = currentUser.email.split('@')[0];
-        let color = '#ffffff';
-        if (userDoc.exists) {
-            const userData = userDoc.data();
-            username = userData.displayName || userData.username || username;
-            color = userData.usernameColor || color;
-        }
-        await chatDb.collection('messages').add({
-            message: message,
-            username: username,
-            userId: currentUser.uid,
-            usernameColor: color,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        input.value = '';
+        const snapshot = await pasteDb.collection('pastes')
+            .where('isRemoved', '==', false)
+            .orderBy('timestamp', 'desc')
+            .limit(100)
+            .get();
+
+        displayPastesTable(snapshot, 'all-pastes-body');
     } catch (error) {
-        showAlert(`Error sending message: ${error.message}`, 'error');
+        console.error('Error loading pastes:', error);
+        document.getElementById('all-pastes-body').innerHTML = 
+            '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes yet. Be the first to create one!</td></tr>';
     }
 }
 
+async function loadPinnedPastes() {
+    try {
+        const snapshot = await pasteDb.collection('pastes')
+            .where('isPinned', '==', true)
+            .where('isRemoved', '==', false)
+            .orderBy('timestamp', 'desc')
+            .get();
+
+        displayPastesTable(snapshot, 'pinned-pastes-body', true);
+    } catch (error) {
+        console.error('Error loading pinned pastes:', error);
+        document.getElementById('pinned-pastes-body').innerHTML = 
+            '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pinned pastes yet.</td></tr>';
+    }
+}
+
+function displayPastesTable(snapshot, containerId, isPinned = false) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+
+    if (snapshot.empty) {
+        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes found.</td></tr>';
+        return;
+    }
+
+    snapshot.forEach(doc => {
+        const paste = doc.data();
+        const pasteId = doc.id;
+
+        const row = document.createElement('tr');
+        row.onclick = () => showPasteDetail(pasteId);
+
+        row.innerHTML = `
+            <td>
+                <div style="font-weight: bold;">${escapeHtml(paste.title)}</div>
+                ${isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
+            </td>
+            <td class="username-cell">${escapeHtml(paste.username || 'Unknown User')}</td>
+            <td>${paste.views || 0}</td>
+            <td>${formatTime(paste.timestamp?.toDate())}</td>
+        `;
+
+        container.appendChild(row);
+    });
+}
+
+// Chat Functions
 function loadChatMessages() {
     chatDb.collection('messages')
         .orderBy('timestamp', 'desc')
@@ -1875,76 +1750,795 @@ function loadChatMessages() {
         .onSnapshot(snapshot => {
             const container = document.getElementById('chat-messages');
             container.innerHTML = '';
+
             const messages = [];
-            snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+            snapshot.forEach(doc => {
+                messages.push({ id: doc.id, ...doc.data() });
+            });
+
+            // Sort by timestamp (newest first)
             messages.sort((a, b) => b.timestamp - a.timestamp);
+
             if (messages.length === 0) {
                 container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #888;">No messages yet</div>';
                 return;
             }
+
             messages.forEach(msg => {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message';
+
                 messageDiv.innerHTML = `
                     <div class="message-header">
-                        <div class="message-sender" style="color: ${msg.usernameColor || '#ffffff'}">
-                            ${escapeHtml(msg.username || 'Unknown User')}:
-                        </div>
+                        <div class="message-sender">${escapeHtml(msg.username || 'Unknown User')}:</div>
                         <div class="message-time">${formatTime(msg.timestamp?.toDate())}</div>
                     </div>
-                    <div>${escapeHtml(msg.message)}</div>
+                    <div>${escapeHtml(msg.message)}:</div>
                 `;
+
                 container.appendChild(messageDiv);
             });
+
+            // Scroll to bottom
             container.scrollTop = container.scrollHeight;
+        }, error => {
+            console.error('Error loading chat:', error);
         });
 }
 
-async function loadAdminStats() {
-    if (!isAdmin) {
-        showAlert('Admin access required', 'error');
+async function sendChatMessage() {
+    if (!currentUser) {
+        showAlert('Please sign in to chat', 'error');
+        showPage('auth');
+        return;
+    }
+
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    try {
+        await chatDb.collection('messages').add({
+            message: message,
+            username: userData.displayName || userData.username || currentUser.email.split('@')[0],
+            userId: currentUser.uid,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        input.value = '';
+    } catch (error) {
+        showAlert(`Error sending message: ${error.message}`, 'error');
+    }
+}
+
+// Search Functionality
+function handleSearch() {
+    const searchTerm = document.getElementById('searchBar').value.trim();
+
+    if (searchTerm.length === 0) {
+        loadRecentPastes();
+        return;
+    }
+
+    if (searchTimeout) clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(() => {
+        performSearch(searchTerm);
+    }, 300);
+}
+
+async function performSearch(searchTerm) {
+    try {
+        const snapshot = await pasteDb.collection('pastes')
+            .where('isRemoved', '==', false)
+            .orderBy('timestamp', 'desc')
+            .get();
+
+        const results = [];
+        const searchLower = searchTerm.toLowerCase();
+
+        snapshot.forEach(doc => {
+            const paste = doc.data();
+            const pasteId = doc.id;
+
+            const titleMatch = paste.title.toLowerCase().includes(searchLower);
+            const contentMatch = paste.content.toLowerCase().includes(searchLower);
+            const userMatch = (paste.username || '').toLowerCase().includes(searchLower);
+
+            if (titleMatch || contentMatch || userMatch) {
+                results.push({ id: pasteId, ...paste });
+            }
+        });
+
+        displaySearchResults(results);
+    } catch (error) {
+        console.error('Error searching:', error);
+    }
+}
+
+function displaySearchResults(results) {
+    const container = document.getElementById('all-pastes-body');
+    container.innerHTML = '';
+
+    if (results.length === 0) {
+        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No results found</td></tr>';
+        return;
+    }
+
+    results.slice(0, 50).forEach(paste => {
+        const row = document.createElement('tr');
+        row.onclick = () => showPasteDetail(paste.id);
+
+        row.innerHTML = `
+            <td>
+                <div style="font-weight: bold;">${escapeHtml(paste.title)}</div>
+                ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
+            </td>
+            <td class="username-cell">${escapeHtml(paste.username || 'Unknown User')}</td>
+            <td>${paste.views || 0}</td>
+            <td>${formatTime(paste.timestamp?.toDate())}</td>
+        `;
+
+        container.appendChild(row);
+    });
+}
+
+// Most Mentioned
+async function loadMostMentioned() {
+    try {
+        const snapshot = await pasteDb.collection('pastes')
+            .where('isRemoved', '==', false)
+            .get();
+
+        const titleCount = {};
+        snapshot.forEach(doc => {
+            const paste = doc.data();
+            const title = paste.title.toLowerCase().trim();
+            if (title) {
+                titleCount[title] = (titleCount[title] || 0) + 1;
+            }
+        });
+
+        const sortedTitles = Object.entries(titleCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 20);
+
+        const container = document.getElementById('most-mentioned-container');
+        container.innerHTML = '';
+
+        sortedTitles.forEach(([title, count], index) => {
+            const card = document.createElement('div');
+            card.className = 'paste-card';
+            card.innerHTML = `
+                <div style="font-size: 1.5rem; margin-bottom: 1rem;">#${index + 1}</div>
+                <div class="paste-title">${escapeHtml(title)}</div>
+                <div class="paste-views">🔥 Mentioned ${count} times</div>
+            `;
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error loading most mentioned:', error);
+    }
+}
+
+// Profile Functions
+async function loadUserProfileData() {
+    if (!currentUser) return;
+
+    try {
+        const doc = await pasteDb.collection('users').doc(currentUser.uid).get();
+        if (doc.exists) {
+            const userData = doc.data();
+
+            document.getElementById('display-name').value = userData.displayName || '';
+            document.getElementById('banner-url').value = userData.bannerUrl || '';
+            document.getElementById('profile-url').value = userData.profileUrl || '';
+
+            if (userData.bannerUrl) {
+                document.getElementById('profile-banner-img').style.backgroundImage = `url('${userData.bannerUrl}')`;
+            }
+
+            if (userData.profileUrl) {
+                document.getElementById('profile-picture-img').style.backgroundImage = `url('${userData.profileUrl}')`;
+            }
+        }
+    } catch (error) {
+        console.error('Error loading profile data:', error);
+    }
+}
+
+async function updateDisplayName() {
+    if (!currentUser) return;
+
+    const displayName = document.getElementById('display-name').value.trim();
+    if (!displayName) {
+        showAlert('Please enter a display name', 'error');
+        return;
+    }
+
+    try {
+        await pasteDb.collection('users').doc(currentUser.uid).update({
+            displayName: displayName,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        userData.displayName = displayName;
+        showAlert('Display name updated successfully!', 'success');
+        updateUIForAuth();
+    } catch (error) {
+        showAlert(`Error updating display name: ${error.message}`, 'error');
+    }
+}
+
+async function updateBanner() {
+    if (!currentUser) return;
+
+    const bannerUrl = document.getElementById('banner-url').value.trim();
+    if (!bannerUrl) {
+        showAlert('Please enter a banner URL', 'error');
+        return;
+    }
+
+    try {
+        await pasteDb.collection('users').doc(currentUser.uid).update({
+            bannerUrl: bannerUrl,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        userData.bannerUrl = bannerUrl;
+        showAlert('Banner updated successfully!', 'success');
+        document.getElementById('profile-banner-img').style.backgroundImage = `url('${bannerUrl}')`;
+    } catch (error) {
+        showAlert(`Error updating banner: ${error.message}`, 'error');
+    }
+}
+
+async function updateProfilePicture() {
+    if (!currentUser) return;
+
+    const profileUrl = document.getElementById('profile-url').value.trim();
+    if (!profileUrl) {
+        showAlert('Please enter a profile picture URL', 'error');
+        return;
+    }
+
+    try {
+        await pasteDb.collection('users').doc(currentUser.uid).update({
+            profileUrl: profileUrl,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        userData.profileUrl = profileUrl;
+        showAlert('Profile picture updated successfully!', 'success');
+        document.getElementById('profile-picture-img').style.backgroundImage = `url('${profileUrl}')`;
+    } catch (error) {
+        showAlert(`Error updating profile picture: ${error.message}`, 'error');
+    }
+}
+
+// VIP Functions
+async function loadVIPFeatures() {
+    if (!currentUser || (!isVIP && !isOwner)) {
+        showAlert('VIP access required', 'error');
         showPage('home');
         return;
     }
+
+    document.getElementById('username-color').value = userData.usernameColor || '#ffffff';
+}
+
+async function updateUsernameColor() {
+    if (!currentUser || (!isVIP && !isOwner)) return;
+
+    const color = document.getElementById('username-color').value;
+    
     try {
+        await pasteDb.collection('users').doc(currentUser.uid).update({
+            usernameColor: color,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        userData.usernameColor = color;
+        showAlert('Username color updated successfully!', 'success');
+        updateUIForAuth();
+    } catch (error) {
+        showAlert(`Error updating username color: ${error.message}`, 'error');
+    }
+}
+
+// Tag Functions
+async function loadTags() {
+    if (!currentUser || (!isTagMaker && !isOwner && !isManager && !isAdmin)) {
+        showAlert('Tag Maker access required', 'error');
+        showPage('home');
+        return;
+    }
+
+    const container = document.getElementById('tags-container');
+    container.innerHTML = '';
+
+    try {
+        const snapshot = await pasteDb.collection('tags').orderBy('createdAt', 'desc').get();
+        
+        if (snapshot.empty) {
+            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #888;">No tags created yet</div>';
+            return;
+        }
+
+        snapshot.forEach(doc => {
+            const tag = doc.data();
+            const tagElement = document.createElement('div');
+            tagElement.className = 'tag-item';
+            tagElement.innerHTML = `
+                <div>
+                    <span class="tag-name" style="background-color: ${tag.color}; color: ${getContrastColor(tag.color)}">
+                        ${escapeHtml(tag.name)}
+                    </span>
+                    <div style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">
+                        Created by: ${escapeHtml(tag.createdBy || 'Unknown')}
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-danger" onclick="deleteTag('${doc.id}')">Delete</button>
+                </div>
+            `;
+            container.appendChild(tagElement);
+        });
+    } catch (error) {
+        console.error('Error loading tags:', error);
+    }
+}
+
+function getContrastColor(hexcolor) {
+    // Remove the # if present
+    hexcolor = hexcolor.replace("#", "");
+    
+    // Convert to RGB
+    const r = parseInt(hexcolor.substr(0, 2), 16);
+    const g = parseInt(hexcolor.substr(2, 2), 16);
+    const b = parseInt(hexcolor.substr(4, 2), 16);
+    
+    // Calculate luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    // Return black or white depending on luminance
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+}
+
+async function createTag() {
+    if (!currentUser || (!isTagMaker && !isOwner && !isManager && !isAdmin)) return;
+
+    const name = document.getElementById('tag-name').value.trim();
+    const color = document.getElementById('tag-color').value;
+
+    if (!name) {
+        showAlert('Please enter a tag name', 'error');
+        return;
+    }
+
+    try {
+        await pasteDb.collection('tags').add({
+            name: name,
+            color: color,
+            createdBy: userData.displayName || userData.username || currentUser.email.split('@')[0],
+            createdById: currentUser.uid,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        showAlert('Tag created successfully!', 'success');
+        document.getElementById('tag-name').value = '';
+        loadTags();
+    } catch (error) {
+        showAlert(`Error creating tag: ${error.message}`, 'error');
+    }
+}
+
+async function deleteTag(tagId) {
+    if (!currentUser || (!isTagMaker && !isOwner && !isManager && !isAdmin)) return;
+
+    if (confirm('Are you sure you want to delete this tag?')) {
+        try {
+            await pasteDb.collection('tags').doc(tagId).delete();
+            showAlert('Tag deleted successfully!', 'success');
+            loadTags();
+        } catch (error) {
+            showAlert(`Error deleting tag: ${error.message}`, 'error');
+        }
+    }
+}
+
+// Timeout Functions
+function showTimeoutNotification(timeoutUntil) {
+    const overlay = document.getElementById('timeout-overlay');
+    const details = document.getElementById('timeout-details');
+    
+    const now = new Date();
+    const diff = timeoutUntil - now;
+    
+    if (diff <= 0) {
+        overlay.classList.remove('active');
+        if (timeoutInterval) {
+            clearInterval(timeoutInterval);
+        }
+        return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    let timeString = '';
+    if (days > 0) timeString += `${days}d `;
+    if (hours > 0) timeString += `${hours}h `;
+    if (minutes > 0) timeString += `${minutes}m `;
+    timeString += `${seconds}s`;
+    
+    details.textContent = `Time remaining: ${timeString}`;
+    overlay.classList.add('active');
+    
+    // Update countdown every second
+    if (timeoutInterval) {
+        clearInterval(timeoutInterval);
+    }
+    
+    timeoutInterval = setInterval(() => {
+        const now = new Date();
+        const diff = timeoutUntil - now;
+        
+        if (diff <= 0) {
+            overlay.classList.remove('active');
+            clearInterval(timeoutInterval);
+            location.reload();
+            return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        let timeString = '';
+        if (days > 0) timeString += `${days}d `;
+        if (hours > 0) timeString += `${hours}h `;
+        if (minutes > 0) timeString += `${minutes}m `;
+        timeString += `${seconds}s`;
+        
+        details.textContent = `Time remaining: ${timeString}`;
+    }, 1000);
+}
+
+function showTimeoutForm() {
+    document.getElementById('timeout-form').classList.remove('hidden');
+}
+
+function hideTimeoutForm() {
+    document.getElementById('timeout-form').classList.add('hidden');
+    document.getElementById('timeout-email').value = '';
+    document.getElementById('timeout-days').value = '';
+    document.getElementById('timeout-hours').value = '';
+    document.getElementById('timeout-minutes').value = '';
+    document.getElementById('timeout-seconds').value = '';
+}
+
+function showTimeoutUserForm(userId) {
+    showPage('admin');
+    showTimeoutForm();
+    document.getElementById('timeout-email').value = userId;
+}
+
+async function adminTimeoutUser() {
+    if (!isAdmin && !isManager) return;
+
+    const emailOrId = document.getElementById('timeout-email').value.trim();
+    const days = parseInt(document.getElementById('timeout-days').value) || 0;
+    const hours = parseInt(document.getElementById('timeout-hours').value) || 0;
+    const minutes = parseInt(document.getElementById('timeout-minutes').value) || 0;
+    const seconds = parseInt(document.getElementById('timeout-seconds').value) || 0;
+
+    if (!emailOrId) {
+        showAlert('Please enter user email or ID', 'error');
+        return;
+    }
+
+    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+        showAlert('Please enter a timeout duration', 'error');
+        return;
+    }
+
+    try {
+        // Find user by email or ID
+        let userId = emailOrId;
+        
+        // Check if it's an email
+        if (emailOrId.includes('@')) {
+            // Find user by email
+            const usersSnapshot = await pasteDb.collection('users').where('email', '==', emailOrId).get();
+            if (usersSnapshot.empty) {
+                showAlert('User not found', 'error');
+                return;
+            }
+            userId = usersSnapshot.docs[0].id;
+        }
+
+        // Calculate timeout duration
+        const totalSeconds = (days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60) + seconds;
+        const timeoutUntil = new Date(Date.now() + (totalSeconds * 1000));
+
+        await pasteDb.collection('users').doc(userId).update({
+            timeoutUntil: firebase.firestore.Timestamp.fromDate(timeoutUntil)
+        });
+
+        showAlert(`User timed out for ${days}d ${hours}h ${minutes}m ${seconds}s`, 'success');
+        hideTimeoutForm();
+        
+        // If timing out current user, show notification
+        if (userId === currentUser?.uid) {
+            showTimeoutNotification(timeoutUntil);
+        }
+    } catch (error) {
+        showAlert(`Error timing out user: ${error.message}`, 'error');
+    }
+}
+
+async function adminUntimeoutUser(userId) {
+    if (!isAdmin && !isManager) return;
+
+    if (confirm('Are you sure you want to remove timeout from this user?')) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                timeoutUntil: null
+            });
+
+            showAlert('Timeout removed successfully', 'success');
+            
+            // If un-timing out current user, hide notification
+            if (userId === currentUser?.uid) {
+                document.getElementById('timeout-overlay').classList.remove('active');
+                if (timeoutInterval) {
+                    clearInterval(timeoutInterval);
+                }
+            }
+        } catch (error) {
+            showAlert(`Error removing timeout: ${error.message}`, 'error');
+        }
+    }
+}
+
+// Admin Functions
+async function loadAdminStats() {
+    if (!isAdmin && !isManager) {
+        showAlert('Admin/Manager access required', 'error');
+        showPage('home');
+        return;
+    }
+
+    try {
+        // Get stats
         const usersSnap = await pasteDb.collection('users').get();
         const pastesSnap = await pasteDb.collection('pastes').where('isRemoved', '==', false).get();
-        const pinnedSnap = await pasteDb.collection('pastes').where('isPinned', '==', true).where('isRemoved', '==', false).get();
-        const now = new Date();
-        const timedOutUsers = usersSnap.docs.filter(doc => {
-            const userData = doc.data();
-            return userData.timeoutUntil && userData.timeoutUntil.toDate() > now;
-        }).length;
-        document.getElementById('totalUsers').textContent = usersSnap.size;
-        document.getElementById('totalPastes').textContent = pastesSnap.size;
-        document.getElementById('bannedUsers').textContent = usersSnap.docs.filter(doc => doc.data().isBanned).length;
-        document.getElementById('pinnedPastes').textContent = pinnedSnap.size;
-        document.getElementById('timedOutUsers').textContent = timedOutUsers;
+        const chatSnap = await chatDb.collection('messages').get();
+
+        const totalUsers = usersSnap.size;
+        const totalPastes = pastesSnap.size;
+        const bannedUsers = usersSnap.docs.filter(doc => doc.data().isBanned).length;
+        const pinnedPastes = pastesSnap.docs.filter(doc => doc.data().isPinned).length;
+
+        document.getElementById('totalUsers').textContent = totalUsers;
+        document.getElementById('totalPastes').textContent = totalPastes;
+        document.getElementById('bannedUsers').textContent = bannedUsers;
+        document.getElementById('pinnedPastes').textContent = pinnedPastes;
+
     } catch (error) {
         console.error('Error loading admin stats:', error);
     }
 }
 
+async function adminPinPaste(pasteId, pinState) {
+    if (!isAdmin && !isManager) return;
+
+    try {
+        await pasteDb.collection('pastes').doc(pasteId).update({
+            isPinned: pinState
+        });
+        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
+        loadPasteDetailContent(pasteId);
+        loadPinnedPastes();
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function adminRemovePaste(pasteId) {
+    if (!isAdmin && !isManager) return;
+
+    if (confirm('Are you sure you want to remove this paste?')) {
+        try {
+            await pasteDb.collection('pastes').doc(pasteId).update({
+                isRemoved: true
+            });
+            showAlert('Paste removed', 'success');
+            closePasteDetail();
+            showPage('home');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminBanUser(userId, banState = true) {
+    if (!isAdmin && !isManager) return;
+
+    const action = banState ? 'ban' : 'unban';
+    if (confirm(`Are you sure you want to ${action} this user?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isBanned: banState
+            });
+            showAlert(`User ${banState ? 'banned' : 'unbanned'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminDeleteUserPosts(userId) {
+    if (!isAdmin && !isManager) return;
+
+    if (confirm('Delete ALL posts by this user?')) {
+        try {
+            const snapshot = await pasteDb.collection('pastes')
+                .where('userId', '==', userId)
+                .get();
+
+            const batch = pasteDb.batch();
+            snapshot.forEach(doc => {
+                batch.update(doc.ref, { isRemoved: true });
+            });
+
+            await batch.commit();
+            showAlert('All user posts removed', 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminMakeAdmin(userId, makeAdmin) {
+    if (!isAdmin && !isOwner) return;
+
+    if (confirm(`${makeAdmin ? 'Make' : 'Remove'} admin privileges?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isAdmin: makeAdmin
+            });
+            showAlert(`Admin privileges ${makeAdmin ? 'granted' : 'removed'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminMakeManager(userId, makeManager) {
+    if (!isAdmin && !isOwner) return;
+
+    if (confirm(`${makeManager ? 'Make' : 'Remove'} manager privileges?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isManager: makeManager
+            });
+            showAlert(`Manager privileges ${makeManager ? 'granted' : 'removed'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminMakeVIP(userId, makeVIP) {
+    if (!isAdmin && !isOwner && !isManager) return;
+
+    if (confirm(`${makeVIP ? 'Make' : 'Remove'} VIP privileges?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isVIP: makeVIP
+            });
+            showAlert(`VIP privileges ${makeVIP ? 'granted' : 'removed'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminMakeTagMaker(userId, makeTagMaker) {
+    if (!isAdmin && !isOwner && !isManager) return;
+
+    if (confirm(`${makeTagMaker ? 'Make' : 'Remove'} Tag Maker privileges?`)) {
+        try {
+            await pasteDb.collection('users').doc(userId).update({
+                isTagMaker: makeTagMaker
+            });
+            showAlert(`Tag Maker privileges ${makeTagMaker ? 'granted' : 'removed'}`, 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminClearChat() {
+    if (!isAdmin && !isManager) return;
+
+    if (confirm('Clear ALL chat messages?')) {
+        try {
+            const snapshot = await chatDb.collection('messages').get();
+            const batch = chatDb.batch();
+            snapshot.forEach(doc => {
+                batch.delete(doc.ref);
+            });
+
+            await batch.commit();
+            showAlert('Chat cleared', 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
 async function adminViewAllUsers() {
-    if (!isAdmin) return;
+    if (!isAdmin && !isManager) return;
+
     try {
         const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
         const container = document.getElementById('admin-content');
-        let html = '<h3>All Users:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Roles</th><th>Joined</th><th>Actions</th></tr></thead><tbody>';
+
+        let html = '<h3>All Users:</h3><div class="pastes-grid">';
+
         snapshot.forEach(doc => {
             const user = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
-                <td>${escapeHtml(user.email || 'No email')}</td>
-                <td>${user.isAdmin ? 'Owner ' : ''}${user.isManager ? 'Manager ' : ''}${user.isVip ? 'VIP ' : ''}${user.isTagMaker ? 'TagMaker ' : ''}</td>
-                <td>${formatTime(user.createdAt?.toDate())}</td>
-                <td>
-                    <button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">${user.isBanned ? 'Unban' : 'Ban'}</button>
-                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isManager', ${!user.isManager})">${user.isManager ? 'Remove Manager' : 'Make Manager'}</button>
-                </td>
-            </tr>`;
+            html += `
+                <div class="paste-card">
+                    <div class="paste-username" onclick="showUserProfile('${doc.id}')">
+                        ${escapeHtml(user.displayName || user.username || user.email?.split('@')[0] || 'Unknown User')}
+                        ${user.isBanned ? '<span class="admin-badge-cell">BANNED</span>' : ''}
+                        ${user.isAdmin ? '<span class="admin-badge-cell">ADMIN</span>' : ''}
+                        ${user.isManager ? '<span class="admin-badge-cell">MANAGER</span>' : ''}
+                        ${user.isVIP ? '<span class="admin-badge-cell">VIP</span>' : ''}
+                        ${user.isTagMaker ? '<span class="admin-badge-cell">TAG MAKER</span>' : ''}
+                        ${user.isOwner ? '<span class="admin-badge-cell">OWNER</span>' : ''}
+                    </div>
+                    <div class="paste-title">${escapeHtml(user.email || 'No email')}</div>
+                    <div class="paste-views">
+                        📅 Joined: ${formatTime(user.createdAt?.toDate())}
+                        ${user.timeoutUntil ? `<br>⏰ Timeout until: ${formatTime(user.timeoutUntil?.toDate())}` : ''}
+                    </div>
+                    <div class="btn-group mt-2">
+                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
+                            ${user.isBanned ? '🔓 Unban' : '⚠️ Ban'}
+                        </button>` : ''}
+                        ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${doc.id}', ${!user.isAdmin})">
+                            ${user.isAdmin ? '👑 Remove Admin' : '👑 Make Admin'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${doc.id}', ${!user.isManager})">
+                            ${user.isManager ? '👑 Remove Manager' : '👑 Make Manager'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${doc.id}', ${!user.isVIP})">
+                            ${user.isVIP ? '⭐ Remove VIP' : '⭐ Make VIP'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${doc.id}', ${!user.isTagMaker})">
+                            ${user.isTagMaker ? '🏷️ Remove Tag Maker' : '🏷️ Make Tag Maker'}
+                        </button>` : ''}
+                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${doc.id}')">
+                            ⏰ Timeout
+                        </button>` : ''}
+                        ${(isAdmin || isManager) && user.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${doc.id}')">
+                            🔓 Un-timeout
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
         });
-        html += '</tbody></table></div>';
+
+        html += '</div>';
         container.innerHTML = html;
     } catch (error) {
         showAlert(`Error: ${error.message}`, 'error');
@@ -1952,380 +2546,169 @@ async function adminViewAllUsers() {
 }
 
 async function adminViewAllPastes() {
-    if (!isAdmin) return;
+    if (!isAdmin && !isManager) return;
+
     try {
-        const snapshot = await pasteDb.collection('pastes').orderBy('timestamp', 'desc').limit(100).get();
+        const snapshot = await pasteDb.collection('pastes')
+            .orderBy('timestamp', 'desc')
+            .limit(100)
+            .get();
+
         const container = document.getElementById('admin-content');
-        let html = '<h3>All Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Actions</th></tr></thead><tbody>';
+        container.innerHTML = '<h3>All Pastes:</h3><div class="pastes-grid">';
+
         snapshot.forEach(doc => {
             const paste = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(paste.title)}</td>
-                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
-                <td>${paste.views || 0}</td>
-                <td>${formatTime(paste.timestamp?.toDate())}</td>
-                <td>
-                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
-                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
-                </td>
-            </tr>`;
+            container.innerHTML += `
+                <div class="paste-card">
+                    <div class="paste-username" onclick="showUserProfile('${paste.userId}')">
+                        ${escapeHtml(paste.username || 'Unknown User')}
+                        ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
+                        ${paste.isRemoved ? '<span class="admin-badge-cell">REMOVED</span>' : ''}
+                    </div>
+                    <div class="paste-title">${escapeHtml(paste.title)}</div>
+                    <div class="paste-views">${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}</div>
+                    <div class="btn-group mt-2">
+                        ${(isAdmin || isManager) ? `<button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">
+                            ${paste.isPinned ? '📌 Unpin' : '📌 Pin'}
+                        </button>` : ''}
+                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">
+                            🗑️ Remove
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
         });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
+
+        container.innerHTML += '</div>';
     } catch (error) {
         showAlert(`Error: ${error.message}`, 'error');
     }
-}
-
-async function adminClearChat() {
-    if (!isAdmin) return;
-    if (confirm('Clear ALL chat messages?')) {
-        try {
-            const snapshot = await chatDb.collection('messages').get();
-            const batch = chatDb.batch();
-            snapshot.forEach(doc => batch.delete(doc.ref));
-            await batch.commit();
-            showAlert('Chat cleared', 'success');
-        } catch (error) {
-            showAlert(`Error: ${error.message}`, 'error');
-        }
-    }
-}
-
-async function adminBackupData() {
-    if (!isAdmin) return;
-    showAlert('Backup feature would export data here', 'success');
 }
 
 async function adminManageRoles() {
-    if (!isAdmin) return;
+    if (!isAdmin && !isOwner) return;
+    
+    adminViewAllUsers();
+}
+
+function adminBackupData() {
+    if (!isAdmin && !isManager) return;
+
+    showAlert('Backup feature would export data here', 'success');
+}
+
+async function showUserProfile(userId) {
+    showPage('userProfile');
+
     try {
-        const snapshot = await pasteDb.collection('users').get();
-        const container = document.getElementById('admin-content');
-        let html = '<h3>Manage User Roles:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Current Roles</th><th>Actions</th></tr></thead><tbody>';
-        snapshot.forEach(doc => {
-            const user = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
-                <td>${escapeHtml(user.email || 'No email')}</td>
-                <td>${user.isAdmin ? 'Owner ' : ''}${user.isManager ? 'Manager ' : ''}${user.isVip ? 'VIP ' : ''}${user.isTagMaker ? 'TagMaker ' : ''}</td>
-                <td>
-                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isManager', ${!user.isManager})">${user.isManager ? 'Remove Manager' : 'Make Manager'}</button>
-                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isVip', ${!user.isVip})">${user.isVip ? 'Remove VIP' : 'Make VIP'}</button>
-                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isTagMaker', ${!user.isTagMaker})">${user.isTagMaker ? 'Remove TagMaker' : 'Make TagMaker'}</button>
-                </td>
-            </tr>`;
-        });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function toggleUserRole(userId, role, value) {
-    if (!isAdmin) return;
-    try {
-        await pasteDb.collection('users').doc(userId).update({ [role]: value });
-        showAlert(`User role updated successfully!`, 'success');
-        adminManageRoles();
-    } catch (error) {
-        showAlert(`Error updating role: ${error.message}`, 'error');
-    }
-}
-
-async function managerViewUsers() {
-    if (!isManager) return;
-    try {
-        const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
-        const container = document.getElementById('manager-content');
-        let html = '<h3>All Users:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead><tbody>';
-        snapshot.forEach(doc => {
-            const user = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
-                <td>${escapeHtml(user.email || 'No email')}</td>
-                <td>${user.isBanned ? 'Banned' : 'Active'} ${user.isAdmin ? '| Owner' : ''} ${user.isManager ? '| Manager' : ''}</td>
-                <td>${formatTime(user.createdAt?.toDate())}</td>
-                <td>
-                    <button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">${user.isBanned ? 'Unban' : 'Ban'}</button>
-                    <button class="btn btn-warning" onclick="showPage(\'timeout\'); setTimeout(() => document.getElementById(\'timeout-user-select\').value = \'${doc.id}\', 100)">Timeout</button>
-                </td>
-            </tr>`;
-        });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function managerViewPastes() {
-    if (!isManager) return;
-    try {
-        const snapshot = await pasteDb.collection('pastes').where('isRemoved', '==', false).orderBy('timestamp', 'desc').limit(50).get();
-        const container = document.getElementById('manager-content');
-        let html = '<h3>All Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
-        snapshot.forEach(doc => {
-            const paste = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(paste.title)}</td>
-                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
-                <td>${paste.views || 0}</td>
-                <td>${formatTime(paste.timestamp?.toDate())}</td>
-                <td>${paste.isPinned ? 'Pinned' : 'Normal'}</td>
-                <td>
-                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
-                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
-                </td>
-            </tr>`;
-        });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function managerClearChat() {
-    if (!isManager) return;
-    if (confirm('Clear ALL chat messages?')) {
-        try {
-            const snapshot = await chatDb.collection('messages').get();
-            const batch = chatDb.batch();
-            snapshot.forEach(doc => batch.delete(doc.ref));
-            await batch.commit();
-            showAlert('Chat cleared', 'success');
-        } catch (error) {
-            showAlert(`Error: ${error.message}`, 'error');
-        }
-    }
-}
-
-async function managerViewAllPastes() {
-    if (!isManager) return;
-    try {
-        const snapshot = await pasteDb.collection('pastes').orderBy('timestamp', 'desc').limit(100).get();
-        const container = document.getElementById('manager-content');
-        let html = '<h3>Manage Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
-        snapshot.forEach(doc => {
-            const paste = doc.data();
-            html += `<tr>
-                <td>${escapeHtml(paste.title)}</td>
-                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
-                <td>${paste.views || 0}</td>
-                <td>${formatTime(paste.timestamp?.toDate())}</td>
-                <td>${paste.isPinned ? 'Pinned' : 'Normal'} ${paste.isRemoved ? '| Removed' : ''}</td>
-                <td>
-                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
-                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
-                </td>
-            </tr>`;
-        });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function loadTimeoutUsers() {
-    try {
-        const select = document.getElementById('timeout-user-select');
-        select.innerHTML = '<option value="">-- Select a user --</option>';
-        const snapshot = await pasteDb.collection('users').get();
-        snapshot.forEach(doc => {
-            const user = doc.data();
-            const option = document.createElement('option');
-            option.value = doc.id;
-            option.textContent = `${user.displayName || user.username || user.email?.split('@')[0]} (${user.email})`;
-            select.appendChild(option);
-        });
-        await loadTimedOutList();
-    } catch (error) {
-        console.error('Error loading users:', error);
-    }
-}
-
-async function loadTimedOutList() {
-    try {
-        const now = new Date();
-        const snapshot = await pasteDb.collection('users').get();
-        const container = document.getElementById('timed-out-table-body');
-        container.innerHTML = '';
-        let hasTimedOut = false;
-        snapshot.forEach(doc => {
-            const user = doc.data();
-            if (user.timeoutUntil) {
-                const timeoutUntil = user.timeoutUntil.toDate();
-                if (timeoutUntil > now) {
-                    hasTimedOut = true;
-                    const diff = timeoutUntil - now;
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                    let timeStr = '';
-                    if (days > 0) timeStr += `${days}d `;
-                    if (hours > 0) timeStr += `${hours}h `;
-                    if (minutes > 0) timeStr += `${minutes}m `;
-                    timeStr += `${seconds}s`;
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
-                        <td>${timeStr}</td>
-                        <td>${user.timeoutReason || 'No reason provided'}</td>
-                        <td><button class="btn btn-success" onclick="untimeoutSpecificUser('${doc.id}')">Remove Timeout</button></td>
-                    `;
-                    container.appendChild(row);
-                }
-            }
-        });
-        if (!hasTimedOut) {
-            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No users are currently timed out</td></tr>';
-        }
-    } catch (error) {
-        console.error('Error loading timed out users:', error);
-    }
-}
-
-async function timeoutUser() {
-    if (!isAdmin && !isManager) {
-        showAlert('You do not have permission to timeout users', 'error');
-        return;
-    }
-    const userId = document.getElementById('timeout-user-select').value;
-    const days = parseInt(document.getElementById('timeout-days').value) || 0;
-    const hours = parseInt(document.getElementById('timeout-hours').value) || 0;
-    const minutes = parseInt(document.getElementById('timeout-minutes').value) || 0;
-    const seconds = parseInt(document.getElementById('timeout-seconds').value) || 0;
-    const reason = document.getElementById('timeout-reason-input').value.trim();
-    if (!userId) {
-        showAlert('Please select a user', 'error');
-        return;
-    }
-    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-        showAlert('Please enter a timeout duration', 'error');
-        return;
-    }
-    const totalMs = (days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000);
-    const timeoutUntil = new Date(Date.now() + totalMs);
-    try {
-        await pasteDb.collection('users').doc(userId).update({
-            timeoutUntil: timeoutUntil,
-            timeoutReason: reason || 'No reason provided'
-        });
-        showAlert('User has been timed out', 'success');
-        loadTimedOutList();
-        document.getElementById('timeout-days').value = '';
-        document.getElementById('timeout-hours').value = '';
-        document.getElementById('timeout-minutes').value = '';
-        document.getElementById('timeout-seconds').value = '';
-        document.getElementById('timeout-reason-input').value = '';
-    } catch (error) {
-        showAlert(`Error timing out user: ${error.message}`, 'error');
-    }
-}
-
-async function untimeoutUser() {
-    if (!isAdmin && !isManager) {
-        showAlert('You do not have permission to remove timeouts', 'error');
-        return;
-    }
-    const userId = document.getElementById('timeout-user-select').value;
-    if (!userId) {
-        showAlert('Please select a user', 'error');
-        return;
-    }
-    try {
-        await pasteDb.collection('users').doc(userId).update({
-            timeoutUntil: null,
-            timeoutReason: null
-        });
-        showAlert('User timeout has been removed', 'success');
-        loadTimedOutList();
-    } catch (error) {
-        showAlert(`Error removing timeout: ${error.message}`, 'error');
-    }
-}
-
-async function untimeoutSpecificUser(userId) {
-    if (!isAdmin && !isManager) {
-        showAlert('You do not have permission to remove timeouts', 'error');
-        return;
-    }
-    try {
-        await pasteDb.collection('users').doc(userId).update({
-            timeoutUntil: null,
-            timeoutReason: null
-        });
-        showAlert('User timeout has been removed', 'success');
-        loadTimedOutList();
-    } catch (error) {
-        showAlert(`Error removing timeout: ${error.message}`, 'error');
-    }
-}
-
-function handleSearch() {
-    const searchTerm = document.getElementById('searchBar').value.trim();
-    const resultsDiv = document.getElementById('searchResults');
-    if (searchTerm.length === 0) {
-        resultsDiv.classList.add('hidden');
-        return;
-    }
-    if (searchTimeout) clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => performSearch(searchTerm), 300);
-    resultsDiv.classList.remove('hidden');
-}
-
-async function performSearch(searchTerm) {
-    const resultsContent = document.getElementById('searchResultsContent');
-    resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem;">Searching...</td></tr>';
-    try {
-        const snapshot = await pasteDb.collection('pastes')
+        const userDoc = await pasteDb.collection('users').doc(userId).get();
+        const pasteSnap = await pasteDb.collection('pastes')
+            .where('userId', '==', userId)
             .where('isRemoved', '==', false)
             .orderBy('timestamp', 'desc')
-            .limit(50)
+            .limit(10)
             .get();
-        const results = [];
-        const searchLower = searchTerm.toLowerCase();
-        snapshot.forEach(doc => {
+
+        const container = document.getElementById('user-profile-content');
+
+        if (!userDoc.exists) {
+            container.innerHTML = '<div style="text-align: center; padding: 3rem;">User not found</div>';
+            return;
+        }
+
+        const userData = userDoc.data();
+        let adminControls = '';
+
+        if (isAdmin || isManager) {
+            adminControls = `
+                <div class="admin-controls mt-4">
+                    <div class="admin-title">Admin Controls</div>
+                    <div class="admin-actions">
+                        <button class="btn btn-danger" onclick="adminBanUser('${userId}', ${!userData.isBanned})">
+                            ${userData.isBanned ? '🔓 Unban User' : '⚠️ Ban User'}
+                        </button>
+                        <button class="btn btn-danger" onclick="adminDeleteUserPosts('${userId}')">
+                            🗑️ Delete User's Posts
+                        </button>
+                        ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${userId}', ${!userData.isAdmin})">
+                            ${userData.isAdmin ? '👑 Remove Admin' : '👑 Make Admin'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${userId}', ${!userData.isManager})">
+                            ${userData.isManager ? '👑 Remove Manager' : '👑 Make Manager'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${userId}', ${!userData.isVIP})">
+                            ${userData.isVIP ? '⭐ Remove VIP' : '⭐ Make VIP'}
+                        </button>` : ''}
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${userId}', ${!userData.isTagMaker})">
+                            ${userData.isTagMaker ? '🏷️ Remove Tag Maker' : '🏷️ Make Tag Maker'}
+                        </button>` : ''}
+                        <button class="btn btn-danger" onclick="showTimeoutUserForm('${userId}')">
+                            ⏰ Timeout User
+                        </button>
+                        ${userData.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${userId}')">
+                            🔓 Un-timeout User
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        let postsHtml = '';
+        pasteSnap.forEach(doc => {
             const paste = doc.data();
-            const pasteId = doc.id;
-            const titleMatch = paste.title.toLowerCase().includes(searchLower);
-            const contentMatch = paste.content.toLowerCase().includes(searchLower);
-            const userMatch = (paste.username || '').toLowerCase().includes(searchLower);
-            if (titleMatch || contentMatch || userMatch) results.push({ id: pasteId, ...paste });
+            postsHtml += `
+                <div class="paste-card mt-2" onclick="showPasteDetail('${doc.id}')">
+                    <div class="paste-title">${escapeHtml(paste.title)}</div>
+                    <div class="paste-views">${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}</div>
+                </div>
+            `;
         });
-        displaySearchResults(results, resultsContent);
-    } catch (error) {
-        resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem; color: #ff0000;">Error loading search results</td></tr>';
-    }
-}
 
-function displaySearchResults(results, container) {
-    container.innerHTML = '';
-    if (results.length === 0) {
-        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No results found</td></tr>';
-        return;
-    }
-    results.slice(0, 10).forEach(paste => {
-        const row = document.createElement('tr');
-        row.onclick = () => {
-            showPasteDetail(paste.id);
-            document.getElementById('searchResults').classList.add('hidden');
-            document.getElementById('searchBar').value = '';
-        };
-        row.innerHTML = `
-            <td class="paste-title">${escapeHtml(paste.title)}</td>
-            <td class="paste-views">${paste.views || 0}</td>
-            <td class="paste-author">${escapeHtml(paste.username || 'Anonymous')}</td>
-            <td class="paste-date">${formatDate(paste.timestamp?.toDate())}</td>
+        // Apply username color if user has one
+        const usernameStyle = userData.usernameColor ? `style="color: ${userData.usernameColor}"` : '';
+        
+        // Apply glow effects based on role
+        let usernameClass = '';
+        if (userData.isOwner) {
+            usernameClass = 'owner-glow';
+        } else if (userData.isVIP) {
+            usernameClass = 'vip-glow';
+        }
+
+        container.innerHTML = `
+            <div class="profile-banner" style="${userData.bannerUrl ? `background-image: url('${userData.bannerUrl}')` : ''}">
+                <div class="profile-picture" style="${userData.profileUrl ? `background-image: url('${userData.profileUrl}')` : ''}"></div>
+            </div>
+
+            <h1 class="${usernameClass}" style="font-size: 2.5rem; margin-top: 5rem;" ${usernameStyle}>
+                ${escapeHtml(userData.displayName || userData.username || userData.email?.split('@')[0] || 'Unknown User')}
+                ${userData.isBanned ? '<span class="admin-badge-cell">BANNED</span>' : ''}
+                ${userData.isAdmin ? '<span class="admin-badge-cell">ADMIN</span>' : ''}
+                ${userData.isManager ? '<span class="admin-badge-cell">MANAGER</span>' : ''}
+                ${userData.isVIP ? '<span class="admin-badge-cell">VIP</span>' : ''}
+                ${userData.isTagMaker ? '<span class="admin-badge-cell">TAG MAKER</span>' : ''}
+                ${userData.isOwner ? '<span class="admin-badge-cell">OWNER</span>' : ''}
+            </h1>
+
+            <div class="paste-content mt-3">
+                <p><strong>📧 Email:</strong> ${escapeHtml(userData.email || 'Not provided')}</p>
+                <p><strong>📅 Member since:</strong> ${formatTime(userData.createdAt?.toDate())}</p>
+                <p><strong>💬 Total posts:</strong> ${pasteSnap.size}</p>
+                ${userData.timeoutUntil ? `<p><strong>⏰ Timeout until:</strong> ${formatTime(userData.timeoutUntil?.toDate())}</p>` : ''}
+            </div>
+
+            <h3 class="mt-4">Recent Posts:</h3>
+            ${postsHtml || '<p>No posts yet</p>'}
+
+            ${adminControls}
         `;
-        container.appendChild(row);
-    });
+    } catch (error) {
+        showAlert(`Error loading profile: ${error.message}`, 'error');
+    }
 }
 
+// Utility Functions
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -2335,16 +2718,21 @@ function escapeHtml(text) {
 
 function formatTime(date) {
     if (!date) return 'Unknown';
+
     const now = new Date();
     const diff = now - date;
+
     if (diff < 60000) return 'Just now';
     if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
     if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
     if (diff < 604800000) return `${Math.floor(diff / 86400000)}d ago`;
+
     return date.toLocaleDateString();
 }
 
+// Initialize App
 document.addEventListener('DOMContentLoaded', () => {
+    // Set logo
     const logo = document.querySelector('.logo');
     if (logo) {
         logo.src = "https://i.postimg.cc/x8ML5hVd/logo.jpg";
@@ -2352,26 +2740,38 @@ document.addEventListener('DOMContentLoaded', () => {
             this.src = 'https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';
         };
     }
+
+    // Set up auth listener
     pasteAuth.onAuthStateChanged(async (user) => {
         currentUser = user;
         if (user) {
             await checkUserStatus();
         } else {
-            isAdmin = false;
-            isManager = false;
-            isVip = false;
-            isTagMaker = false;
+            resetUserStatus();
         }
         updateUIForAuth();
+        loadRecentPastes();
         loadPinnedPastes();
-        loadAllPastes();
     });
+
+    // Show home page
     showPage('home');
+
+    // Close menu when clicking outside
     document.addEventListener('click', (event) => {
         const menu = document.getElementById('slideDownMenu');
         const hamburger = document.querySelector('.hamburger-btn');
+
         if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
             menu.classList.remove('active');
+        }
+    });
+
+    // Enable music autoplay on user interaction
+    document.body.addEventListener('click', function() {
+        const hallMusic = document.getElementById('hallMusic');
+        if (hallMusic && hallMusic.paused) {
+            hallMusic.play().catch(e => console.log("Music play prevented"));
         }
     });
 });
