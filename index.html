@@ -1002,9 +1002,7 @@ body {
 <div id="timeout-overlay" class="timeout-overlay">
     <div class="timeout-message">
         <h1 class="timeout-title">TIMED OUT</h1>
-        <div class="timeout-details" id="timeout-details">
-            You have been timed out
-        </div>
+        <div class="timeout-details" id="timeout-details">You have been timed out</div>
         <div class="timeout-reason" id="timeout-reason"></div>
         <div class="timeout-timer" id="timeout-timer" style="font-size: 1.5rem; margin-top: 1rem;"></div>
     </div>
@@ -1039,11 +1037,7 @@ body {
         </div>
 
         <div class="search-container">
-            <input type="text"
-                   class="search-bar"
-                   id="searchBar"
-                   placeholder="Search pastes by title, username, or content..."
-                   oninput="handleSearch()">
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search pastes by title, username, or content..." oninput="handleSearch()">
             <div class="search-results hidden" id="searchResults">
                 <div class="paste-table-container">
                     <table class="paste-table">
@@ -1055,8 +1049,7 @@ body {
                                 <th style="width: 120px;">Added</th>
                             </tr>
                         </thead>
-                        <tbody id="searchResultsContent">
-                        </tbody>
+                        <tbody id="searchResultsContent"></tbody>
                     </table>
                 </div>
             </div>
@@ -1075,8 +1068,7 @@ body {
                             <th style="width: 120px;">Added</th>
                         </tr>
                     </thead>
-                    <tbody id="pinned-pastes-body">
-                    </tbody>
+                    <tbody id="pinned-pastes-body"></tbody>
                 </table>
             </div>
         </div>
@@ -1094,8 +1086,7 @@ body {
                             <th style="width: 120px;">Added</th>
                         </tr>
                     </thead>
-                    <tbody id="all-pastes-body">
-                    </tbody>
+                    <tbody id="all-pastes-body"></tbody>
                 </table>
             </div>
         </div>
@@ -1128,17 +1119,11 @@ body {
     <div id="chat-page" class="hidden">
         <h2 class="section-title">Global Chat</h2>
         <div class="chat-container">
-            <div class="chat-header">
-                Live Global Chat • <span id="onlineCount">0</span> users online
-            </div>
+            <div class="chat-header">Live Global Chat • <span id="onlineCount">0</span> users online</div>
             <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input-container">
                 <div class="chat-input-wrapper">
-                    <input type="text"
-                           class="chat-input"
-                           id="chat-input"
-                           placeholder="Type your message... (Press Enter to send)"
-                           onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message... (Press Enter to send)" onkeypress="if(event.key === 'Enter') sendChatMessage()">
                     <button class="send-btn" onclick="sendChatMessage()">Send</button>
                 </div>
             </div>
@@ -1156,8 +1141,7 @@ body {
                         <th style="width: 120px;">Last Mentioned</th>
                     </tr>
                 </thead>
-                <tbody id="most-mentioned-body">
-                </tbody>
+                <tbody id="most-mentioned-body"></tbody>
             </table>
         </div>
     </div>
@@ -1177,13 +1161,11 @@ body {
                         <div id="profile-picture-img" class="profile-picture-img"></div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">Display Name</label>
                     <input type="text" class="form-input" id="display-name" placeholder="Enter display name">
                     <button class="btn btn-primary mt-3" onclick="updateDisplayName()">Update Display Name</button>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">Username Color</label>
                     <div class="color-picker" id="color-picker">
@@ -1198,7 +1180,6 @@ body {
                     </div>
                     <button class="btn btn-primary mt-3" onclick="updateUsernameColor()" id="updateColorBtn">Update Color</button>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">Banner Image URL</label>
                     <div class="url-input-group">
@@ -1206,7 +1187,6 @@ body {
                         <button class="btn btn-primary" onclick="updateBanner()">Update</button>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">Profile Picture URL</label>
                     <div class="url-input-group">
@@ -1222,7 +1202,6 @@ body {
         <h2 class="section-title">Admin Panel</h2>
         <div class="admin-controls">
             <div class="admin-title">Administrator Controls</div>
-
             <div class="admin-stats">
                 <div class="stat-box">
                     <div class="stat-number" id="totalUsers">0</div>
@@ -1245,7 +1224,6 @@ body {
                     <div class="stat-label">Timed Out Users</div>
                 </div>
             </div>
-
             <div class="admin-actions">
                 <button class="btn btn-danger" onclick="adminViewAllUsers()">View All Users</button>
                 <button class="btn btn-danger" onclick="adminViewAllPastes()">View All Pastes</button>
@@ -1253,8 +1231,8 @@ body {
                 <button class="btn btn-danger" onclick="adminBackupData()">Backup Data</button>
                 <button class="btn btn-warning" onclick="adminManageRoles()">Manage Roles</button>
                 <button class="btn btn-warning" onclick="showPage('timeout')">Timeout Users</button>
+                <button class="btn btn-warning" onclick="showPage('tagmaker')">Manage Tags</button>
             </div>
-
             <div id="admin-content" class="mt-4"></div>
         </div>
     </div>
@@ -1263,14 +1241,13 @@ body {
         <h2 class="section-title">Manager Panel</h2>
         <div class="admin-controls" style="border-color: var(--manager-color);">
             <div class="admin-title" style="color: var(--manager-color);">Manager Controls</div>
-
             <div class="admin-actions">
                 <button class="btn btn-warning" onclick="managerViewUsers()">View Users</button>
                 <button class="btn btn-warning" onclick="managerViewPastes()">View Pastes</button>
                 <button class="btn btn-warning" onclick="showPage('timeout')">Timeout Users</button>
                 <button class="btn btn-danger" onclick="managerClearChat()">Clear Chat</button>
+                <button class="btn btn-danger" onclick="managerViewAllPastes()">Remove Pastes</button>
             </div>
-
             <div id="manager-content" class="mt-4"></div>
         </div>
     </div>
@@ -1280,11 +1257,10 @@ body {
         <div class="timeout-form">
             <div class="form-group">
                 <label class="form-label">Select User</label>
-                <select class="form-select" id="timeout-user">
+                <select class="form-select" id="timeout-user-select">
                     <option value="">-- Select a user --</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label class="form-label">Timeout Duration</label>
                 <div class="timeout-inputs">
@@ -1294,18 +1270,15 @@ body {
                     <input type="number" class="form-input" id="timeout-seconds" placeholder="Seconds" min="0" max="59">
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="form-label">Reason</label>
-                <input type="text" class="form-input" id="timeout-reason" placeholder="Reason for timeout">
+                <input type="text" class="form-input" id="timeout-reason-input" placeholder="Reason for timeout">
             </div>
-
             <div class="btn-group">
                 <button class="btn btn-danger" onclick="timeoutUser()">Timeout User</button>
                 <button class="btn btn-success" onclick="untimeoutUser()">Remove Timeout</button>
                 <button class="btn btn-secondary" onclick="showPage('admin')">Back</button>
             </div>
-
             <div id="timeout-content" class="mt-4">
                 <h3>Currently Timed Out Users</h3>
                 <div id="timed-out-list" class="paste-table-container">
@@ -1318,8 +1291,7 @@ body {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="timed-out-table-body">
-                        </tbody>
+                        <tbody id="timed-out-table-body"></tbody>
                     </table>
                 </div>
             </div>
@@ -1334,7 +1306,6 @@ body {
                 <input type="text" class="form-input" id="new-tag-name" placeholder="Enter tag name">
                 <button class="btn btn-primary mt-3" onclick="createTag()">Create Tag</button>
             </div>
-
             <div id="tags-container" class="mt-4">
                 <h3>Existing Tags</h3>
                 <div id="tags-list" class="tags-grid"></div>
@@ -1426,50 +1397,7 @@ function showAlert(message, type = 'info') {
     alert.className = `alert ${type}`;
     alert.textContent = message;
     container.appendChild(alert);
-
-    setTimeout(() => {
-        alert.remove();
-    }, 5000);
-}
-
-function initializeHallOfAutism() {
-    const hallContainer = document.getElementById('hall-container');
-    hallContainer.innerHTML = '';
-
-    const hallItems = [
-        { name: "Mihai Caradan", description: "reasons:toxic, manipulationer, fakes that hes an kid with many non responsibilities that he said it for attention, mocks girls for the gayness that he is", image: "https://i.postimg.cc/ydG19g3W/image.png" },
-        { name: "Azcox (david)", description: "reason:an wanna be discord drowner who thinks his opsec is good but he actually got full drowned by exotic slasher and void", image: "https://i.postimg.cc/3rp3jy1q/expoze1.jpg" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+3" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+4" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+5" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+6" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+7" },
-        { name: "Noone", description: "Untitled", image: "https://via.placeholder.com/400x300/000000/ffffff?text=Image+8" }
-    ];
-
-    hallItems.forEach(item => {
-        const box = document.createElement('div');
-        box.className = 'hall-box';
-        box.innerHTML = `
-            <div class="hall-image">
-                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/400x300/000000/ffffff?text=Image+Error'">
-            </div>
-            <div class="hall-name">${item.name}</div>
-            <div class="hall-description">${item.description}</div>
-        `;
-        hallContainer.appendChild(box);
-    });
-
-    if (!document.getElementById('hall-page').classList.contains('hidden')) {
-        try {
-            const hallMusic = document.getElementById('hallMusic');
-            hallMusic.play().catch(e => {
-                console.log("Music autoplay prevented");
-            });
-        } catch (e) {
-            console.log("Music error:", e);
-        }
-    }
+    setTimeout(() => alert.remove(), 5000);
 }
 
 function toggleMenu() {
@@ -1479,14 +1407,10 @@ function toggleMenu() {
 
 function showPage(pageId) {
     document.getElementById('slideDownMenu').classList.remove('active');
-    document.querySelectorAll('[id$="-page"]').forEach(page => {
-        page.classList.add('hidden');
-    });
-
+    document.querySelectorAll('[id$="-page"]').forEach(page => page.classList.add('hidden'));
     const page = document.getElementById(pageId + '-page');
     if (page) {
         page.classList.remove('hidden');
-
         switch(pageId) {
             case 'home':
                 loadPinnedPastes();
@@ -1521,16 +1445,13 @@ function showPage(pageId) {
 }
 
 function showPasteDetail(pasteId) {
-    const container = document.getElementById('paste-detail-container');
-    container.classList.add('active');
+    document.getElementById('paste-detail-container').classList.add('active');
     document.body.style.overflow = 'hidden';
-
     loadPasteDetailContent(pasteId);
 }
 
 function closePasteDetail() {
-    const container = document.getElementById('paste-detail-container');
-    container.classList.remove('active');
+    document.getElementById('paste-detail-container').classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
@@ -1539,31 +1460,21 @@ async function loadPasteDetailContent(pasteId) {
         await pasteDb.collection('pastes').doc(pasteId).update({
             views: firebase.firestore.FieldValue.increment(1)
         });
-
         const doc = await pasteDb.collection('pastes').doc(pasteId).get();
         const paste = doc.data();
         const container = document.getElementById('paste-detail-content');
         const actionsContainer = document.getElementById('paste-detail-actions');
-
         let adminControls = '';
         if (isAdmin || isManager) {
-            adminControls = `
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
-                        ${paste.isPinned ? 'Unpin Paste' : 'Pin Paste'}
-                    </button>
-                    <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">
-                        Remove Paste
-                    </button>
-                    <button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">
-                        Ban User
-                    </button>
-                </div>
-            `;
+            adminControls = `<div class="btn-group">
+                <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
+                    ${paste.isPinned ? 'Unpin Paste' : 'Pin Paste'}
+                </button>
+                <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">Remove Paste</button>
+                <button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">Ban User</button>
+            </div>`;
         }
-
         actionsContainer.innerHTML = adminControls;
-
         container.innerHTML = `
             <div class="paste-username" onclick="showUserProfile('${paste.userId}')">
                 ${escapeHtml(paste.username || 'Unknown User')}
@@ -1583,6 +1494,33 @@ async function loadPasteDetailContent(pasteId) {
     }
 }
 
+async function adminPinPaste(pasteId, pinState) {
+    if (!isAdmin && !isManager) return;
+    try {
+        await pasteDb.collection('pastes').doc(pasteId).update({ isPinned: pinState });
+        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
+        loadPinnedPastes();
+        loadAllPastes();
+        loadPasteDetailContent(pasteId);
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function adminRemovePaste(pasteId) {
+    if (!isAdmin && !isManager) return;
+    if (confirm('Are you sure you want to remove this paste?')) {
+        try {
+            await pasteDb.collection('pastes').doc(pasteId).update({ isRemoved: true });
+            showAlert('Paste removed', 'success');
+            closePasteDetail();
+            loadAllPastes();
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
 async function loadPinnedPastes() {
     try {
         const snapshot = await pasteDb.collection('pastes')
@@ -1591,10 +1529,8 @@ async function loadPinnedPastes() {
             .orderBy('timestamp', 'desc')
             .limit(10)
             .get();
-
         displayPastesTable(snapshot, 'pinned-pastes-body', true);
     } catch (error) {
-        console.error('Error loading pinned pastes:', error);
         document.getElementById('pinned-pastes-body').innerHTML = 
             '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pinned pastes</td></tr>';
     }
@@ -1606,21 +1542,16 @@ async function loadAllPastes() {
             .where('isRemoved', '==', false)
             .orderBy('timestamp', 'desc')
             .limit(pastesPerPage);
-
         const snapshot = await query.get();
-        
         totalPastes = snapshot.size;
         totalPages = Math.max(1, Math.ceil(totalPastes / pastesPerPage));
-        
         if (snapshot.docs.length > 0) {
             lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
             firstVisibleDoc = snapshot.docs[0];
         }
-
         displayPastesTable(snapshot, 'all-pastes-body', false);
         updatePagination();
     } catch (error) {
-        console.error('Error loading pastes:', error);
         document.getElementById('all-pastes-body').innerHTML = 
             '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pastes yet. Be the first to create one!</td></tr>';
     }
@@ -1629,27 +1560,19 @@ async function loadAllPastes() {
 async function changePage(delta) {
     if (delta === 1 && !lastVisibleDoc) return;
     if (delta === -1 && !firstVisibleDoc) return;
-
     try {
         let query = pasteDb.collection('pastes')
             .where('isRemoved', '==', false)
             .orderBy('timestamp', 'desc')
             .limit(pastesPerPage);
-
-        if (delta === 1) {
-            query = query.startAfter(lastVisibleDoc);
-        } else if (delta === -1) {
-            query = query.endBefore(firstVisibleDoc).limitToLast(pastesPerPage);
-        }
-
+        if (delta === 1) query = query.startAfter(lastVisibleDoc);
+        else if (delta === -1) query = query.endBefore(firstVisibleDoc).limitToLast(pastesPerPage);
         const snapshot = await query.get();
-        
         if (snapshot.docs.length > 0) {
             lastVisibleDoc = snapshot.docs[snapshot.docs.length - 1];
             firstVisibleDoc = snapshot.docs[0];
             currentPage += delta;
         }
-
         displayPastesTable(snapshot, 'all-pastes-body', false);
         updatePagination();
     } catch (error) {
@@ -1660,36 +1583,27 @@ async function changePage(delta) {
 function displayPastesTable(snapshot, containerId, isPinned = false) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
-
     if (snapshot.empty) {
         container.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 2rem;">No pastes found</td></tr>';
         return;
     }
-
     snapshot.forEach(doc => {
         const paste = doc.data();
         const pasteId = doc.id;
-        const rowClass = isPinned ? 'pinned-row' : '';
-
         const row = document.createElement('tr');
-        row.className = rowClass;
+        row.className = isPinned ? 'pinned-row' : '';
         row.onclick = () => showPasteDetail(pasteId);
-
         const date = paste.timestamp?.toDate();
         const dateStr = date ? formatDate(date) : 'Unknown';
-        
-        const commentCount = paste.commentCount || 0;
-        
         row.innerHTML = `
             <td class="paste-title">${escapeHtml(paste.title)}</td>
-            <td class="paste-comments">${commentCount}</td>
+            <td class="paste-comments">0</td>
             <td class="paste-views">${paste.views || 0}</td>
             <td class="paste-author" onclick="event.stopPropagation(); showUserProfile('${paste.userId}')">
                 ${escapeHtml(paste.username || 'Anonymous')}
             </td>
             <td class="paste-date">${dateStr}</td>
         `;
-
         container.appendChild(row);
     });
 }
@@ -1698,7 +1612,6 @@ function updatePagination() {
     const pageInfo = document.getElementById('page-info');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-    
     pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
     prevBtn.disabled = currentPage <= 1;
     nextBtn.disabled = currentPage >= totalPages;
@@ -1706,30 +1619,22 @@ function updatePagination() {
 
 function formatDate(date) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const year = date.getFullYear();
-    
-    return `${month} ${day}, ${year}`;
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
 async function signIn() {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
-
     if (!email || !password) {
         showAlert('Please enter both email and password', 'error');
         return;
     }
-
     try {
         const userCredential = await pasteAuth.signInWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
         await checkUserStatus();
         updateUIForAuth();
-        
         await checkTimeoutStatus();
-        
         showAlert('Successfully signed in!', 'success');
         showPage('home');
     } catch (error) {
@@ -1740,21 +1645,17 @@ async function signIn() {
 async function signUp() {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
-
     if (!email || !password) {
         showAlert('Please enter both email and password', 'error');
         return;
     }
-
     if (password.length < 6) {
         showAlert('Password must be at least 6 characters', 'error');
         return;
     }
-
     try {
         const userCredential = await pasteAuth.createUserWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
-
         const userData = {
             email: email,
             username: email.split('@')[0],
@@ -1768,12 +1669,9 @@ async function signUp() {
             usernameColor: '#ffffff',
             bannerUrl: '',
             profileUrl: '',
-            lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-            roles: []
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
         };
-
         await pasteDb.collection('users').doc(currentUser.uid).set(userData);
-
         await checkUserStatus();
         updateUIForAuth();
         showAlert('Account created successfully!', 'success');
@@ -1804,7 +1702,6 @@ async function checkUserStatus() {
         isTagMaker = false;
         return;
     }
-
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
         if (userDoc.exists) {
@@ -1813,11 +1710,8 @@ async function checkUserStatus() {
             isManager = userData.isManager || false;
             isVip = userData.isVip || false;
             isTagMaker = userData.isTagMaker || false;
-
             if (currentUser.email === 'exoticslash3r@gmail.com' && !userData.isAdmin) {
-                await pasteDb.collection('users').doc(currentUser.uid).update({
-                    isAdmin: true
-                });
+                await pasteDb.collection('users').doc(currentUser.uid).update({ isAdmin: true });
             }
         } else {
             const userData = {
@@ -1833,8 +1727,7 @@ async function checkUserStatus() {
                 usernameColor: '#ffffff',
                 bannerUrl: '',
                 profileUrl: '',
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-                roles: []
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
             };
             await pasteDb.collection('users').doc(currentUser.uid).set(userData);
             isAdmin = currentUser.email === 'exoticslash3r@gmail.com';
@@ -1844,91 +1737,6 @@ async function checkUserStatus() {
     }
 }
 
-async function checkTimeoutStatus() {
-    if (!currentUser) return;
-
-    try {
-        const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        if (userDoc.exists) {
-            const userData = userDoc.data();
-            if (userData.timeoutUntil) {
-                const timeoutUntil = userData.timeoutUntil.toDate();
-                const now = new Date();
-                
-                if (timeoutUntil > now) {
-                    showTimeoutNotification(timeoutUntil, userData.timeoutReason || 'No reason provided');
-                } else {
-                    await pasteDb.collection('users').doc(currentUser.uid).update({
-                        timeoutUntil: null,
-                        timeoutReason: null
-                    });
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error checking timeout status:', error);
-    }
-}
-
-function showTimeoutNotification(timeoutUntil, reason) {
-    const overlay = document.getElementById('timeout-overlay');
-    const details = document.getElementById('timeout-details');
-    const reasonEl = document.getElementById('timeout-reason');
-    const timerEl = document.getElementById('timeout-timer');
-    
-    const now = new Date();
-    const diff = timeoutUntil - now;
-    
-    if (diff <= 0) {
-        overlay.classList.remove('active');
-        return;
-    }
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    let timeStr = '';
-    if (days > 0) timeStr += `${days}d `;
-    if (hours > 0) timeStr += `${hours}h `;
-    if (minutes > 0) timeStr += `${minutes}m `;
-    timeStr += `${seconds}s`;
-    
-    details.textContent = `You have been timed out for ${timeStr}`;
-    reasonEl.textContent = `Reason: ${reason}`;
-    timerEl.textContent = `Time remaining: ${timeStr}`;
-    
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    const timerInterval = setInterval(() => {
-        const now = new Date();
-        const diff = timeoutUntil - now;
-        
-        if (diff <= 0) {
-            clearInterval(timerInterval);
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            showAlert('Your timeout has expired!', 'success');
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        let timeStr = '';
-        if (days > 0) timeStr += `${days}d `;
-        if (hours > 0) timeStr += `${hours}h `;
-        if (minutes > 0) timeStr += `${minutes}m `;
-        timeStr += `${seconds}s`;
-        
-        timerEl.textContent = `Time remaining: ${timeStr}`;
-    }, 1000);
-}
-
 function updateUIForAuth() {
     const authBtn = document.getElementById('authBtn');
     const myAccountBtn = document.getElementById('myAccountBtn');
@@ -1936,61 +1744,42 @@ function updateUIForAuth() {
     const managerBtn = document.getElementById('managerBtn');
     const tagMakerBtn = document.getElementById('tagMakerBtn');
     const usernameDisplay = document.getElementById('usernameDisplay');
-    const updateColorBtn = document.getElementById('updateColorBtn');
-
     if (currentUser) {
         authBtn.textContent = 'Sign Out';
         authBtn.onclick = signOut;
         myAccountBtn.classList.remove('hidden');
-
         pasteDb.collection('users').doc(currentUser.uid).get().then(doc => {
             if (doc.exists) {
                 const userData = doc.data();
                 let username = userData.displayName || userData.username || currentUser.email.split('@')[0];
                 let color = userData.usernameColor || '#ffffff';
-                
                 let badges = '';
                 if (userData.isAdmin) badges += '<span class="role-badge owner-badge">OWNER</span>';
                 if (userData.isManager) badges += '<span class="role-badge manager-badge">MANAGER</span>';
                 if (userData.isVip) badges += '<span class="role-badge vip-badge">VIP</span>';
                 if (userData.isTagMaker) badges += '<span class="role-badge tagmaker-badge">TAG MAKER</span>';
-                
                 usernameDisplay.innerHTML = `<span style="color: ${color};">${escapeHtml(username)}</span>${badges}`;
-                
                 if (isAdmin) {
                     adminBtn.classList.remove('hidden');
                     showAlert('Owner privileges activated!', 'success');
-                } else {
-                    adminBtn.classList.add('hidden');
-                }
-                
+                } else adminBtn.classList.add('hidden');
                 if (isManager) {
                     managerBtn.classList.remove('hidden');
                     showAlert('Manager privileges activated!', 'success');
-                } else {
-                    managerBtn.classList.add('hidden');
-                }
-                
-                if (isTagMaker) {
-                    tagMakerBtn.classList.remove('hidden');
-                } else {
-                    tagMakerBtn.classList.add('hidden');
-                }
-                
+                } else managerBtn.classList.add('hidden');
+                if (isTagMaker) tagMakerBtn.classList.remove('hidden');
+                else tagMakerBtn.classList.add('hidden');
                 if (isVip) {
                     document.getElementById('color-picker').classList.remove('hidden');
-                    updateColorBtn.classList.remove('hidden');
+                    document.getElementById('updateColorBtn').classList.remove('hidden');
                 } else {
                     document.getElementById('color-picker').classList.add('hidden');
-                    updateColorBtn.classList.add('hidden');
+                    document.getElementById('updateColorBtn').classList.add('hidden');
                 }
             } else {
                 usernameDisplay.textContent = currentUser.email.split('@')[0];
             }
-        }).catch(error => {
-            usernameDisplay.textContent = currentUser.email.split('@')[0];
         });
-
     } else {
         authBtn.textContent = 'Sign In';
         authBtn.onclick = () => showPage('auth');
@@ -2002,77 +1791,25 @@ function updateUIForAuth() {
     }
 }
 
-function selectColor(color) {
-    selectedColor = color;
-    document.querySelectorAll('.color-option').forEach(option => {
-        option.classList.remove('selected');
-    });
-    event.target.classList.add('selected');
-}
-
-async function updateUsernameColor() {
-    if (!currentUser) return;
-
-    try {
-        await pasteDb.collection('users').doc(currentUser.uid).update({
-            usernameColor: selectedColor
-        });
-
-        showAlert('Username color updated successfully!', 'success');
-        updateUIForAuth();
-    } catch (error) {
-        showAlert(`Error updating color: ${error.message}`, 'error');
-    }
-}
-
 async function publishPaste() {
     if (!currentUser) {
         showAlert('Please sign in to publish pastes', 'error');
         showPage('auth');
         return;
     }
-
-    try {
-        const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        if (userDoc.exists) {
-            const userData = userDoc.data();
-            if (userData.timeoutUntil && userData.timeoutUntil.toDate() > new Date()) {
-                showAlert('You are timed out and cannot publish pastes', 'error');
-                return;
-            }
-        }
-    } catch (error) {
-        console.error('Error checking timeout:', error);
-    }
-
     const title = document.getElementById('paste-title').value.trim();
     const content = document.getElementById('paste-content').value.trim();
-
     if (!title || !content) {
         showAlert('Please fill in both title and content', 'error');
         return;
     }
-
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        let userData = userDoc.data();
-        
-        if (!userData) {
-            userData = {
-                email: currentUser.email,
-                username: currentUser.email.split('@')[0],
-                displayName: currentUser.email.split('@')[0],
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                isBanned: false,
-                isAdmin: currentUser.email === 'exoticslash3r@gmail.com',
-                isManager: false,
-                isVip: false,
-                isTagMaker: false,
-                usernameColor: '#ffffff'
-            };
-            await pasteDb.collection('users').doc(currentUser.uid).set(userData);
-        }
-
+        let userData = userDoc.exists ? userDoc.data() : {
+            email: currentUser.email,
+            username: currentUser.email.split('@')[0],
+            displayName: currentUser.email.split('@')[0]
+        };
         const pasteData = {
             title: title,
             content: content,
@@ -2085,9 +1822,7 @@ async function publishPaste() {
             isRemoved: false,
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         };
-
         await pasteDb.collection('pastes').add(pasteData);
-
         showAlert('Paste published successfully!', 'success');
         clearPasteForm();
         loadAllPastes();
@@ -2108,38 +1843,18 @@ async function sendChatMessage() {
         showPage('auth');
         return;
     }
-
-    try {
-        const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        if (userDoc.exists) {
-            const userData = userDoc.data();
-            if (userData.timeoutUntil && userData.timeoutUntil.toDate() > new Date()) {
-                showAlert('You are timed out and cannot send messages', 'error');
-                return;
-            }
-        }
-    } catch (error) {
-        console.error('Error checking timeout:', error);
-    }
-
     const input = document.getElementById('chat-input');
     const message = input.value.trim();
-
     if (!message) return;
-
     try {
         const userDoc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        let username;
+        let username = currentUser.email.split('@')[0];
         let color = '#ffffff';
-
         if (userDoc.exists) {
             const userData = userDoc.data();
-            username = userData.displayName || userData.username || currentUser.email.split('@')[0];
-            color = userData.usernameColor || '#ffffff';
-        } else {
-            username = currentUser.email.split('@')[0];
+            username = userData.displayName || userData.username || username;
+            color = userData.usernameColor || color;
         }
-
         await chatDb.collection('messages').add({
             message: message,
             username: username,
@@ -2147,7 +1862,6 @@ async function sendChatMessage() {
             usernameColor: color,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
-
         input.value = '';
     } catch (error) {
         showAlert(`Error sending message: ${error.message}`, 'error');
@@ -2161,23 +1875,16 @@ function loadChatMessages() {
         .onSnapshot(snapshot => {
             const container = document.getElementById('chat-messages');
             container.innerHTML = '';
-
             const messages = [];
-            snapshot.forEach(doc => {
-                messages.push({ id: doc.id, ...doc.data() });
-            });
-
+            snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
             messages.sort((a, b) => b.timestamp - a.timestamp);
-
             if (messages.length === 0) {
                 container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #888;">No messages yet</div>';
                 return;
             }
-
             messages.forEach(msg => {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message';
-
                 messageDiv.innerHTML = `
                     <div class="message-header">
                         <div class="message-sender" style="color: ${msg.usernameColor || '#ffffff'}">
@@ -2187,199 +1894,409 @@ function loadChatMessages() {
                     </div>
                     <div>${escapeHtml(msg.message)}</div>
                 `;
-
                 container.appendChild(messageDiv);
             });
-
             container.scrollTop = container.scrollHeight;
-        }, error => {
-            console.error('Error loading chat:', error);
         });
 }
 
-async function loadMostMentioned() {
+async function loadAdminStats() {
+    if (!isAdmin) {
+        showAlert('Admin access required', 'error');
+        showPage('home');
+        return;
+    }
     try {
-        const snapshot = await pasteDb.collection('pastes')
-            .where('isRemoved', '==', false)
-            .get();
+        const usersSnap = await pasteDb.collection('users').get();
+        const pastesSnap = await pasteDb.collection('pastes').where('isRemoved', '==', false).get();
+        const pinnedSnap = await pasteDb.collection('pastes').where('isPinned', '==', true).where('isRemoved', '==', false).get();
+        const now = new Date();
+        const timedOutUsers = usersSnap.docs.filter(doc => {
+            const userData = doc.data();
+            return userData.timeoutUntil && userData.timeoutUntil.toDate() > now;
+        }).length;
+        document.getElementById('totalUsers').textContent = usersSnap.size;
+        document.getElementById('totalPastes').textContent = pastesSnap.size;
+        document.getElementById('bannedUsers').textContent = usersSnap.docs.filter(doc => doc.data().isBanned).length;
+        document.getElementById('pinnedPastes').textContent = pinnedSnap.size;
+        document.getElementById('timedOutUsers').textContent = timedOutUsers;
+    } catch (error) {
+        console.error('Error loading admin stats:', error);
+    }
+}
 
-        const titleCount = {};
-        const lastMentioned = {};
-        
+async function adminViewAllUsers() {
+    if (!isAdmin) return;
+    try {
+        const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
+        const container = document.getElementById('admin-content');
+        let html = '<h3>All Users:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Roles</th><th>Joined</th><th>Actions</th></tr></thead><tbody>';
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            html += `<tr>
+                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
+                <td>${escapeHtml(user.email || 'No email')}</td>
+                <td>${user.isAdmin ? 'Owner ' : ''}${user.isManager ? 'Manager ' : ''}${user.isVip ? 'VIP ' : ''}${user.isTagMaker ? 'TagMaker ' : ''}</td>
+                <td>${formatTime(user.createdAt?.toDate())}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">${user.isBanned ? 'Unban' : 'Ban'}</button>
+                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isManager', ${!user.isManager})">${user.isManager ? 'Remove Manager' : 'Make Manager'}</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function adminViewAllPastes() {
+    if (!isAdmin) return;
+    try {
+        const snapshot = await pasteDb.collection('pastes').orderBy('timestamp', 'desc').limit(100).get();
+        const container = document.getElementById('admin-content');
+        let html = '<h3>All Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Actions</th></tr></thead><tbody>';
         snapshot.forEach(doc => {
             const paste = doc.data();
-            const title = paste.title.toLowerCase().trim();
-            if (title) {
-                titleCount[title] = (titleCount[title] || 0) + 1;
-                if (!lastMentioned[title] || paste.timestamp > lastMentioned[title]) {
-                    lastMentioned[title] = paste.timestamp;
+            html += `<tr>
+                <td>${escapeHtml(paste.title)}</td>
+                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
+                <td>${paste.views || 0}</td>
+                <td>${formatTime(paste.timestamp?.toDate())}</td>
+                <td>
+                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
+                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function adminClearChat() {
+    if (!isAdmin) return;
+    if (confirm('Clear ALL chat messages?')) {
+        try {
+            const snapshot = await chatDb.collection('messages').get();
+            const batch = chatDb.batch();
+            snapshot.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+            showAlert('Chat cleared', 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function adminBackupData() {
+    if (!isAdmin) return;
+    showAlert('Backup feature would export data here', 'success');
+}
+
+async function adminManageRoles() {
+    if (!isAdmin) return;
+    try {
+        const snapshot = await pasteDb.collection('users').get();
+        const container = document.getElementById('admin-content');
+        let html = '<h3>Manage User Roles:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Current Roles</th><th>Actions</th></tr></thead><tbody>';
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            html += `<tr>
+                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
+                <td>${escapeHtml(user.email || 'No email')}</td>
+                <td>${user.isAdmin ? 'Owner ' : ''}${user.isManager ? 'Manager ' : ''}${user.isVip ? 'VIP ' : ''}${user.isTagMaker ? 'TagMaker ' : ''}</td>
+                <td>
+                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isManager', ${!user.isManager})">${user.isManager ? 'Remove Manager' : 'Make Manager'}</button>
+                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isVip', ${!user.isVip})">${user.isVip ? 'Remove VIP' : 'Make VIP'}</button>
+                    <button class="btn btn-warning" onclick="toggleUserRole('${doc.id}', 'isTagMaker', ${!user.isTagMaker})">${user.isTagMaker ? 'Remove TagMaker' : 'Make TagMaker'}</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function toggleUserRole(userId, role, value) {
+    if (!isAdmin) return;
+    try {
+        await pasteDb.collection('users').doc(userId).update({ [role]: value });
+        showAlert(`User role updated successfully!`, 'success');
+        adminManageRoles();
+    } catch (error) {
+        showAlert(`Error updating role: ${error.message}`, 'error');
+    }
+}
+
+async function managerViewUsers() {
+    if (!isManager) return;
+    try {
+        const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
+        const container = document.getElementById('manager-content');
+        let html = '<h3>All Users:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Username</th><th>Email</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead><tbody>';
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            html += `<tr>
+                <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
+                <td>${escapeHtml(user.email || 'No email')}</td>
+                <td>${user.isBanned ? 'Banned' : 'Active'} ${user.isAdmin ? '| Owner' : ''} ${user.isManager ? '| Manager' : ''}</td>
+                <td>${formatTime(user.createdAt?.toDate())}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">${user.isBanned ? 'Unban' : 'Ban'}</button>
+                    <button class="btn btn-warning" onclick="showPage(\'timeout\'); setTimeout(() => document.getElementById(\'timeout-user-select\').value = \'${doc.id}\', 100)">Timeout</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function managerViewPastes() {
+    if (!isManager) return;
+    try {
+        const snapshot = await pasteDb.collection('pastes').where('isRemoved', '==', false).orderBy('timestamp', 'desc').limit(50).get();
+        const container = document.getElementById('manager-content');
+        let html = '<h3>All Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+        snapshot.forEach(doc => {
+            const paste = doc.data();
+            html += `<tr>
+                <td>${escapeHtml(paste.title)}</td>
+                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
+                <td>${paste.views || 0}</td>
+                <td>${formatTime(paste.timestamp?.toDate())}</td>
+                <td>${paste.isPinned ? 'Pinned' : 'Normal'}</td>
+                <td>
+                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
+                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function managerClearChat() {
+    if (!isManager) return;
+    if (confirm('Clear ALL chat messages?')) {
+        try {
+            const snapshot = await chatDb.collection('messages').get();
+            const batch = chatDb.batch();
+            snapshot.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+            showAlert('Chat cleared', 'success');
+        } catch (error) {
+            showAlert(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+
+async function managerViewAllPastes() {
+    if (!isManager) return;
+    try {
+        const snapshot = await pasteDb.collection('pastes').orderBy('timestamp', 'desc').limit(100).get();
+        const container = document.getElementById('manager-content');
+        let html = '<h3>Manage Pastes:</h3><div class="paste-table-container"><table class="paste-table"><thead><tr><th>Title</th><th>Author</th><th>Views</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+        snapshot.forEach(doc => {
+            const paste = doc.data();
+            html += `<tr>
+                <td>${escapeHtml(paste.title)}</td>
+                <td>${escapeHtml(paste.username || 'Anonymous')}</td>
+                <td>${paste.views || 0}</td>
+                <td>${formatTime(paste.timestamp?.toDate())}</td>
+                <td>${paste.isPinned ? 'Pinned' : 'Normal'} ${paste.isRemoved ? '| Removed' : ''}</td>
+                <td>
+                    <button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">${paste.isPinned ? 'Unpin' : 'Pin'}</button>
+                    <button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">Remove</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    } catch (error) {
+        showAlert(`Error: ${error.message}`, 'error');
+    }
+}
+
+async function loadTimeoutUsers() {
+    try {
+        const select = document.getElementById('timeout-user-select');
+        select.innerHTML = '<option value="">-- Select a user --</option>';
+        const snapshot = await pasteDb.collection('users').get();
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            const option = document.createElement('option');
+            option.value = doc.id;
+            option.textContent = `${user.displayName || user.username || user.email?.split('@')[0]} (${user.email})`;
+            select.appendChild(option);
+        });
+        await loadTimedOutList();
+    } catch (error) {
+        console.error('Error loading users:', error);
+    }
+}
+
+async function loadTimedOutList() {
+    try {
+        const now = new Date();
+        const snapshot = await pasteDb.collection('users').get();
+        const container = document.getElementById('timed-out-table-body');
+        container.innerHTML = '';
+        let hasTimedOut = false;
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            if (user.timeoutUntil) {
+                const timeoutUntil = user.timeoutUntil.toDate();
+                if (timeoutUntil > now) {
+                    hasTimedOut = true;
+                    const diff = timeoutUntil - now;
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                    let timeStr = '';
+                    if (days > 0) timeStr += `${days}d `;
+                    if (hours > 0) timeStr += `${hours}h `;
+                    if (minutes > 0) timeStr += `${minutes}m `;
+                    timeStr += `${seconds}s`;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${escapeHtml(user.displayName || user.username || user.email?.split('@')[0])}</td>
+                        <td>${timeStr}</td>
+                        <td>${user.timeoutReason || 'No reason provided'}</td>
+                        <td><button class="btn btn-success" onclick="untimeoutSpecificUser('${doc.id}')">Remove Timeout</button></td>
+                    `;
+                    container.appendChild(row);
                 }
             }
         });
-
-        const sortedTitles = Object.entries(titleCount)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 20);
-
-        const container = document.getElementById('most-mentioned-body');
-        container.innerHTML = '';
-
-        if (sortedTitles.length === 0) {
-            container.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 2rem;">No mentions yet</td></tr>';
-            return;
-        }
-
-        sortedTitles.forEach(([title, count], index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="paste-title">${escapeHtml(title)}</td>
-                <td class="paste-views">${count}</td>
-                <td class="paste-date">${formatDate(lastMentioned[title]?.toDate())}</td>
-            `;
-            container.appendChild(row);
-        });
-    } catch (error) {
-        console.error('Error loading most mentioned:', error);
-        document.getElementById('most-mentioned-body').innerHTML = 
-            '<tr><td colspan="3" style="text-align: center; padding: 2rem; color: #ff0000;">Error loading data</td></tr>';
-    }
-}
-
-async function loadUserProfileData() {
-    if (!currentUser) return;
-
-    try {
-        const doc = await pasteDb.collection('users').doc(currentUser.uid).get();
-        if (doc.exists) {
-            const userData = doc.data();
-
-            document.getElementById('display-name').value = userData.displayName || '';
-            document.getElementById('banner-url').value = userData.bannerUrl || '';
-            document.getElementById('profile-url').value = userData.profileUrl || '';
-
-            if (userData.bannerUrl) {
-                document.getElementById('profile-banner-img').style.backgroundImage = `url('${userData.bannerUrl}')`;
-            }
-
-            if (userData.profileUrl) {
-                document.getElementById('profile-picture-img').style.backgroundImage = `url('${userData.profileUrl}')`;
-            }
+        if (!hasTimedOut) {
+            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No users are currently timed out</td></tr>';
         }
     } catch (error) {
-        console.error('Error loading profile data:', error);
+        console.error('Error loading timed out users:', error);
     }
 }
 
-async function updateDisplayName() {
-    if (!currentUser) return;
-
-    const displayName = document.getElementById('display-name').value.trim();
-    if (!displayName) {
-        showAlert('Please enter a display name', 'error');
+async function timeoutUser() {
+    if (!isAdmin && !isManager) {
+        showAlert('You do not have permission to timeout users', 'error');
         return;
     }
-
+    const userId = document.getElementById('timeout-user-select').value;
+    const days = parseInt(document.getElementById('timeout-days').value) || 0;
+    const hours = parseInt(document.getElementById('timeout-hours').value) || 0;
+    const minutes = parseInt(document.getElementById('timeout-minutes').value) || 0;
+    const seconds = parseInt(document.getElementById('timeout-seconds').value) || 0;
+    const reason = document.getElementById('timeout-reason-input').value.trim();
+    if (!userId) {
+        showAlert('Please select a user', 'error');
+        return;
+    }
+    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+        showAlert('Please enter a timeout duration', 'error');
+        return;
+    }
+    const totalMs = (days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000);
+    const timeoutUntil = new Date(Date.now() + totalMs);
     try {
-        await pasteDb.collection('users').doc(currentUser.uid).update({
-            displayName: displayName,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        await pasteDb.collection('users').doc(userId).update({
+            timeoutUntil: timeoutUntil,
+            timeoutReason: reason || 'No reason provided'
         });
-
-        showAlert('Display name updated successfully!', 'success');
-        document.getElementById('usernameDisplay').textContent = displayName;
+        showAlert('User has been timed out', 'success');
+        loadTimedOutList();
+        document.getElementById('timeout-days').value = '';
+        document.getElementById('timeout-hours').value = '';
+        document.getElementById('timeout-minutes').value = '';
+        document.getElementById('timeout-seconds').value = '';
+        document.getElementById('timeout-reason-input').value = '';
     } catch (error) {
-        showAlert(`Error updating display name: ${error.message}`, 'error');
+        showAlert(`Error timing out user: ${error.message}`, 'error');
     }
 }
 
-async function updateBanner() {
-    if (!currentUser) return;
-
-    const bannerUrl = document.getElementById('banner-url').value.trim();
-    if (!bannerUrl) {
-        showAlert('Please enter a banner URL', 'error');
+async function untimeoutUser() {
+    if (!isAdmin && !isManager) {
+        showAlert('You do not have permission to remove timeouts', 'error');
         return;
     }
-
+    const userId = document.getElementById('timeout-user-select').value;
+    if (!userId) {
+        showAlert('Please select a user', 'error');
+        return;
+    }
     try {
-        await pasteDb.collection('users').doc(currentUser.uid).update({
-            bannerUrl: bannerUrl,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        await pasteDb.collection('users').doc(userId).update({
+            timeoutUntil: null,
+            timeoutReason: null
         });
-
-        showAlert('Banner updated successfully!', 'success');
-        document.getElementById('profile-banner-img').style.backgroundImage = `url('${bannerUrl}')`;
+        showAlert('User timeout has been removed', 'success');
+        loadTimedOutList();
     } catch (error) {
-        showAlert(`Error updating banner: ${error.message}`, 'error');
+        showAlert(`Error removing timeout: ${error.message}`, 'error');
     }
 }
 
-async function updateProfilePicture() {
-    if (!currentUser) return;
-
-    const profileUrl = document.getElementById('profile-url').value.trim();
-    if (!profileUrl) {
-        showAlert('Please enter a profile picture URL', 'error');
+async function untimeoutSpecificUser(userId) {
+    if (!isAdmin && !isManager) {
+        showAlert('You do not have permission to remove timeouts', 'error');
         return;
     }
-
     try {
-        await pasteDb.collection('users').doc(currentUser.uid).update({
-            profileUrl: profileUrl,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        await pasteDb.collection('users').doc(userId).update({
+            timeoutUntil: null,
+            timeoutReason: null
         });
-
-        showAlert('Profile picture updated successfully!', 'success');
-        document.getElementById('profile-picture-img').style.backgroundImage = `url('${profileUrl}')`;
+        showAlert('User timeout has been removed', 'success');
+        loadTimedOutList();
     } catch (error) {
-        showAlert(`Error updating profile picture: ${error.message}`, 'error');
+        showAlert(`Error removing timeout: ${error.message}`, 'error');
     }
 }
 
 function handleSearch() {
     const searchTerm = document.getElementById('searchBar').value.trim();
     const resultsDiv = document.getElementById('searchResults');
-
     if (searchTerm.length === 0) {
         resultsDiv.classList.add('hidden');
         return;
     }
-
     if (searchTimeout) clearTimeout(searchTimeout);
-
-    searchTimeout = setTimeout(() => {
-        performSearch(searchTerm);
-        resultsDiv.classList.remove('hidden');
-    }, 300);
+    searchTimeout = setTimeout(() => performSearch(searchTerm), 300);
+    resultsDiv.classList.remove('hidden');
 }
 
 async function performSearch(searchTerm) {
     const resultsContent = document.getElementById('searchResultsContent');
     resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem;">Searching...</td></tr>';
-
     try {
         const snapshot = await pasteDb.collection('pastes')
             .where('isRemoved', '==', false)
             .orderBy('timestamp', 'desc')
             .limit(50)
             .get();
-
         const results = [];
         const searchLower = searchTerm.toLowerCase();
-
         snapshot.forEach(doc => {
             const paste = doc.data();
             const pasteId = doc.id;
-
             const titleMatch = paste.title.toLowerCase().includes(searchLower);
             const contentMatch = paste.content.toLowerCase().includes(searchLower);
             const userMatch = (paste.username || '').toLowerCase().includes(searchLower);
-
-            if (titleMatch || contentMatch || userMatch) {
-                results.push({ id: pasteId, ...paste });
-            }
+            if (titleMatch || contentMatch || userMatch) results.push({ id: pasteId, ...paste });
         });
-
         displaySearchResults(results, resultsContent);
     } catch (error) {
         resultsContent.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1rem; color: #ff0000;">Error loading search results</td></tr>';
@@ -2388,12 +2305,10 @@ async function performSearch(searchTerm) {
 
 function displaySearchResults(results, container) {
     container.innerHTML = '';
-
     if (results.length === 0) {
         container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No results found</td></tr>';
         return;
     }
-
     results.slice(0, 10).forEach(paste => {
         const row = document.createElement('tr');
         row.onclick = () => {
@@ -2401,7 +2316,6 @@ function displaySearchResults(results, container) {
             document.getElementById('searchResults').classList.add('hidden');
             document.getElementById('searchBar').value = '';
         };
-
         row.innerHTML = `
             <td class="paste-title">${escapeHtml(paste.title)}</td>
             <td class="paste-views">${paste.views || 0}</td>
@@ -2421,65 +2335,13 @@ function escapeHtml(text) {
 
 function formatTime(date) {
     if (!date) return 'Unknown';
-
     const now = new Date();
     const diff = now - date;
-
     if (diff < 60000) return 'Just now';
     if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
     if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
     if (diff < 604800000) return `${Math.floor(diff / 86400000)}d ago`;
-
     return date.toLocaleDateString();
-}
-
-async function adminPinPaste(pasteId, pinState) {
-    if (!isAdmin && !isManager) return;
-
-    try {
-        await pasteDb.collection('pastes').doc(pasteId).update({
-            isPinned: pinState
-        });
-        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
-        loadPasteDetailContent(pasteId);
-        loadPinnedPastes();
-    } catch (error) {
-        showAlert(`Error: ${error.message}`, 'error');
-    }
-}
-
-async function adminRemovePaste(pasteId) {
-    if (!isAdmin && !isManager) return;
-
-    if (confirm('Are you sure you want to remove this paste?')) {
-        try {
-            await pasteDb.collection('pastes').doc(pasteId).update({
-                isRemoved: true
-            });
-            showAlert('Paste removed', 'success');
-            closePasteDetail();
-            showPage('home');
-            loadAllPastes();
-        } catch (error) {
-            showAlert(`Error: ${error.message}`, 'error');
-        }
-    }
-}
-
-async function adminBanUser(userId, banState = true) {
-    if (!isAdmin && !isManager) return;
-
-    const action = banState ? 'ban' : 'unban';
-    if (confirm(`Are you sure you want to ${action} this user?`)) {
-        try {
-            await pasteDb.collection('users').doc(userId).update({
-                isBanned: banState
-            });
-            showAlert(`User ${banState ? 'banned' : 'unbanned'}`, 'success');
-        } catch (error) {
-            showAlert(`Error: ${error.message}`, 'error');
-        }
-    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2490,12 +2352,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.src = 'https://via.placeholder.com/300x100/000000/ffffff?text=NORBIN+LOGO';
         };
     }
-
     pasteAuth.onAuthStateChanged(async (user) => {
         currentUser = user;
         if (user) {
             await checkUserStatus();
-            await checkTimeoutStatus();
         } else {
             isAdmin = false;
             isManager = false;
@@ -2506,22 +2366,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadPinnedPastes();
         loadAllPastes();
     });
-
     showPage('home');
-
     document.addEventListener('click', (event) => {
         const menu = document.getElementById('slideDownMenu');
         const hamburger = document.querySelector('.hamburger-btn');
-
         if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
             menu.classList.remove('active');
-        }
-    });
-
-    document.body.addEventListener('click', function() {
-        const hallMusic = document.getElementById('hallMusic');
-        if (hallMusic && hallMusic.paused) {
-            hallMusic.play().catch(e => console.log("Music play prevented"));
         }
     });
 });
