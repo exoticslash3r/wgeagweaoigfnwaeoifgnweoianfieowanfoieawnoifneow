@@ -148,7 +148,7 @@ body {
     font-weight: bold;
 }
 
-/* Slide Down Menu */
+/* Slide Down Menu - Updated Layout */
 .slide-down-menu {
     position: fixed;
     top: -100%;
@@ -156,7 +156,7 @@ body {
     width: 100%;
     background-color: #000000;
     z-index: 999;
-    padding: 2rem;
+    padding: 1rem 2rem;
     border-bottom: 2px solid var(--accent-color);
     transition: top 0.5s ease;
 }
@@ -166,9 +166,9 @@ body {
 }
 
 .menu-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -177,18 +177,53 @@ body {
     background: #111111;
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
-    padding: 1.5rem;
-    text-align: center;
-    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    text-align: left;
+    font-size: 1.1rem;
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .menu-btn:hover {
     background: var(--accent-color);
     color: #000000;
-    transform: translateY(-2px);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.menu-btn::after {
+    content: '→';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.menu-btn:hover::after {
+    opacity: 1;
+}
+
+/* Add separators between buttons */
+.menu-btn:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+/* Add subtle border between buttons */
+.menu-btn {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.menu-btn:hover {
+    border-top: 1px solid var(--accent-color);
+    border-bottom: 1px solid var(--accent-color);
 }
 
 .hidden {
@@ -276,6 +311,33 @@ body {
 
 .admin-badge-cell {
     background: #ff0000;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.manager-badge-cell {
+    background: #ff8800;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.vip-badge-cell {
+    background: #ffd700;
+    color: black;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.tagmaker-badge-cell {
+    background: #8800ff;
     color: white;
     padding: 0.2rem 0.5rem;
     border-radius: 3px;
@@ -847,7 +909,7 @@ body {
 <body>
 <!-- Timeout Overlay -->
 <div id="timeout-overlay" class="timeout-overlay">
-    <div class="timeout-message">⏰ YOU HAVE BEEN TIMED OUT</div>
+    <div class="timeout-message">YOU HAVE BEEN TIMED OUT</div>
     <div class="timeout-details" id="timeout-details"></div>
     <div style="color: #888; font-size: 1rem;">
         You will be redirected when the timeout expires
@@ -857,7 +919,7 @@ body {
 <!-- Fullscreen Paste Detail -->
 <div id="paste-detail-container" class="paste-detail-container">
     <div class="paste-detail-header">
-        <button class="back-btn" onclick="closePasteDetail()">← Back to Pastes</button>
+        <button class="back-btn" onclick="closePasteDetail()">Back to Pastes</button>
         <div id="paste-detail-actions"></div>
     </div>
     <div id="paste-detail-content" class="paste-detail-content"></div>
@@ -875,15 +937,15 @@ body {
 <!-- Slide Down Menu -->
 <div class="slide-down-menu" id="slideDownMenu">
     <div class="menu-items">
-        <button class="menu-btn" onclick="showPage('home')">🏠 Home</button>
-        <button class="menu-btn" onclick="showPage('paste')">📝 Create Paste</button>
-        <button class="menu-btn" onclick="showPage('chat')">💬 Global Chat</button>
-        <button class="menu-btn" onclick="showPage('most-mentioned')">🔥 Most Mentioned</button>
-        <button class="menu-btn" onclick="showPage('hall')">🎭 Hall of Autism</button>
-        <button class="menu-btn hidden" id="myAccountBtn" onclick="showPage('myaccount')">👤 My Account</button>
-        <button class="menu-btn hidden" id="adminBtn" onclick="showPage('admin')">⚙️ Admin Panel</button>
-        <button class="menu-btn hidden" id="tagMakerBtn" onclick="showPage('tagMaker')">🏷️ Tag Manager</button>
-        <button class="menu-btn hidden" id="vipBtn" onclick="showPage('vip')">⭐ VIP Features</button>
+        <button class="menu-btn" onclick="showPage('home')">Home</button>
+        <button class="menu-btn" onclick="showPage('paste')">Create Paste</button>
+        <button class="menu-btn" onclick="showPage('chat')">Global Chat</button>
+        <button class="menu-btn" onclick="showPage('most-mentioned')">Most Mentioned</button>
+        <button class="menu-btn" onclick="showPage('hall')">Hall of Autism</button>
+        <button class="menu-btn hidden" id="myAccountBtn" onclick="showPage('myaccount')">My Account</button>
+        <button class="menu-btn hidden" id="adminBtn" onclick="showPage('admin')">Admin Panel</button>
+        <button class="menu-btn hidden" id="tagMakerBtn" onclick="showPage('tagMaker')">Tag Manager</button>
+        <button class="menu-btn hidden" id="vipBtn" onclick="showPage('vip')">VIP Features</button>
     </div>
 </div>
 
@@ -899,13 +961,13 @@ body {
             <input type="text"
                    class="search-bar"
                    id="searchBar"
-                   placeholder="🔍 Search pastes by title, username, or content..."
+                   placeholder="Search pastes by title, username, or content..."
                    oninput="handleSearch()">
         </div>
 
         <!-- Pinned Pastes -->
         <div id="pinned-pastes" class="pinned-pastes">
-            <h2 class="section-title">📌 Pinned Pastes</h2>
+            <h2 class="section-title">Pinned Pastes</h2>
             <div id="pinned-pastes-container" class="pastes-table-container">
                 <table class="pastes-table" id="pinned-pastes-table">
                     <thead>
@@ -923,7 +985,7 @@ body {
             </div>
         </div>
 
-        <h2 class="section-title">📜 All Pastes</h2>
+        <h2 class="section-title">All Pastes</h2>
         <div id="pastes-container" class="pastes-table-container">
             <table class="pastes-table" id="all-pastes-table">
                 <thead>
@@ -943,7 +1005,7 @@ body {
 
     <!-- Create Paste -->
     <div id="paste-page" class="hidden">
-        <h2 class="section-title">📝 Create New Paste</h2>
+        <h2 class="section-title">Create New Paste</h2>
         <div class="paste-form">
             <div class="form-group">
                 <label class="form-label">Title</label>
@@ -954,18 +1016,18 @@ body {
                 <textarea class="form-textarea" id="paste-content" placeholder="Enter your paste content here..."></textarea>
             </div>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="publishPaste()">🚀 Publish</button>
-                <button class="btn btn-secondary" onclick="clearPasteForm()">🗑️ Clear</button>
+                <button class="btn btn-primary" onclick="publishPaste()">Publish</button>
+                <button class="btn btn-secondary" onclick="clearPasteForm()">Clear</button>
             </div>
         </div>
     </div>
 
     <!-- Global Chat -->
     <div id="chat-page" class="hidden">
-        <h2 class="section-title">💬 Global Chat</h2>
+        <h2 class="section-title">Global Chat</h2>
         <div class="chat-container">
             <div class="chat-header">
-                🌍 Live Global Chat • <span id="onlineCount">0</span> users online
+                Live Global Chat • <span id="onlineCount">0</span> users online
             </div>
             <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input-container">
@@ -975,7 +1037,7 @@ body {
                            id="chat-input"
                            placeholder="Type your message... (Press Enter to send)"
                            onkeypress="if(event.key === 'Enter') sendChatMessage()">
-                    <button class="send-btn" onclick="sendChatMessage()">📤 Send</button>
+                    <button class="send-btn" onclick="sendChatMessage()">Send</button>
                 </div>
             </div>
         </div>
@@ -983,19 +1045,19 @@ body {
 
     <!-- Most Mentioned -->
     <div id="most-mentioned-page" class="hidden">
-        <h2 class="section-title">🔥 Most Mentioned Titles</h2>
+        <h2 class="section-title">Most Mentioned Titles</h2>
         <div id="most-mentioned-container" class="pastes-grid"></div>
     </div>
 
     <!-- Hall of Autism -->
     <div id="hall-page" class="hidden">
-        <h2 class="section-title">🎭 Hall of Autism</h2>
+        <h2 class="section-title">Hall of Autism</h2>
         <div class="hall-grid" id="hall-container"></div>
     </div>
 
     <!-- My Account -->
     <div id="myaccount-page" class="hidden">
-        <h2 class="section-title">👤 My Account</h2>
+        <h2 class="section-title">My Account</h2>
         <div class="profile-form">
             <div class="form-group">
                 <div class="profile-banner">
@@ -1032,7 +1094,7 @@ body {
 
     <!-- VIP Features -->
     <div id="vip-page" class="hidden">
-        <h2 class="section-title">⭐ VIP Features</h2>
+        <h2 class="section-title">VIP Features</h2>
         <div class="profile-form">
             <div class="form-group">
                 <label class="form-label">Custom Username Color</label>
@@ -1047,7 +1109,7 @@ body {
 
     <!-- Tag Manager -->
     <div id="tagMaker-page" class="hidden">
-        <h2 class="section-title">🏷️ Tag Manager</h2>
+        <h2 class="section-title">Tag Manager</h2>
         <div class="tag-form">
             <div class="form-group">
                 <label class="form-label">Create New Tag</label>
@@ -1067,7 +1129,7 @@ body {
 
     <!-- Admin Panel -->
     <div id="admin-page" class="hidden">
-        <h2 class="section-title">⚙️ Admin Panel</h2>
+        <h2 class="section-title">Admin Panel</h2>
         <div class="admin-controls">
             <div class="admin-title">Administrator Controls</div>
 
@@ -1091,12 +1153,12 @@ body {
             </div>
 
             <div class="admin-actions">
-                <button class="btn btn-danger" onclick="adminViewAllUsers()">👥 View All Users</button>
-                <button class="btn btn-danger" onclick="adminViewAllPastes()">📄 View All Pastes</button>
-                <button class="btn btn-danger" onclick="adminClearChat()">🗑️ Clear Chat</button>
-                <button class="btn btn-danger" onclick="adminBackupData()">💾 Backup Data</button>
-                <button class="btn btn-danger" onclick="showTimeoutForm()">⏰ Timeout User</button>
-                <button class="btn btn-danger" onclick="adminManageRoles()">👑 Manage Roles</button>
+                <button class="btn btn-danger" onclick="adminViewAllUsers()">View All Users</button>
+                <button class="btn btn-danger" onclick="adminViewAllPastes()">View All Pastes</button>
+                <button class="btn btn-danger" onclick="adminClearChat()">Clear Chat</button>
+                <button class="btn btn-danger" onclick="adminBackupData()">Backup Data</button>
+                <button class="btn btn-danger" onclick="showTimeoutForm()">Timeout User</button>
+                <button class="btn btn-danger" onclick="adminManageRoles()">Manage Roles</button>
             </div>
 
             <div id="admin-content" class="mt-4"></div>
@@ -1118,7 +1180,7 @@ body {
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-danger" onclick="adminTimeoutUser()">⏰ Timeout User</button>
+                    <button class="btn btn-danger" onclick="adminTimeoutUser()">Timeout User</button>
                     <button class="btn btn-secondary" onclick="hideTimeoutForm()">Cancel</button>
                 </div>
             </div>
@@ -1127,25 +1189,25 @@ body {
 
     <!-- User Profile -->
     <div id="user-profile-page" class="hidden">
-        <button class="back-btn" onclick="showPage('home')">← Back</button>
+        <button class="back-btn" onclick="showPage('home')">Back</button>
         <div id="user-profile-content" class="paste-detail"></div>
     </div>
 
     <!-- Auth Page -->
     <div id="auth-page" class="hidden">
-        <h2 class="section-title">🔐 Authentication</h2>
+        <h2 class="section-title">Authentication</h2>
         <div class="auth-form">
             <div class="form-group">
-                <label class="form-label">📧 Email</label>
+                <label class="form-label">Email</label>
                 <input type="email" class="form-input" id="auth-email" placeholder="your@email.com">
             </div>
             <div class="form-group">
-                <label class="form-label">🔑 Password</label>
+                <label class="form-label">Password</label>
                 <input type="password" class="form-input" id="auth-password" placeholder="••••••••">
             </div>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="signIn()">🚀 Sign In</button>
-                <button class="btn btn-secondary" onclick="signUp()">✨ Create Account</button>
+                <button class="btn btn-primary" onclick="signIn()">Sign In</button>
+                <button class="btn btn-secondary" onclick="signUp()">Create Account</button>
             </div>
             <div id="auth-message" class="mt-3 text-center"></div>
         </div>
@@ -1345,16 +1407,16 @@ async function loadPasteDetailContent(pasteId) {
             adminControls = `
                 <div class="btn-group">
                     <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
-                        ${paste.isPinned ? '📌 Unpin Paste' : '📌 Pin Paste'}
+                        ${paste.isPinned ? 'Unpin Paste' : 'Pin Paste'}
                     </button>
                     <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">
-                        🗑️ Remove Paste
+                        Remove Paste
                     </button>
                     ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">
-                        ⚠️ Ban User
+                        Ban User
                     </button>` : ''}
                     ${isAdmin ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${paste.userId}')">
-                        ⏰ Timeout User
+                        Timeout User
                     </button>` : ''}
                 </div>
             `;
@@ -1371,7 +1433,7 @@ async function loadPasteDetailContent(pasteId) {
                 ${escapeHtml(paste.title)}
             </h2>
             <div class="paste-views" style="margin-bottom: 2rem;">
-                👁️ ${paste.views || 0} views • ⏰ ${formatTime(paste.timestamp?.toDate())}
+                ${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}
             </div>
             <div class="paste-content">${escapeHtml(paste.content)}</div>
         `;
@@ -1616,13 +1678,13 @@ function updateUIForAuth() {
         }
 
         if (isOwner) {
-            showAlert('🔴 OWNER privileges activated!', 'success');
+            showAlert('OWNER privileges activated!', 'success');
         } else if (isAdmin) {
-            showAlert('🔴 Admin privileges activated!', 'success');
+            showAlert('Admin privileges activated!', 'success');
         } else if (isManager) {
-            showAlert('👑 Manager privileges activated!', 'success');
+            showAlert('Manager privileges activated!', 'success');
         } else if (isVIP) {
-            showAlert('⭐ VIP privileges activated!', 'success');
+            showAlert('VIP privileges activated!', 'success');
         }
     } else {
         authBtn.textContent = 'Sign In';
@@ -1717,7 +1779,11 @@ function displayPastesTable(snapshot, containerId, isPinned = false) {
     container.innerHTML = '';
 
     if (snapshot.empty) {
-        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes found.</td></tr>';
+        if (isPinned) {
+            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pinned pastes yet.</td></tr>';
+        } else {
+            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes found.</td></tr>';
+        }
         return;
     }
 
@@ -1773,7 +1839,7 @@ function loadChatMessages() {
                         <div class="message-sender">${escapeHtml(msg.username || 'Unknown User')}:</div>
                         <div class="message-time">${formatTime(msg.timestamp?.toDate())}</div>
                     </div>
-                    <div>${escapeHtml(msg.message)}:</div>
+                    <div>${escapeHtml(msg.message)}</div>
                 `;
 
                 container.appendChild(messageDiv);
@@ -1913,7 +1979,7 @@ async function loadMostMentioned() {
             card.innerHTML = `
                 <div style="font-size: 1.5rem; margin-bottom: 1rem;">#${index + 1}</div>
                 <div class="paste-title">${escapeHtml(title)}</div>
-                <div class="paste-views">🔥 Mentioned ${count} times</div>
+                <div class="paste-views">Mentioned ${count} times</div>
             `;
             container.appendChild(card);
         });
@@ -2343,8 +2409,15 @@ async function adminPinPaste(pasteId, pinState) {
             isPinned: pinState
         });
         showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
-        loadPasteDetailContent(pasteId);
+        
+        // Reload both pinned and all pastes
+        loadRecentPastes();
         loadPinnedPastes();
+        
+        // If in paste detail view, update the content
+        if (document.getElementById('paste-detail-container').classList.contains('active')) {
+            loadPasteDetailContent(pasteId);
+        }
     } catch (error) {
         showAlert(`Error: ${error.message}`, 'error');
     }
@@ -2360,7 +2433,8 @@ async function adminRemovePaste(pasteId) {
             });
             showAlert('Paste removed', 'success');
             closePasteDetail();
-            showPage('home');
+            loadRecentPastes();
+            loadPinnedPastes();
         } catch (error) {
             showAlert(`Error: ${error.message}`, 'error');
         }
@@ -2501,37 +2575,37 @@ async function adminViewAllUsers() {
                         ${escapeHtml(user.displayName || user.username || user.email?.split('@')[0] || 'Unknown User')}
                         ${user.isBanned ? '<span class="admin-badge-cell">BANNED</span>' : ''}
                         ${user.isAdmin ? '<span class="admin-badge-cell">ADMIN</span>' : ''}
-                        ${user.isManager ? '<span class="admin-badge-cell">MANAGER</span>' : ''}
-                        ${user.isVIP ? '<span class="admin-badge-cell">VIP</span>' : ''}
-                        ${user.isTagMaker ? '<span class="admin-badge-cell">TAG MAKER</span>' : ''}
+                        ${user.isManager ? '<span class="manager-badge-cell">MANAGER</span>' : ''}
+                        ${user.isVIP ? '<span class="vip-badge-cell">VIP</span>' : ''}
+                        ${user.isTagMaker ? '<span class="tagmaker-badge-cell">TAG MAKER</span>' : ''}
                         ${user.isOwner ? '<span class="admin-badge-cell">OWNER</span>' : ''}
                     </div>
                     <div class="paste-title">${escapeHtml(user.email || 'No email')}</div>
                     <div class="paste-views">
-                        📅 Joined: ${formatTime(user.createdAt?.toDate())}
-                        ${user.timeoutUntil ? `<br>⏰ Timeout until: ${formatTime(user.timeoutUntil?.toDate())}` : ''}
+                        Joined: ${formatTime(user.createdAt?.toDate())}
+                        ${user.timeoutUntil ? `<br>Timeout until: ${formatTime(user.timeoutUntil?.toDate())}` : ''}
                     </div>
                     <div class="btn-group mt-2">
                         ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
-                            ${user.isBanned ? '🔓 Unban' : '⚠️ Ban'}
+                            ${user.isBanned ? 'Unban' : 'Ban'}
                         </button>` : ''}
                         ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${doc.id}', ${!user.isAdmin})">
-                            ${user.isAdmin ? '👑 Remove Admin' : '👑 Make Admin'}
+                            ${user.isAdmin ? 'Remove Admin' : 'Make Admin'}
                         </button>` : ''}
                         ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${doc.id}', ${!user.isManager})">
-                            ${user.isManager ? '👑 Remove Manager' : '👑 Make Manager'}
+                            ${user.isManager ? 'Remove Manager' : 'Make Manager'}
                         </button>` : ''}
                         ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${doc.id}', ${!user.isVIP})">
-                            ${user.isVIP ? '⭐ Remove VIP' : '⭐ Make VIP'}
+                            ${user.isVIP ? 'Remove VIP' : 'Make VIP'}
                         </button>` : ''}
                         ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${doc.id}', ${!user.isTagMaker})">
-                            ${user.isTagMaker ? '🏷️ Remove Tag Maker' : '🏷️ Make Tag Maker'}
+                            ${user.isTagMaker ? 'Remove Tag Maker' : 'Make Tag Maker'}
                         </button>` : ''}
                         ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${doc.id}')">
-                            ⏰ Timeout
+                            Timeout
                         </button>` : ''}
                         ${(isAdmin || isManager) && user.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${doc.id}')">
-                            🔓 Un-timeout
+                            Un-timeout
                         </button>` : ''}
                     </div>
                 </div>
@@ -2570,10 +2644,10 @@ async function adminViewAllPastes() {
                     <div class="paste-views">${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}</div>
                     <div class="btn-group mt-2">
                         ${(isAdmin || isManager) ? `<button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">
-                            ${paste.isPinned ? '📌 Unpin' : '📌 Pin'}
+                            ${paste.isPinned ? 'Unpin' : 'Pin'}
                         </button>` : ''}
                         ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">
-                            🗑️ Remove
+                            Remove
                         </button>` : ''}
                     </div>
                 </div>
@@ -2626,28 +2700,28 @@ async function showUserProfile(userId) {
                     <div class="admin-title">Admin Controls</div>
                     <div class="admin-actions">
                         <button class="btn btn-danger" onclick="adminBanUser('${userId}', ${!userData.isBanned})">
-                            ${userData.isBanned ? '🔓 Unban User' : '⚠️ Ban User'}
+                            ${userData.isBanned ? 'Unban User' : 'Ban User'}
                         </button>
                         <button class="btn btn-danger" onclick="adminDeleteUserPosts('${userId}')">
-                            🗑️ Delete User's Posts
+                            Delete User's Posts
                         </button>
                         ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${userId}', ${!userData.isAdmin})">
-                            ${userData.isAdmin ? '👑 Remove Admin' : '👑 Make Admin'}
+                            ${userData.isAdmin ? 'Remove Admin' : 'Make Admin'}
                         </button>` : ''}
                         ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${userId}', ${!userData.isManager})">
-                            ${userData.isManager ? '👑 Remove Manager' : '👑 Make Manager'}
+                            ${userData.isManager ? 'Remove Manager' : 'Make Manager'}
                         </button>` : ''}
                         ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${userId}', ${!userData.isVIP})">
-                            ${userData.isVIP ? '⭐ Remove VIP' : '⭐ Make VIP'}
+                            ${userData.isVIP ? 'Remove VIP' : 'Make VIP'}
                         </button>` : ''}
                         ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${userId}', ${!userData.isTagMaker})">
-                            ${userData.isTagMaker ? '🏷️ Remove Tag Maker' : '🏷️ Make Tag Maker'}
+                            ${userData.isTagMaker ? 'Remove Tag Maker' : 'Make Tag Maker'}
                         </button>` : ''}
                         <button class="btn btn-danger" onclick="showTimeoutUserForm('${userId}')">
-                            ⏰ Timeout User
+                            Timeout User
                         </button>
                         ${userData.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${userId}')">
-                            🔓 Un-timeout User
+                            Un-timeout User
                         </button>` : ''}
                     </div>
                 </div>
@@ -2685,17 +2759,17 @@ async function showUserProfile(userId) {
                 ${escapeHtml(userData.displayName || userData.username || userData.email?.split('@')[0] || 'Unknown User')}
                 ${userData.isBanned ? '<span class="admin-badge-cell">BANNED</span>' : ''}
                 ${userData.isAdmin ? '<span class="admin-badge-cell">ADMIN</span>' : ''}
-                ${userData.isManager ? '<span class="admin-badge-cell">MANAGER</span>' : ''}
-                ${userData.isVIP ? '<span class="admin-badge-cell">VIP</span>' : ''}
-                ${userData.isTagMaker ? '<span class="admin-badge-cell">TAG MAKER</span>' : ''}
+                ${userData.isManager ? '<span class="manager-badge-cell">MANAGER</span>' : ''}
+                ${userData.isVIP ? '<span class="vip-badge-cell">VIP</span>' : ''}
+                ${userData.isTagMaker ? '<span class="tagmaker-badge-cell">TAG MAKER</span>' : ''}
                 ${userData.isOwner ? '<span class="admin-badge-cell">OWNER</span>' : ''}
             </h1>
 
             <div class="paste-content mt-3">
-                <p><strong>📧 Email:</strong> ${escapeHtml(userData.email || 'Not provided')}</p>
-                <p><strong>📅 Member since:</strong> ${formatTime(userData.createdAt?.toDate())}</p>
-                <p><strong>💬 Total posts:</strong> ${pasteSnap.size}</p>
-                ${userData.timeoutUntil ? `<p><strong>⏰ Timeout until:</strong> ${formatTime(userData.timeoutUntil?.toDate())}</p>` : ''}
+                <p><strong>Email:</strong> ${escapeHtml(userData.email || 'Not provided')}</p>
+                <p><strong>Member since:</strong> ${formatTime(userData.createdAt?.toDate())}</p>
+                <p><strong>Total posts:</strong> ${pasteSnap.size}</p>
+                ${userData.timeoutUntil ? `<p><strong>Timeout until:</strong> ${formatTime(userData.timeoutUntil?.toDate())}</p>` : ''}
             </div>
 
             <h3 class="mt-4">Recent Posts:</h3>
