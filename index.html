@@ -561,6 +561,16 @@ body {
     background: #008800;
 }
 
+.btn-warning {
+    background: #ffaa00;
+    color: black;
+    border: 2px solid #ffaa00;
+}
+
+.btn-warning:hover {
+    background: #ff9900;
+}
+
 .btn-gold {
     background: linear-gradient(45deg, #ffd700, #ffed4e);
     color: #000000;
@@ -1403,12 +1413,15 @@ async function loadPasteDetailContent(pasteId) {
         const actionsContainer = document.getElementById('paste-detail-actions');
 
         let adminControls = '';
-        if (isAdmin || isManager) {
+        if (isAdmin || isManager || isOwner) {
             adminControls = `
                 <div class="btn-group">
-                    <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', ${!paste.isPinned})">
-                        ${paste.isPinned ? 'Unpin Paste' : 'Pin Paste'}
+                    <button class="btn btn-success" onclick="adminPinPaste('${pasteId}', true)">
+                        Pin to Pinned Section
                     </button>
+                    ${paste.isPinned ? `<button class="btn btn-warning" onclick="adminPinPaste('${pasteId}', false)">
+                        Remove from Pinned
+                    </button>` : ''}
                     <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">
                         Remove Paste
                     </button>
@@ -2402,13 +2415,13 @@ async function loadAdminStats() {
 }
 
 async function adminPinPaste(pasteId, pinState) {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     try {
         await pasteDb.collection('pastes').doc(pasteId).update({
             isPinned: pinState
         });
-        showAlert(`Paste ${pinState ? 'pinned' : 'unpinned'}`, 'success');
+        showAlert(`Paste ${pinState ? 'pinned to pinned section' : 'removed from pinned section'}`, 'success');
         
         // Reload both pinned and all pastes
         loadRecentPastes();
@@ -2424,7 +2437,7 @@ async function adminPinPaste(pasteId, pinState) {
 }
 
 async function adminRemovePaste(pasteId) {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     if (confirm('Are you sure you want to remove this paste?')) {
         try {
@@ -2442,7 +2455,7 @@ async function adminRemovePaste(pasteId) {
 }
 
 async function adminBanUser(userId, banState = true) {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     const action = banState ? 'ban' : 'unban';
     if (confirm(`Are you sure you want to ${action} this user?`)) {
@@ -2458,7 +2471,7 @@ async function adminBanUser(userId, banState = true) {
 }
 
 async function adminDeleteUserPosts(userId) {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     if (confirm('Delete ALL posts by this user?')) {
         try {
@@ -2540,7 +2553,7 @@ async function adminMakeTagMaker(userId, makeTagMaker) {
 }
 
 async function adminClearChat() {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     if (confirm('Clear ALL chat messages?')) {
         try {
@@ -2559,7 +2572,7 @@ async function adminClearChat() {
 }
 
 async function adminViewAllUsers() {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     try {
         const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
@@ -2586,7 +2599,7 @@ async function adminViewAllUsers() {
                         ${user.timeoutUntil ? `<br>Timeout until: ${formatTime(user.timeoutUntil?.toDate())}` : ''}
                     </div>
                     <div class="btn-group mt-2">
-                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
                             ${user.isBanned ? 'Unban' : 'Ban'}
                         </button>` : ''}
                         ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${doc.id}', ${!user.isAdmin})">
@@ -2601,10 +2614,10 @@ async function adminViewAllUsers() {
                         ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${doc.id}', ${!user.isTagMaker})">
                             ${user.isTagMaker ? 'Remove Tag Maker' : 'Make Tag Maker'}
                         </button>` : ''}
-                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${doc.id}')">
                             Timeout
                         </button>` : ''}
-                        ${(isAdmin || isManager) && user.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) && user.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${doc.id}')">
                             Un-timeout
                         </button>` : ''}
                     </div>
@@ -2620,7 +2633,7 @@ async function adminViewAllUsers() {
 }
 
 async function adminViewAllPastes() {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     try {
         const snapshot = await pasteDb.collection('pastes')
@@ -2643,10 +2656,10 @@ async function adminViewAllPastes() {
                     <div class="paste-title">${escapeHtml(paste.title)}</div>
                     <div class="paste-views">${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}</div>
                     <div class="btn-group mt-2">
-                        ${(isAdmin || isManager) ? `<button class="btn btn-success" onclick="adminPinPaste('${doc.id}', ${!paste.isPinned})">
-                            ${paste.isPinned ? 'Unpin' : 'Pin'}
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-success" onclick="adminPinPaste('${doc.id}', true)">
+                            Pin to Pinned
                         </button>` : ''}
-                        ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">
                             Remove
                         </button>` : ''}
                     </div>
@@ -2667,7 +2680,7 @@ async function adminManageRoles() {
 }
 
 function adminBackupData() {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     showAlert('Backup feature would export data here', 'success');
 }
@@ -2694,7 +2707,7 @@ async function showUserProfile(userId) {
         const userData = userDoc.data();
         let adminControls = '';
 
-        if (isAdmin || isManager) {
+        if (isAdmin || isManager || isOwner) {
             adminControls = `
                 <div class="admin-controls mt-4">
                     <div class="admin-title">Admin Controls</div>
