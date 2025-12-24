@@ -118,7 +118,7 @@ body {
 /* Navbar */
 .navbar {
     background-color: #000000;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     position: fixed;
     top: 0;
     width: 100%;
@@ -127,25 +127,32 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
 }
 
 .hamburger-btn {
     background: none;
     border: none;
     color: var(--accent-color);
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.4rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .username-display {
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
 /* Slide Down Menu - Updated Layout */
@@ -156,19 +163,19 @@ body {
     width: 100%;
     background-color: #000000;
     z-index: 999;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     border-bottom: 2px solid var(--accent-color);
     transition: top 0.5s ease;
 }
 
 .slide-down-menu.active {
-    top: 70px;
+    top: 60px;
 }
 
 .menu-items {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -177,11 +184,11 @@ body {
     background: #111111;
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1rem;
     text-align: left;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: all 0.3s;
     width: 100%;
     margin: 0;
@@ -193,16 +200,16 @@ body {
     background: var(--accent-color);
     color: #000000;
     transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 3px 8px rgba(255, 255, 255, 0.1);
 }
 
 .menu-btn::after {
     content: '→';
     position: absolute;
-    right: 15px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.2rem;
+    font-size: 1rem;
     opacity: 0.7;
 }
 
@@ -212,7 +219,7 @@ body {
 
 /* Add separators between buttons */
 .menu-btn:not(:last-child) {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 /* Add subtle border between buttons */
@@ -232,39 +239,90 @@ body {
 
 /* Main Content */
 .main-content {
-    padding-top: 120px;
+    padding-top: 80px;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 2rem 2rem;
-    min-height: calc(100vh - 120px);
+    padding: 80px 1.5rem 1.5rem;
+    min-height: calc(100vh - 80px);
 }
 
 /* Logo and Search */
 .logo-container {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .logo {
-    max-width: 300px;
+    max-width: 250px;
     height: auto;
-    margin: 1rem auto;
-    border: 3px solid var(--accent-color);
-    padding: 1rem;
+    margin: 0.8rem auto;
+    border: 2px solid var(--accent-color);
+    padding: 0.8rem;
     background: #000000;
+}
+
+/* Search Container */
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.search-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-bar {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 4px;
+    background: #000000;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    outline: none;
+    height: 40px;
+}
+
+.search-bar::placeholder {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.search-btn {
+    padding: 0.6rem 1.2rem;
+    background: #000000;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    height: 40px;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.search-btn:hover {
+    background: var(--accent-color);
+    color: #000000;
 }
 
 /* Pinned Pastes Section */
 .pinned-pastes {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .pastes-table-container {
     background: #111111;
     border: 2px solid var(--accent-color);
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    margin-top: 1rem;
+    margin-top: 0.8rem;
 }
 
 .pastes-table {
@@ -275,16 +333,17 @@ body {
 .pastes-table th {
     background: #000000;
     color: var(--accent-color);
-    padding: 1rem;
+    padding: 0.8rem;
     text-align: left;
     border-bottom: 2px solid var(--accent-color);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
 .pastes-table td {
-    padding: 1rem;
+    padding: 0.8rem;
     border-bottom: 1px solid #333333;
     cursor: pointer;
+    font-size: 0.85rem;
 }
 
 .pastes-table tr:hover {
@@ -303,77 +362,56 @@ body {
 .pinned-badge-cell {
     background: #00aa00;
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    margin-left: 0.4rem;
 }
 
 .admin-badge-cell {
     background: #ff0000;
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    margin-left: 0.4rem;
 }
 
 .manager-badge-cell {
     background: #ff8800;
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    margin-left: 0.4rem;
 }
 
 .vip-badge-cell {
     background: #ffd700;
     color: black;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    margin-left: 0.4rem;
 }
 
 .tagmaker-badge-cell {
     background: #8800ff;
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-}
-
-/* Search */
-.search-container {
-    max-width: 800px;
-    margin: 0 auto 3rem;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 5px;
-    background: #000000;
-    color: var(--accent-color);
-    font-size: 1.2rem;
-    outline: none;
-}
-
-.search-bar::placeholder {
-    color: #666;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    margin-left: 0.4rem;
 }
 
 /* Recent Pastes */
 .section-title {
     color: var(--accent-color);
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 1rem;
+    padding-bottom: 0.8rem;
 }
 
 /* FULLSCREEN PASTE DETAIL */
@@ -385,7 +423,7 @@ body {
     height: 100vh;
     background: #000000;
     z-index: 9999;
-    padding: 20px;
+    padding: 15px;
     overflow-y: auto;
     display: none;
 }
@@ -400,17 +438,18 @@ body {
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     border-bottom: 2px solid var(--accent-color);
     z-index: 10000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
 }
 
 .paste-detail-content {
-    margin-top: 80px;
-    padding: 2rem;
+    margin-top: 70px;
+    padding: 1.5rem;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -420,11 +459,12 @@ body {
     background: #111111;
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1rem;
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
     transition: all 0.3s;
+    height: 36px;
 }
 
 .back-btn:hover {
@@ -436,88 +476,101 @@ body {
     white-space: pre-wrap;
     font-family: 'Courier New', monospace;
     background: #000000;
-    padding: 2rem;
-    border-radius: 5px;
+    padding: 1.5rem;
+    border-radius: 4px;
     border: 2px solid var(--accent-color);
-    margin-top: 2rem;
-    min-height: 200px;
-    max-height: calc(100vh - 200px);
+    margin-top: 1.5rem;
+    min-height: 150px;
+    max-height: calc(100vh - 150px);
     overflow-y: auto;
-    line-height: 1.6;
-    font-size: 1.1rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
 /* Forms */
 .paste-form, .auth-form, .profile-form, .timeout-form, .tag-form, .username-color-form {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
     background: #111111;
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 1.5rem;
+    border-radius: 8px;
     border: 2px solid var(--accent-color);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     font-weight: bold;
     color: var(--accent-color);
+    font-size: 0.9rem;
 }
 
 .form-input, .form-textarea, .form-select {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border: 2px solid var(--accent-color);
-    border-radius: 5px;
+    border-radius: 4px;
     background: #000000;
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: 0.9rem;
     outline: none;
 }
 
 .form-textarea {
-    min-height: 300px;
+    min-height: 250px;
     font-family: 'Courier New', monospace;
     resize: vertical;
 }
 
 .url-input-group {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .url-input {
     flex: 1;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border: 2px solid var(--accent-color);
-    border-radius: 5px;
+    border-radius: 4px;
     background: #000000;
     color: var(--accent-color);
+    font-size: 0.9rem;
 }
 
 .time-input-group {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .time-input {
     flex: 1;
+    font-size: 0.9rem;
 }
 
-/* Buttons */
+/* Buttons - Made smaller */
 .btn {
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1rem;
     border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    height: 32px;
 }
 
 .btn-primary {
@@ -583,18 +636,18 @@ body {
 
 .btn-group {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
 }
 
 /* Chat Page */
 .chat-container {
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
     background: #111111;
     border: 2px solid var(--accent-color);
-    border-radius: 10px;
-    height: 600px;
+    border-radius: 8px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -602,74 +655,79 @@ body {
 
 .chat-header {
     background: #000000;
-    padding: 1rem;
+    padding: 0.8rem;
     border-bottom: 2px solid var(--accent-color);
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--accent-color);
 }
 
 .chat-messages {
     flex: 1;
     overflow-y: auto;
-    padding: 1rem;
+    padding: 0.8rem;
     background: #0a0a0a;
 }
 
 .message {
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin-bottom: 0.8rem;
+    padding: 0.8rem;
     background: #111111;
-    border-radius: 5px;
+    border-radius: 4px;
     border-left: 3px solid var(--accent-color);
+    font-size: 0.9rem;
 }
 
 .message-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .message-sender {
     font-weight: bold;
     color: var(--accent-color);
+    font-size: 0.85rem;
 }
 
 .message-time {
     color: #888888;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .chat-input-container {
-    padding: 1rem;
+    padding: 0.8rem;
     background: #000000;
     border-top: 2px solid var(--accent-color);
 }
 
 .chat-input-wrapper {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .chat-input {
     flex: 1;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border: 2px solid var(--accent-color);
-    border-radius: 5px;
+    border-radius: 4px;
     background: #000000;
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: 0.9rem;
     outline: none;
+    height: 36px;
 }
 
 .send-btn {
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1rem;
     background: #000000;
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 0.9rem;
+    height: 36px;
 }
 
 .send-btn:hover {
@@ -681,8 +739,8 @@ body {
 .hall-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 @media (max-width: 1200px) {
@@ -700,24 +758,24 @@ body {
 .hall-box {
     background: #111111;
     border: 2px solid var(--accent-color);
-    border-radius: 10px;
-    padding: 1.5rem;
+    border-radius: 8px;
+    padding: 1.2rem;
     text-align: center;
     transition: all 0.3s;
 }
 
 .hall-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .hall-image {
     width: 100%;
-    height: 200px;
+    height: 150px;
     background: #000000;
     border: 2px solid var(--accent-color);
-    margin-bottom: 1rem;
-    border-radius: 5px;
+    margin-bottom: 0.8rem;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -728,23 +786,23 @@ body {
 }
 
 .hall-name {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     color: var(--accent-color);
 }
 
 .hall-description {
     color: #888888;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 /* Profile Page */
 .profile-banner {
-    height: 300px;
+    height: 200px;
     background: #000000;
-    border-radius: 10px;
-    margin-bottom: 2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
     position: relative;
     overflow: hidden;
     border: 2px solid var(--accent-color);
@@ -757,14 +815,14 @@ body {
 }
 
 .profile-picture {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     background: #000000;
     position: absolute;
-    bottom: -75px;
-    left: 2rem;
-    border: 3px solid var(--accent-color);
-    border-radius: 10px;
+    bottom: -50px;
+    left: 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -778,96 +836,99 @@ body {
 .admin-controls {
     background: #111111;
     border: 2px solid #ff0000;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-top: 2rem;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .admin-title {
     color: #ff0000;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
     border-bottom: 1px solid #ff0000;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
 }
 
 .admin-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
 }
 
 .stat-box {
     background: #000000;
     border: 2px solid var(--accent-color);
-    border-radius: 5px;
-    padding: 1rem;
+    border-radius: 4px;
+    padding: 0.8rem;
     text-align: center;
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--accent-color);
 }
 
 .stat-label {
     color: #888;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .admin-actions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Tag Management */
 .tag-container {
     background: #111111;
     border: 2px solid var(--accent-color);
-    border-radius: 10px;
-    padding: 2rem;
-    margin-top: 2rem;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .tag-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.8rem;
     background: #000000;
     border: 1px solid #333333;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .tag-name {
     font-weight: bold;
     color: var(--accent-color);
-    padding: 0.3rem 0.8rem;
-    border-radius: 3px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
 }
 
 /* Alerts */
 .alert-container {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     z-index: 9999;
 }
 
 .alert {
-    padding: 1rem 2rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 0.8rem;
+    border-radius: 4px;
     background: #111111;
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     animation: slideIn 0.3s ease-out;
+    font-size: 0.9rem;
 }
 
 .alert.error {
@@ -888,30 +949,37 @@ body {
 /* Utility */
 .text-center { text-align: center; }
 .mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 2rem; }
+.mt-3 { margin-top: 0.8rem; }
+.mt-4 { margin-top: 1.2rem; }
+.mt-5 { margin-top: 1.5rem; }
 .mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 0.8rem; }
+.mb-4 { margin-bottom: 1.2rem; }
+.mb-5 { margin-bottom: 1.5rem; }
 .d-flex { display: flex; }
 .justify-between { justify-content: space-between; }
 .align-center { align-items: center; }
 .gap-2 { gap: 0.5rem; }
-.gap-3 { gap: 1rem; }
+.gap-3 { gap: 0.8rem; }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .main-content { padding: 120px 1rem 2rem; }
+    .main-content { padding: 70px 1rem 1rem; }
     .menu-items { grid-template-columns: 1fr; }
-    .paste-form, .auth-form { padding: 1.5rem; }
+    .paste-form, .auth-form { padding: 1.2rem; }
     .btn-group { flex-direction: column; }
     .paste-detail-content { padding: 1rem; }
     .paste-content { padding: 1rem; }
     .pastes-table th, .pastes-table td {
-        padding: 0.5rem;
-        font-size: 0.9rem;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    .search-container {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .search-wrapper {
+        width: 100%;
     }
 }
 </style>
@@ -921,7 +989,7 @@ body {
 <div id="timeout-overlay" class="timeout-overlay">
     <div class="timeout-message">YOU HAVE BEEN TIMED OUT</div>
     <div class="timeout-details" id="timeout-details"></div>
-    <div style="color: #888; font-size: 1rem;">
+    <div style="color: #888; font-size: 0.9rem;">
         You will be redirected when the timeout expires
     </div>
 </div>
@@ -940,7 +1008,7 @@ body {
     <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
     <div class="user-info">
         <span id="usernameDisplay" class="username-display"></span>
-        <button class="btn btn-primary" onclick="showPage('auth')" id="authBtn">Sign In</button>
+        <button class="btn btn-primary btn-small" onclick="showPage('auth')" id="authBtn">Sign In</button>
     </div>
 </nav>
 
@@ -968,11 +1036,14 @@ body {
         </div>
 
         <div class="search-container">
-            <input type="text"
-                   class="search-bar"
-                   id="searchBar"
-                   placeholder="Search pastes by title, username, or content..."
-                   oninput="handleSearch()">
+            <div class="search-wrapper">
+                <input type="text"
+                       class="search-bar"
+                       id="searchBar"
+                       placeholder="Search pastes by title, username, or content..."
+                       onkeypress="if(event.key === 'Enter') performSearchNow()">
+                <button class="search-btn" onclick="performSearchNow()">Enter</button>
+            </div>
         </div>
 
         <!-- Pinned Pastes -->
@@ -1108,9 +1179,9 @@ body {
         <div class="profile-form">
             <div class="form-group">
                 <label class="form-label">Custom Username Color</label>
-                <input type="color" class="form-input" id="username-color" value="#ffffff" style="height: 50px; padding: 0;">
+                <input type="color" class="form-input" id="username-color" value="#ffffff" style="height: 40px; padding: 0;">
                 <button class="btn btn-gold mt-3" onclick="updateUsernameColor()">Update Color</button>
-                <p class="mt-2" style="color: #888; font-size: 0.9rem;">
+                <p class="mt-2" style="color: #888; font-size: 0.8rem;">
                     Note: VIP users can customize their username color. Glow effects are only for Owner and VIP roles.
                 </p>
             </div>
@@ -1124,13 +1195,13 @@ body {
             <div class="form-group">
                 <label class="form-label">Create New Tag</label>
                 <input type="text" class="form-input" id="tag-name" placeholder="Enter tag name">
-                <input type="color" class="form-input mt-2" id="tag-color" value="#ffffff" style="height: 50px; padding: 0;">
+                <input type="color" class="form-input mt-2" id="tag-color" value="#ffffff" style="height: 40px; padding: 0;">
                 <button class="btn btn-primary mt-3" onclick="createTag()">Create Tag</button>
             </div>
         </div>
         
         <div class="tag-container">
-            <h3 class="section-title" style="font-size: 1.5rem;">Existing Tags</h3>
+            <h3 class="section-title" style="font-size: 1.2rem;">Existing Tags</h3>
             <div id="tags-container">
                 <!-- Tags will be loaded here -->
             </div>
@@ -1163,12 +1234,12 @@ body {
             </div>
 
             <div class="admin-actions">
-                <button class="btn btn-danger" onclick="adminViewAllUsers()">View All Users</button>
-                <button class="btn btn-danger" onclick="adminViewAllPastes()">View All Pastes</button>
-                <button class="btn btn-danger" onclick="adminClearChat()">Clear Chat</button>
-                <button class="btn btn-danger" onclick="adminBackupData()">Backup Data</button>
-                <button class="btn btn-danger" onclick="showTimeoutForm()">Timeout User</button>
-                <button class="btn btn-danger" onclick="adminManageRoles()">Manage Roles</button>
+                <button class="btn btn-danger btn-small" onclick="adminViewAllUsers()">View All Users</button>
+                <button class="btn btn-danger btn-small" onclick="adminViewAllPastes()">View All Pastes</button>
+                <button class="btn btn-danger btn-small" onclick="adminClearChat()">Clear Chat</button>
+                <button class="btn btn-danger btn-small" onclick="adminBackupData()">Backup Data</button>
+                <button class="btn btn-danger btn-small" onclick="showTimeoutForm()">Timeout User</button>
+                <button class="btn btn-danger btn-small" onclick="adminManageRoles()">Manage Roles</button>
             </div>
 
             <div id="admin-content" class="mt-4"></div>
@@ -1385,6 +1456,61 @@ function showPage(pageId) {
     }
 }
 
+// Search Functions
+function handleSearch() {
+    const searchTerm = document.getElementById('searchBar').value.trim();
+
+    if (searchTerm.length === 0) {
+        loadRecentPastes();
+        return;
+    }
+
+    if (searchTimeout) clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(() => {
+        performSearch(searchTerm);
+    }, 300);
+}
+
+function performSearchNow() {
+    const searchTerm = document.getElementById('searchBar').value.trim();
+    if (searchTerm) {
+        performSearch(searchTerm);
+    } else {
+        loadRecentPastes();
+    }
+}
+
+async function performSearch(searchTerm) {
+    try {
+        const snapshot = await pasteDb.collection('pastes')
+            .where('isRemoved', '==', false)
+            .orderBy('timestamp', 'desc')
+            .get();
+
+        const results = [];
+        const searchLower = searchTerm.toLowerCase();
+
+        snapshot.forEach(doc => {
+            const paste = doc.data();
+            const pasteId = doc.id;
+
+            const titleMatch = paste.title.toLowerCase().includes(searchLower);
+            const contentMatch = paste.content.toLowerCase().includes(searchLower);
+            const userMatch = (paste.username || '').toLowerCase().includes(searchLower);
+
+            if (titleMatch || contentMatch || userMatch) {
+                results.push({ id: pasteId, ...paste });
+            }
+        });
+
+        displaySearchResults(results);
+    } catch (error) {
+        console.error('Error searching:', error);
+        showAlert('Error searching pastes', 'error');
+    }
+}
+
 // FULLSCREEN PASTE FUNCTIONS
 function showPasteDetail(pasteId) {
     const container = document.getElementById('paste-detail-container');
@@ -1425,10 +1551,10 @@ async function loadPasteDetailContent(pasteId) {
                     <button class="btn btn-danger" onclick="adminRemovePaste('${pasteId}')">
                         Remove Paste
                     </button>
-                    ${(isAdmin || isManager) ? `<button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">
+                    ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="adminBanUser('${paste.userId}')">
                         Ban User
                     </button>` : ''}
-                    ${isAdmin ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${paste.userId}')">
+                    ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${paste.userId}')">
                         Timeout User
                     </button>` : ''}
                 </div>
@@ -1442,10 +1568,10 @@ async function loadPasteDetailContent(pasteId) {
                 ${escapeHtml(paste.username || 'Unknown User')}
                 ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
             </div>
-            <h2 style="color: var(--accent-color); margin-bottom: 1rem; font-size: 2.5rem;">
+            <h2 style="color: var(--accent-color); margin-bottom: 0.8rem; font-size: 2rem;">
                 ${escapeHtml(paste.title)}
             </h2>
-            <div class="paste-views" style="margin-bottom: 2rem;">
+            <div class="paste-views" style="margin-bottom: 1.5rem;">
                 ${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}
             </div>
             <div class="paste-content">${escapeHtml(paste.content)}</div>
@@ -1670,7 +1796,7 @@ function updateUIForAuth() {
         }
 
         // Show/hide admin button
-        if (isAdmin || isManager) {
+        if (isAdmin || isManager || isOwner) {
             adminBtn.classList.remove('hidden');
         } else {
             adminBtn.classList.add('hidden');
@@ -1767,7 +1893,7 @@ async function loadRecentPastes() {
     } catch (error) {
         console.error('Error loading pastes:', error);
         document.getElementById('all-pastes-body').innerHTML = 
-            '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes yet. Be the first to create one!</td></tr>';
+            '<tr><td colspan="4" style="text-align: center; padding: 1.5rem;">No pastes yet. Be the first to create one!</td></tr>';
     }
 }
 
@@ -1783,7 +1909,7 @@ async function loadPinnedPastes() {
     } catch (error) {
         console.error('Error loading pinned pastes:', error);
         document.getElementById('pinned-pastes-body').innerHTML = 
-            '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pinned pastes yet.</td></tr>';
+            '<tr><td colspan="4" style="text-align: center; padding: 1.5rem;">No pinned pastes yet.</td></tr>';
     }
 }
 
@@ -1793,9 +1919,9 @@ function displayPastesTable(snapshot, containerId, isPinned = false) {
 
     if (snapshot.empty) {
         if (isPinned) {
-            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pinned pastes yet.</td></tr>';
+            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1.5rem;">No pinned pastes yet.</td></tr>';
         } else {
-            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No pastes found.</td></tr>';
+            container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1.5rem;">No pastes found.</td></tr>';
         }
         return;
     }
@@ -1811,6 +1937,33 @@ function displayPastesTable(snapshot, containerId, isPinned = false) {
             <td>
                 <div style="font-weight: bold;">${escapeHtml(paste.title)}</div>
                 ${isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
+            </td>
+            <td class="username-cell">${escapeHtml(paste.username || 'Unknown User')}</td>
+            <td>${paste.views || 0}</td>
+            <td>${formatTime(paste.timestamp?.toDate())}</td>
+        `;
+
+        container.appendChild(row);
+    });
+}
+
+function displaySearchResults(results) {
+    const container = document.getElementById('all-pastes-body');
+    container.innerHTML = '';
+
+    if (results.length === 0) {
+        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 1.5rem;">No results found</td></tr>';
+        return;
+    }
+
+    results.slice(0, 50).forEach(paste => {
+        const row = document.createElement('tr');
+        row.onclick = () => showPasteDetail(paste.id);
+
+        row.innerHTML = `
+            <td>
+                <div style="font-weight: bold;">${escapeHtml(paste.title)}</div>
+                ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
             </td>
             <td class="username-cell">${escapeHtml(paste.username || 'Unknown User')}</td>
             <td>${paste.views || 0}</td>
@@ -1839,7 +1992,7 @@ function loadChatMessages() {
             messages.sort((a, b) => b.timestamp - a.timestamp);
 
             if (messages.length === 0) {
-                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #888;">No messages yet</div>';
+                container.innerHTML = '<div style="text-align: center; padding: 1.5rem; color: #888;">No messages yet</div>';
                 return;
             }
 
@@ -1891,78 +2044,6 @@ async function sendChatMessage() {
     }
 }
 
-// Search Functionality
-function handleSearch() {
-    const searchTerm = document.getElementById('searchBar').value.trim();
-
-    if (searchTerm.length === 0) {
-        loadRecentPastes();
-        return;
-    }
-
-    if (searchTimeout) clearTimeout(searchTimeout);
-
-    searchTimeout = setTimeout(() => {
-        performSearch(searchTerm);
-    }, 300);
-}
-
-async function performSearch(searchTerm) {
-    try {
-        const snapshot = await pasteDb.collection('pastes')
-            .where('isRemoved', '==', false)
-            .orderBy('timestamp', 'desc')
-            .get();
-
-        const results = [];
-        const searchLower = searchTerm.toLowerCase();
-
-        snapshot.forEach(doc => {
-            const paste = doc.data();
-            const pasteId = doc.id;
-
-            const titleMatch = paste.title.toLowerCase().includes(searchLower);
-            const contentMatch = paste.content.toLowerCase().includes(searchLower);
-            const userMatch = (paste.username || '').toLowerCase().includes(searchLower);
-
-            if (titleMatch || contentMatch || userMatch) {
-                results.push({ id: pasteId, ...paste });
-            }
-        });
-
-        displaySearchResults(results);
-    } catch (error) {
-        console.error('Error searching:', error);
-    }
-}
-
-function displaySearchResults(results) {
-    const container = document.getElementById('all-pastes-body');
-    container.innerHTML = '';
-
-    if (results.length === 0) {
-        container.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">No results found</td></tr>';
-        return;
-    }
-
-    results.slice(0, 50).forEach(paste => {
-        const row = document.createElement('tr');
-        row.onclick = () => showPasteDetail(paste.id);
-
-        row.innerHTML = `
-            <td>
-                <div style="font-weight: bold;">${escapeHtml(paste.title)}</div>
-                ${paste.isPinned ? '<span class="pinned-badge-cell">PINNED</span>' : ''}
-            </td>
-            <td class="username-cell">${escapeHtml(paste.username || 'Unknown User')}</td>
-            <td>${paste.views || 0}</td>
-            <td>${formatTime(paste.timestamp?.toDate())}</td>
-        `;
-
-        container.appendChild(row);
-    });
-}
-
 // Most Mentioned
 async function loadMostMentioned() {
     try {
@@ -1990,7 +2071,7 @@ async function loadMostMentioned() {
             const card = document.createElement('div');
             card.className = 'paste-card';
             card.innerHTML = `
-                <div style="font-size: 1.5rem; margin-bottom: 1rem;">#${index + 1}</div>
+                <div style="font-size: 1.2rem; margin-bottom: 0.8rem;">#${index + 1}</div>
                 <div class="paste-title">${escapeHtml(title)}</div>
                 <div class="paste-views">Mentioned ${count} times</div>
             `;
@@ -2141,7 +2222,7 @@ async function loadTags() {
         const snapshot = await pasteDb.collection('tags').orderBy('createdAt', 'desc').get();
         
         if (snapshot.empty) {
-            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #888;">No tags created yet</div>';
+            container.innerHTML = '<div style="text-align: center; padding: 1.5rem; color: #888;">No tags created yet</div>';
             return;
         }
 
@@ -2154,12 +2235,12 @@ async function loadTags() {
                     <span class="tag-name" style="background-color: ${tag.color}; color: ${getContrastColor(tag.color)}">
                         ${escapeHtml(tag.name)}
                     </span>
-                    <div style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">
+                    <div style="color: #888; font-size: 0.8rem; margin-top: 0.4rem;">
                         Created by: ${escapeHtml(tag.createdBy || 'Unknown')}
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-danger" onclick="deleteTag('${doc.id}')">Delete</button>
+                    <button class="btn btn-danger btn-small" onclick="deleteTag('${doc.id}')">Delete</button>
                 </div>
             `;
             container.appendChild(tagElement);
@@ -2308,7 +2389,7 @@ function showTimeoutUserForm(userId) {
 }
 
 async function adminTimeoutUser() {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     const emailOrId = document.getElementById('timeout-email').value.trim();
     const days = parseInt(document.getElementById('timeout-days').value) || 0;
@@ -2362,7 +2443,7 @@ async function adminTimeoutUser() {
 }
 
 async function adminUntimeoutUser(userId) {
-    if (!isAdmin && !isManager) return;
+    if (!isAdmin && !isManager && !isOwner) return;
 
     if (confirm('Are you sure you want to remove timeout from this user?')) {
         try {
@@ -2387,7 +2468,7 @@ async function adminUntimeoutUser(userId) {
 
 // Admin Functions
 async function loadAdminStats() {
-    if (!isAdmin && !isManager) {
+    if (!isAdmin && !isManager && !isOwner) {
         showAlert('Admin/Manager access required', 'error');
         showPage('home');
         return;
@@ -2578,7 +2659,7 @@ async function adminViewAllUsers() {
         const snapshot = await pasteDb.collection('users').orderBy('createdAt', 'desc').get();
         const container = document.getElementById('admin-content');
 
-        let html = '<h3>All Users:</h3><div class="pastes-grid">';
+        let html = '<h3 style="font-size: 1.2rem; margin-bottom: 1rem;">All Users:</h3><div class="pastes-grid">';
 
         snapshot.forEach(doc => {
             const user = doc.data();
@@ -2599,25 +2680,25 @@ async function adminViewAllUsers() {
                         ${user.timeoutUntil ? `<br>Timeout until: ${formatTime(user.timeoutUntil?.toDate())}` : ''}
                     </div>
                     <div class="btn-group mt-2">
-                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger btn-small" onclick="adminBanUser('${doc.id}', ${!user.isBanned})">
                             ${user.isBanned ? 'Unban' : 'Ban'}
                         </button>` : ''}
-                        ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${doc.id}', ${!user.isAdmin})">
+                        ${isAdmin ? `<button class="btn btn-danger btn-small" onclick="adminMakeAdmin('${doc.id}', ${!user.isAdmin})">
                             ${user.isAdmin ? 'Remove Admin' : 'Make Admin'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${doc.id}', ${!user.isManager})">
+                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger btn-small" onclick="adminMakeManager('${doc.id}', ${!user.isManager})">
                             ${user.isManager ? 'Remove Manager' : 'Make Manager'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${doc.id}', ${!user.isVIP})">
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger btn-small" onclick="adminMakeVIP('${doc.id}', ${!user.isVIP})">
                             ${user.isVIP ? 'Remove VIP' : 'Make VIP'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${doc.id}', ${!user.isTagMaker})">
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger btn-small" onclick="adminMakeTagMaker('${doc.id}', ${!user.isTagMaker})">
                             ${user.isTagMaker ? 'Remove Tag Maker' : 'Make Tag Maker'}
                         </button>` : ''}
-                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="showTimeoutUserForm('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger btn-small" onclick="showTimeoutUserForm('${doc.id}')">
                             Timeout
                         </button>` : ''}
-                        ${(isAdmin || isManager || isOwner) && user.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) && user.timeoutUntil ? `<button class="btn btn-success btn-small" onclick="adminUntimeoutUser('${doc.id}')">
                             Un-timeout
                         </button>` : ''}
                     </div>
@@ -2642,7 +2723,7 @@ async function adminViewAllPastes() {
             .get();
 
         const container = document.getElementById('admin-content');
-        container.innerHTML = '<h3>All Pastes:</h3><div class="pastes-grid">';
+        container.innerHTML = '<h3 style="font-size: 1.2rem; margin-bottom: 1rem;">All Pastes:</h3><div class="pastes-grid">';
 
         snapshot.forEach(doc => {
             const paste = doc.data();
@@ -2656,10 +2737,10 @@ async function adminViewAllPastes() {
                     <div class="paste-title">${escapeHtml(paste.title)}</div>
                     <div class="paste-views">${paste.views || 0} views • ${formatTime(paste.timestamp?.toDate())}</div>
                     <div class="btn-group mt-2">
-                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-success" onclick="adminPinPaste('${doc.id}', true)">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-success btn-small" onclick="adminPinPaste('${doc.id}', true)">
                             Pin to Pinned
                         </button>` : ''}
-                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger" onclick="adminRemovePaste('${doc.id}')">
+                        ${(isAdmin || isManager || isOwner) ? `<button class="btn btn-danger btn-small" onclick="adminRemovePaste('${doc.id}')">
                             Remove
                         </button>` : ''}
                     </div>
@@ -2700,7 +2781,7 @@ async function showUserProfile(userId) {
         const container = document.getElementById('user-profile-content');
 
         if (!userDoc.exists) {
-            container.innerHTML = '<div style="text-align: center; padding: 3rem;">User not found</div>';
+            container.innerHTML = '<div style="text-align: center; padding: 2rem;">User not found</div>';
             return;
         }
 
@@ -2712,28 +2793,28 @@ async function showUserProfile(userId) {
                 <div class="admin-controls mt-4">
                     <div class="admin-title">Admin Controls</div>
                     <div class="admin-actions">
-                        <button class="btn btn-danger" onclick="adminBanUser('${userId}', ${!userData.isBanned})">
+                        <button class="btn btn-danger btn-small" onclick="adminBanUser('${userId}', ${!userData.isBanned})">
                             ${userData.isBanned ? 'Unban User' : 'Ban User'}
                         </button>
-                        <button class="btn btn-danger" onclick="adminDeleteUserPosts('${userId}')">
+                        <button class="btn btn-danger btn-small" onclick="adminDeleteUserPosts('${userId}')">
                             Delete User's Posts
                         </button>
-                        ${isAdmin ? `<button class="btn btn-danger" onclick="adminMakeAdmin('${userId}', ${!userData.isAdmin})">
+                        ${isAdmin ? `<button class="btn btn-danger btn-small" onclick="adminMakeAdmin('${userId}', ${!userData.isAdmin})">
                             ${userData.isAdmin ? 'Remove Admin' : 'Make Admin'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger" onclick="adminMakeManager('${userId}', ${!userData.isManager})">
+                        ${(isAdmin || isOwner) ? `<button class="btn btn-danger btn-small" onclick="adminMakeManager('${userId}', ${!userData.isManager})">
                             ${userData.isManager ? 'Remove Manager' : 'Make Manager'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeVIP('${userId}', ${!userData.isVIP})">
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger btn-small" onclick="adminMakeVIP('${userId}', ${!userData.isVIP})">
                             ${userData.isVIP ? 'Remove VIP' : 'Make VIP'}
                         </button>` : ''}
-                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger" onclick="adminMakeTagMaker('${userId}', ${!userData.isTagMaker})">
+                        ${(isAdmin || isOwner || isManager) ? `<button class="btn btn-danger btn-small" onclick="adminMakeTagMaker('${userId}', ${!userData.isTagMaker})">
                             ${userData.isTagMaker ? 'Remove Tag Maker' : 'Make Tag Maker'}
                         </button>` : ''}
-                        <button class="btn btn-danger" onclick="showTimeoutUserForm('${userId}')">
+                        <button class="btn btn-danger btn-small" onclick="showTimeoutUserForm('${userId}')">
                             Timeout User
                         </button>
-                        ${userData.timeoutUntil ? `<button class="btn btn-success" onclick="adminUntimeoutUser('${userId}')">
+                        ${userData.timeoutUntil ? `<button class="btn btn-success btn-small" onclick="adminUntimeoutUser('${userId}')">
                             Un-timeout User
                         </button>` : ''}
                     </div>
@@ -2768,7 +2849,7 @@ async function showUserProfile(userId) {
                 <div class="profile-picture" style="${userData.profileUrl ? `background-image: url('${userData.profileUrl}')` : ''}"></div>
             </div>
 
-            <h1 class="${usernameClass}" style="font-size: 2.5rem; margin-top: 5rem;" ${usernameStyle}>
+            <h1 class="${usernameClass}" style="font-size: 2rem; margin-top: 4rem;" ${usernameStyle}>
                 ${escapeHtml(userData.displayName || userData.username || userData.email?.split('@')[0] || 'Unknown User')}
                 ${userData.isBanned ? '<span class="admin-badge-cell">BANNED</span>' : ''}
                 ${userData.isAdmin ? '<span class="admin-badge-cell">ADMIN</span>' : ''}
