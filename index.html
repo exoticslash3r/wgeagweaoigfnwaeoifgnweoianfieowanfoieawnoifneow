@@ -4271,6 +4271,36 @@ const pasteId = urlParams.get('paste');
 if (pasteId) {
 showPasteDetail(pasteId);
 }
+// Basic discouragement script - NOT SECURE
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+document.addEventListener('keydown', function(e) {
+    // Disable F12
+    if(e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+    if(e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Disable Ctrl+U (View source)
+    if(e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Additional discouragement - can be bypassed
+setInterval(function() {
+    debugger;
+}, 1000);
+
 });
 </script>
 </body>
